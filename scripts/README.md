@@ -32,7 +32,7 @@ The example script is a command line tool:
 > Usage: download_era5.py [OPTIONS]
 > 
 > Download Era5 data.
-
+>
 > Options:
 >   --year TEXT    Year of Era5 data  [required]
 >   --output TEXT  Output path for nc file  [required]
