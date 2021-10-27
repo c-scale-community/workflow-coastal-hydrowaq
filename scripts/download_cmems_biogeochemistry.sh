@@ -1,7 +1,7 @@
 #!/bin/bash
 
 motu="https://nrt.cmems-du.eu/motu-web/Motu"
-service_id="GLOBAL_ANALYSIS_FORECAST_BIO_001_028"
+service_id="GLOBAL_ANALYSIS_FORECAST_BIO_001_028-TDS"
 product_id="global-analysis-forecast-bio-001-028-daily"
 longitude_min=22.5
 longitude_max=24.5
