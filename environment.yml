@@ -1,0 +1,10 @@
+name: hisea
+
+channels:
+ - conda-forge
+ - defaults
+
+dependencies:
+ - python 3.9.*
+ - cdsapi 0.5.*
+ - click 8.0.*
