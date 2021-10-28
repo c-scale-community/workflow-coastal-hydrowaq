@@ -7,6 +7,9 @@
 
 ## CMEMS
 
+General information
+https://help.marine.copernicus.eu/en/articles/4796533-what-are-the-motu-client-motuclient-and-python-requirements
+
 CMEMS in download with the motu client. This client can be installed via python pip or conda:
 	
 	python -m pip install motuclient==1.8.4 --no-cache-dir
