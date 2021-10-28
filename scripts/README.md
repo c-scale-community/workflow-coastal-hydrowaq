@@ -23,7 +23,8 @@ General information
 https://cds.climate.copernicus.eu/api-how-to 
 
 # Install the CDS API key
-- If you don't have an account, please self register at the CDS registration page and go to the steps below.
+https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key
+- If you don't have an account, please self register at the CDS registration page (https://cds.climate.copernicus.eu/user/register?destination=%2F%23!%2Fhome) and go to the steps below.
 - If you are not logged, please login and go to the step below.
 - Copy the code displayed beside (url and key), in the file $HOME/.cdsapirc (in your Unix/Linux environment).
 
