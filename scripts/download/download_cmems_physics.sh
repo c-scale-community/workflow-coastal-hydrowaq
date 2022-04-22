@@ -12,9 +12,9 @@ date_max=$(date +"%Y-%m-%d")
 depth_min=0.493
 depth_max=5727.918000000001
 variables=("thetao" "bottomT" "so" "zos" "uo" "vo")
-out_dir="/home/centos/hisea/data/cmems"
-user=""
-pwd=""
+out_dir="data/cmems"
+user="$1"
+pwd="$2
 
 for v in ${variables[*]}
 do
