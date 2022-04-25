@@ -1,9 +1,19 @@
-# Data Download
+# Download data
 
-3 script are available to download data:
-- CMEMS physics data
-- CMEMS biogeochemistry data
-- ERA5
+This folder contains 3 dockerised scripts to download the necessary input data
+for the workflow:
+
+1. `download_cmems_physics.sh`
+2. `download_cmems_biogeochemistry.sh`
+3. `download_era5.py`
+
+## Building the Docker container
+@backeb... continue here
+
+
+
+# Deprecated
+The below needs updating
 
 ## CMEMS
 
