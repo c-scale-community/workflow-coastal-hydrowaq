@@ -1,15 +1,31 @@
 # Download data
 
-This folder contains 3 dockerised scripts to download the necessary input data
-for the workflow:
+This folder contains the following files needed to build and run the docker
+containers to download the necessary input data for the workflow:
 
+**Download scripts**
 1. `download_cmems_physics.sh`
 2. `download_cmems_biogeochemistry.sh`
 3. `download_era5.py`
 
-## Building the Docker container
-@backeb... continue here
+**Files for docker**
+1. `Dockerfile`
+2. `environment.yml`
 
+## docker
+To build the docker container image run the following command
+  
+  docker build --tag download-cmems-era5 .
+
+To run the `download-cmems-era5` docker container image for `download_cmems_physics.sh` do
+
+  docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems username password longitude_min longitude_max latitude_min latitude_max date_min date_max
+
+Example to get the latest 5 days of input data:
+
+  docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
+  
+Note, to get a `username` and `password` please register at https://resources.marine.copernicus.eu/registration-form
 
 
 # Deprecated
