@@ -27,6 +27,7 @@ Example to get the latest 5 days of input data:
   
 Note, to get a `username` and `password` please register at https://resources.marine.copernicus.eu/registration-form
 
+TODO @backeb - add info about biogeochemistry docker
 
 # Deprecated
 The below needs updating
