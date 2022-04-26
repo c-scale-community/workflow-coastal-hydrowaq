@@ -15,15 +15,15 @@ containers to download the necessary input data for the workflow:
 ## docker
 To build the docker container image run the following command
   
-  docker build --tag download-cmems-era5 .
+    docker build --tag download-cmems-era5 .
 
 To run the `download-cmems-era5` docker container image for `download_cmems_physics.sh` do
 
-  docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems username password longitude_min longitude_max latitude_min latitude_max date_min date_max
+    docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems username password longitude_min longitude_max latitude_min latitude_max date_min date_max
 
 Example to get the latest 5 days of input data:
 
-  docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
+    docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
   
 Note, to get a `username` and `password` please register at https://resources.marine.copernicus.eu/registration-form
 
@@ -80,3 +80,6 @@ The example script is a command line tool:
 >   --year TEXT    Year of Era5 data  [required]
 >   --output TEXT  Output path for nc file  [required]
 >   --help         Show this message and exit.
+
+
+
