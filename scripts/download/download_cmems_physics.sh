@@ -2,11 +2,12 @@
 Help()
 {
   # Display Help
-  echo "This script downloads the necessary hydrodynmic input data from
-  Copernicus."
+  echo "This script downloads the necessary hydrodynmic input data from Copernicus."
   echo
   echo "Syntax: download_cmems_physics.sh username password longitude_min
   longitude_max latitude_min latitude_max date_min date_max"
+  echo
+  echo "For the username and password, please register an account at https://resources.marine.copernicus.eu/registration-form"
 }
 
 user="$1"

@@ -1,20 +1,30 @@
 #!/bin/bash
+Help()
+{
+  # Display Help
+  echo "This script downloads the necessary biogeochemical input data from Copernicus."
+  echo
+  echo "Syntax: download_cmems_biogeochemistry.sh username password longitude_min longitude_max latitude_min latitude_max date_min date_max"
+  echo
+  echo "For the username and password, please register an account at https://resources.marine.copernicus.eu/registration-form"
+}
+
+user="$1"
+pwd="$2"
+longitude_min=$3 #22.5
+longitude_max=$4 #24.5
+latitude_min=$5 #36.5
+latitude_max=$6 #38.5
+date_min=$7 #$(date --date="5 days ago" +"%Y-%m-%d")
+date_max=$8 #$(date +"%Y-%m-%d")
 
 motu="https://nrt.cmems-du.eu/motu-web/Motu"
 service_id="GLOBAL_ANALYSIS_FORECAST_BIO_001_028-TDS"
 product_id="global-analysis-forecast-bio-001-028-daily"
-longitude_min=22.5
-longitude_max=24.5
-latitude_min=36.5
-latitude_max=38.5
-date_min=$(date --date="5 days ago" +"%Y-%m-%d")
-date_max=$(date +"%Y-%m-%d")
 depth_min=0.493
 depth_max=5727.918000000001
 variables=("no3" "o2" "phyc" "po4" "si")
-out_dir="/home/centos/hisea/data/cmems"
-user=""
-pwd=""
+out_dir="/data/cmems"
 
 for v in ${variables[*]}
 do
