@@ -4,7 +4,7 @@ WORKDIR /scripts
 # put the envinroment.yaml file in the container
 COPY environment.yml /tmp/environment.yml
 
-# create the enfironment
+# create the environment
 RUN conda update -n base -c defaults conda
 RUN conda env create -f /tmp/environment.yml
 

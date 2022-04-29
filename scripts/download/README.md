@@ -19,20 +19,20 @@ To build the docker container image run the following command
 ## Usage `docker run` for `download_cmems_physics.sh`
 To run the `download-cmems-era5` docker container image for `download_cmems_physics.sh` do
 
-    docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems ./download_cmems_physics.sh username password longitude_min longitude_max latitude_min latitude_max date_min date_max
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_physics.sh username password longitude_min longitude_max latitude_min latitude_max date_min date_max
 
 Example to get the latest 5 days of input data for a geographic region of interest:
 
-    docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems ./download_cmems_physics.sh username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_physics.sh username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
   
 ## Usage `docker run` for `download_cmems_biogeochemistry.sh`
 To run the `download-cmems-era5` docker container image for `download_cmems_biogeochemistry.sh` do
 
-    docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems ./download_cmems_biogeochemistry.sh username password longitude_min longitude_max latitude_min latitude_max date_min date_max
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_biogeochemistry.sh username password longitude_min longitude_max latitude_min latitude_max date_min date_max
 
 Example to get the latest 5 days of input data for a geographic region of interest:
 
-    docker run download-cmems-era5 -v /path/to/where/you/want/to/keep/the/data:/data/cmems ./download_cmems_biogeochemistry.sh username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_biogeochemistry.sh username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
   
 Note, to get a `username` and `password` please register at https://resources.marine.copernicus.eu/registration-form
 

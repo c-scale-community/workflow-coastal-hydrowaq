@@ -32,7 +32,7 @@ do
 out_name="${v}_${date_min}_${date_max}.nc"
 echo ${v}
 echo $out_name
-python -m motuclient \
+motuclient \
     --motu $motu \
     --service-id $service_id \
     --product-id $product_id \
