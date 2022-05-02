@@ -18,7 +18,7 @@ To build the docker container image run the following command
   
     docker build --tag download-cmems-era5 .
 
-## Usage `docker run`
+## Usage: `docker run`
 
 For help
 
@@ -36,7 +36,7 @@ Example `docker run` for `download_cmems_biogeochemistry.py`:
 
 Example `docker run` for `download_era5.py`:
 
-    TODO download_era5.py
+    TODO
 
 ### CDS API key
 Use the .cdsapirc file in this repository (only for C-SCALE) or alterantively create your own account via the steps below:
