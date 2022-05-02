@@ -3,9 +3,11 @@ This folder contains the following files needed to build and run the docker
 containers to download the necessary input data for the workflow:
 
 **Download scripts**
-1. `download_cmems_physics.sh`
-2. `download_cmems_biogeochemistry.sh`
+1. `download_cmems_physics.py`
+2. `download_cmems_biogeochemistry.py`
 3. `download_era5.py`
+
+Type e.g. `python download_cmems_physics.py --help` for usage options.
 
 **Files for docker**
 1. `Dockerfile`
@@ -16,25 +18,29 @@ To build the docker container image run the following command
   
     docker build --tag download-cmems-era5 .
 
-## Usage `docker run` for `download_cmems_physics.sh`
-To run the `download-cmems-era5` docker container image for `download_cmems_physics.sh` do
+## Usage `docker run` for `download_cmems_physics.py`
+To run the `download-cmems-era5` docker container image for `download_cmems_physics.py` do
 
-    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_physics.sh username password longitude_min longitude_max latitude_min latitude_max date_min date_max
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_physics.py --username TEXT --password TEXT --longitude_min FLOAT --longitude_max FLOAT --latitude_min FLOAT --latitude_max FLOAT --date_min TEXT --date_max TEXT
 
-Example to get the latest 5 days of input data for a geographic region of interest:
+Example:
 
-    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_physics.sh username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_physics.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
+
+Note, the default values for --date_min and --date_max download the last 5 days of data.
   
-## Usage `docker run` for `download_cmems_biogeochemistry.sh`
-To run the `download-cmems-era5` docker container image for `download_cmems_biogeochemistry.sh` do
+## Usage `docker run` for `download_cmems_biogeochemistry.py`
+To run the `download-cmems-era5` docker container image for `download_cmems_biogeochemistry.py` do
 
-    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_biogeochemistry.sh username password longitude_min longitude_max latitude_min latitude_max date_min date_max
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_biogeochemistry.py --username TEXT --password TEXT --longitude_min FLOAT --longitude_max FLOAT --latitude_min FLOAT --latitude_max FLOAT --date_min TEXT --date_max TEXT
 
-Example to get the latest 5 days of input data for a geographic region of interest:
+Example:
 
-    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_biogeochemistry.sh username password 22.5 24.5 36.5 38.5 $(date --date="5 days ago" +"%Y-%m-%d") $(date +"%Y-%m-%d")
+    docker run -v /path/to/where/you/want/to/keep/the/data:/data/cmems download-cmems-era5 ./download_cmems_biogeochemistry.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
   
-Note, to get a `username` and `password` please register at https://resources.marine.copernicus.eu/registration-form
+Note, the default --date_min and --date_max download the latest 5 days of data.
+
+To get a `username` and `password` please register at https://resources.marine.copernicus.eu/registration-form
 
 ## Usage `docker run` for `download_era5.py`
 TODO add details
