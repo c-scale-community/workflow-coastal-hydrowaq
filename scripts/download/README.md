@@ -28,17 +28,11 @@ For help
 
 Examples:
 
-`download_cmems_physics.py`:
-
     docker run -v $PWD:/data/cmems download-cmems-era5 ./download_cmems_physics.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
-
-`download_cmems_biogeochemistry.py`:
 
     docker run -v $PWD:/data/cmems download-cmems-era5 ./download_cmems_biogeochemistry.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
 
-`download_era5.py`:
-
-    TODO  
+    TODO download_era5.py
 
 ### CDS API key
 Use the .cdsapirc file in this repository (only for C-SCALE) or alterantively create your own account via the steps below:
