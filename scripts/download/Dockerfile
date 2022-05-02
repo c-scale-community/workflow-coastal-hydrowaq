@@ -16,4 +16,4 @@ ENV PATH /opt/conda/envs/download_env/bin:$PATH
 COPY README.md download_cmems_physics.py download_cmems_biogeochemistry.py download_era5.py /scripts/.
 
 # tell the container to use bash
-ENTRYPOINT ["bash", "-c"]
+CMD ["python", "download_cmems_physics.py", "--help"]
