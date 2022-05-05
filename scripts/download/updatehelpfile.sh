@@ -8,14 +8,18 @@ echo ' ' >> helpfile
 
 echo '1. download_cmems_physics.py' >> helpfile
 echo '     download hydrodynamic input data for Delft3D FM from the Copernicus Marine Service' >> helpfile
+echo '     this script requires a username and password which you can get by registering at: https://resources.marine.copernicus.eu/registration-form' >> helpfile
 echo ' ' >> helpfile
 
 echo '2. download_cmems_biogeochemistry.py' >> helpfile
 echo '     download biogeochemistry input data for Delft3D FM from the Copernicus Marine Service' >> helpfile
+echo '     this script requires a username and password which you can get by registering at: https://resources.marine.copernicus.eu/registration-form' >> helpfile
 echo ' ' >> helpfile
 
 echo '3. download_era5.py' >> helpfile
 echo '     download ERA5 input data for Delft3D FM from the Copernicus Data Store' >> helpfile
+echo '     this script requires a CDS API key. ' >> helpfile
+echo '     follow instructions at https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key to generate the key' >> helpfile
 echo ' ' >> helpfile
 
 echo ' ' >> helpfile
@@ -35,6 +39,9 @@ echo ' ' >> helpfile
 python download_cmems_biogeochemistry.py --help >> helpfile
 echo ' ' >> helpfile
 
-#TODO python download_era5.py --help >> helpfile
-#TODO echo ' ' >> helpfile
+python download_era5.py --help >> helpfile
+echo ' ' >> helpfile
+echo 'Dependencies:' >> helpfile
+echo '  download_era5.py requires a CDS API key placed in $HOME/.cdsapirc' >> helpfile
+echo '  follow instructions at https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key to generate the key' >> helpfile
 
