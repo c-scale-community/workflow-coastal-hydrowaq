@@ -49,3 +49,14 @@ Follow instruction at: https://cds.climate.copernicus.eu/api-how-to#install-the-
 1. If you don't have an account, register at https://cds.climate.copernicus.eu/user/register?destination=%2F%23!%2Fhome
 2. Login at https://cds.climate.copernicus.eu/user/login?destination=%2F%23!%2Fhome
 3. Copy the code displayed (url and key) into the file .cdsapirc
+
+## Windows users
+To run these docker containers locally on Windows we suggest using the Windows Subsystem for Linux (WSL) with Ubuntu 20.04 and Docker Desktop.
+
+To install WSL and Ubuntu 20.04 follow instructions here: https://docs.microsoft.com/en-us/windows/wsl/install
+
+To install Docker Desktop follow instructions here: https://www.docker.com/products/docker-desktop/
+In Docker Desktop under Settings > General, make sure the "Use the WSL 2 based engine" checkbox is checked.
+
+
+
