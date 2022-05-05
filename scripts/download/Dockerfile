@@ -12,8 +12,10 @@ RUN conda env create -f /tmp/environment.yml
 RUN echo "conda activate download_env" > /root/.bashrc
 ENV PATH /opt/conda/envs/download_env/bin:$PATH
 
+
 # copy the necessary scripts into the container
-COPY README.md download_cmems_physics.py download_cmems_biogeochemistry.py download_era5.py /scripts/.
+COPY README.md helpfile updatehelpfile.sh download_cmems_physics.py download_cmems_biogeochemistry.py download_era5.py /scripts/.
+RUN ./updatehelpfile.sh
 
 # tell the container to use bash
-CMD ["python", "download_cmems_physics.py", "--help"]
+CMD ["cat", "helpfile"]

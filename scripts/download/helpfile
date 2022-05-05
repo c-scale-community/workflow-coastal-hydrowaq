@@ -1,0 +1,54 @@
+This container has the following scripts to download data:
+ 
+1. download_cmems_physics.py
+     download hydrodynamic input data for Delft3D FM from the Copernicus Marine Service
+ 
+2. download_cmems_biogeochemistry.py
+     download biogeochemistry input data for Delft3D FM from the Copernicus Marine Service
+ 
+3. download_era5.py
+     download ERA5 input data for Delft3D FM from the Copernicus Data Store
+ 
+Below are the usage options for the scripts.
+ 
+To run these in docker type:
+     docker run download-input python download_???.py [OPTIONS]
+ 
+Usage: download_cmems_physics.py [OPTIONS]
+
+Options:
+  --username TEXT        To get a username and password register at:
+                         https://resources.marine.copernicus.eu/registration-
+                         form
+  --password TEXT        To get a username and password register at:
+                         https://resources.marine.copernicus.eu/registration-
+                         form
+  --longitude_min FLOAT  Set minimum longitude for region of interest
+  --longitude_max FLOAT  Set maximum longitude for region of interest
+  --latitude_min FLOAT   Set minimum latitude for region of interest
+  --latitude_max FLOAT   Set maximum latitude for region of interest
+  --date_min TEXT        Set start date for data download. Format: YYYY-MM-DD.
+                         Default is today minus 5 days.
+  --date_max TEXT        Set end date for data download. Format: YYYY-MM-DD.
+                         Default is today.
+  --help                 Show this message and exit.
+ 
+Usage: download_cmems_biogeochemistry.py [OPTIONS]
+
+Options:
+  --username TEXT        To get a username and password register at:
+                         https://resources.marine.copernicus.eu/registration-
+                         form
+  --password TEXT        To get a username and password register at:
+                         https://resources.marine.copernicus.eu/registration-
+                         form
+  --longitude_min FLOAT  Set minimum longitude for region of interest
+  --longitude_max FLOAT  Set maximum longitude for region of interest
+  --latitude_min FLOAT   Set minimum latitude for region of interest
+  --latitude_max FLOAT   Set maximum latitude for region of interest
+  --date_min TEXT        Set start date for data download. Format: YYYY-MM-DD.
+                         Default is today minus 5 days.
+  --date_max TEXT        Set end date for data download. Format: YYYY-MM-DD.
+                         Default is today.
+  --help                 Show this message and exit.
+ 
