@@ -5,3 +5,4 @@ scripts/download/.README.md.swo
 scripts/.cdsapirc
 *.swp
 scripts/download/.cdsapirc
+*.nc
