@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <dimrConfig xsi:schemaLocation="http://schemas.deltares.nl/dimr http://content.oss.deltares.nl/schemas/dimr-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.deltares.nl/dimr">
+  <documentation>
+    <fileVersion>1.00</fileVersion>
+  </documentation>
+  <control>
+    <start name="DFlowFM"/>
+  </control>
+  <component name="DFlowFM">
+        <setting key="bloomspecies" value="/opt/delft3dfm_latest/lnx64/share/delft3d/bloom.spe"/>
+        <setting key="processlibrary" value="/opt/delft3dfm_latest/lnx64/share/delft3d/proc_def.dat"/>
+    <library>dflowfm</library>
+    <process>0 1 2 3 4 5 6 7</process>
+    <workingDir>.</workingDir>
+    <inputFile>tttz_waq.mdu</inputFile>
+  </component>
+</dimrConfig>

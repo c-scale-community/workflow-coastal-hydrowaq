@@ -1,0 +1,27 @@
+[forcing]
+Name                            = east2_0001
+Function                        = timeseries
+Time-interpolation              = linear
+Vertical position type          = single
+Vertical interpolation          = linear
+Quantity                        = time
+Unit                            = minutes since 2015-01-01 00:00:00 +00:00
+Quantity                        = tracerbndContinuity
+Unit                            = mg/L
+Vertical position               = 1
+0       	1.
+3000000	    1.
+
+[forcing]
+Name                            = south2_0001
+Function                        = timeseries
+Time-interpolation              = linear
+Vertical position type          = single
+Vertical interpolation          = linear
+Quantity                        = time
+Unit                            = minutes since 2015-01-01 00:00:00 +00:00
+Quantity                        = tracerbndContinuity
+Unit                            = mg/L
+Vertical position               = 1
+0       	1.
+3000000	    1.

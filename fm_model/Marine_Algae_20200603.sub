@@ -1,0 +1,1531 @@
+substance 'Continuity' active
+   description        'Continuity'
+   concentration-unit '(g/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'OXY' active
+   description        'Dissolved Oxygen'
+   concentration-unit '(g/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'IM1' active
+   description        'inorganic matter (IM1)'
+   concentration-unit '(gDM/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'NH4' active
+   description        'Ammonium (NH4)'
+   concentration-unit '(gN/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'NO3' active
+   description        'Nitrate (NO3)'
+   concentration-unit '(gN/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'PO4' active
+   description        'Ortho-Phosphate (PO4)'
+   concentration-unit '(gP/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'Si' active
+   description        'dissolved Silica (Si)'
+   concentration-unit '(gSi/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'Opal' active
+   description        'Opal-Si'
+   concentration-unit '(gSi/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'POC1' active
+   description        'POC1 (fast decomposing fraction)'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'PON1' active
+   description        'PON1 (fast decomposing fraction)'
+   concentration-unit '(gN/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'POP1' active
+   description        'POP1 (fast decomposing fraction)'
+   concentration-unit '(gP/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'DINOFLAG_E' active
+   description        'Marine DINOFLAG energy type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'DINOFLAG_N' active
+   description        'Marine DINOFLAG nitrogen type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'DINOFLAG_P' active
+   description        'Marine DINOFLAG phosphorus typ'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'MDIATOMS_E' active
+   description        'Marine DIATOMS energy type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'MDIATOMS_N' active
+   description        'Marine DIATOMS nitrogen type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'MDIATOMS_P' active
+   description        'Marine DIATOMS phosphorus type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'MFLAGELA_E' active
+   description        'Marine FLAGELAT energy type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'MFLAGELA_N' active
+   description        'Marine FLAGELAT nitrogen type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'MFLAGELA_P' active
+   description        'Marine FLAGELAT phosphorus typ'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'PHAEOCYS_E' active
+   description        'Phaeocystis energy type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'PHAEOCYS_N' active
+   description        'Phaeocystis nitrogen type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'PHAEOCYS_P' active
+   description        'Phaeocystis phosphorus type'
+   concentration-unit '(gC/m3)'
+   waste-load-unit    '-'
+end-substance
+substance 'DetCS1' inactive
+   description        'DetC in layer S1'
+   concentration-unit '(gC/m2)'
+   waste-load-unit    '-'
+end-substance
+substance 'DetNS1' inactive
+   description        'DetN in layer S1'
+   concentration-unit '(gN/m2)'
+   waste-load-unit    '-'
+end-substance
+substance 'DetPS1' inactive
+   description        'DetP in layer S1'
+   concentration-unit '(gP/m2)'
+   waste-load-unit    '-'
+end-substance
+substance 'DetSiS1' inactive
+   description        'DetSi in layer S1'
+   concentration-unit '(gSi/m2)'
+   waste-load-unit    '-'
+end-substance
+parameter 'VertDisper'
+   description   'vertical dispersion'
+   unit          '(m2/s)'
+   value         0.0
+end-parameter
+parameter 'TimMultBl'
+   description   'ratio bloom/delwaq time step'
+   unit          '(-)'
+   value          144.
+end-parameter
+parameter 'Temp'
+   description   'ambient water temperature'
+   unit          '(oC)'
+   value          0.1500E+02
+end-parameter
+parameter 'FrAutMDI_E'
+   description   'frac. mort. algae  dissolved as nutrients MDIATOMS_E'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutMDI_N'
+   description   'frac. mort. algae  dissolved as nutrients MDIATOMS_N'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutMDI_P'
+   description   'frac. mort. algae  dissolved as nutrients MDIATOMS_P'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutMFL_E'
+   description   'frac. mort. algae  dissolved as nutrients MFLAGELA_E'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutMFL_N'
+   description   'frac. mort. algae  dissolved as nutrients MFLAGELA_N'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutMFL_P'
+   description   'frac. mort. algae  dissolved as nutrients MFLAGELA_P'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutDIN_E'
+   description   'frac. mort. algae  dissolved as nutrients DINOFLAG_E'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutDIN_N'
+   description   'frac. mort. algae  dissolved as nutrients DINOFLAG_N'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutDIN_P'
+   description   'frac. mort. algae  dissolved as nutrients DINOFLAG_P'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutPHA_E'
+   description   'frac. mort. algae  dissolved as nutrients PHAEOCYS_E'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutPHA_N'
+   description   'frac. mort. algae  dissolved as nutrients PHAEOCYS_N'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrAutPHA_P'
+   description   'frac. mort. algae  dissolved as nutrients PHAEOCYS_P'
+   unit          '(-)'
+   value          0.3000E+00
+end-parameter
+parameter 'FrDetMDI_E'
+   description   'frac. mort. algae  detritus production MDIATOMS_E'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetMDI_N'
+   description   'frac. mort. algae  detritus production MDIATOMS_N'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetMDI_P'
+   description   'frac. mort. algae  detritus production MDIATOMS_P'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetMFL_E'
+   description   'frac. mort. algae  detritus production MFLAGELA_E'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetMFL_N'
+   description   'frac. mort. algae  detritus production MFLAGELA_N'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetMFL_P'
+   description   'frac. mort. algae  detritus production MFLAGELA_P'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetDIN_E'
+   description   'frac. mort. algae  detritus production DINOFLAG_E'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetDIN_N'
+   description   'frac. mort. algae  detritus production DINOFLAG_N'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetDIN_P'
+   description   'frac. mort. algae  detritus production DINOFLAG_P'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetPHA_E'
+   description   'frac. mort. algae  detritus production PHAEOCYS_E'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetPHA_N'
+   description   'frac. mort. algae  detritus production PHAEOCYS_N'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'FrDetPHA_P'
+   description   'frac. mort. algae  detritus production PHAEOCYS_P'
+   unit          '(-)'
+   value          0.7000E+00
+end-parameter
+parameter 'ExtVlMDI_E'
+   description   'extinction coeff. visible light by algae MDIATOMS_E'
+   unit          '(m2/gC)'
+   value          0.2400E+00
+end-parameter
+parameter 'ExtVlMDI_N'
+   description   'extinction coeff. visible light by algae MDIATOMS_N'
+   unit          '(m2/gC)'
+   value          0.2100E+00
+end-parameter
+parameter 'ExtVlMDI_P'
+   description   'extinction coeff. visible light by algae MDIATOMS_P'
+   unit          '(m2/gC)'
+   value          0.2100E+00
+end-parameter
+parameter 'ExtVlMFL_E'
+   description   'extinction coeff. visible light by algae MFLAGELA_E'
+   unit          '(m2/gC)'
+   value          0.2500E+00
+end-parameter
+parameter 'ExtVlMFL_N'
+   description   'extinction coeff. visible light by algae MFLAGELA_N'
+   unit          '(m2/gC)'
+   value          0.2250E+00
+end-parameter
+parameter 'ExtVlMFL_P'
+   description   'extinction coeff. visible light by algae MFLAGELA_P'
+   unit          '(m2/gC)'
+   value          0.2250E+00
+end-parameter
+parameter 'ExtVlDIN_E'
+   description   'extinction coeff. visible light by algae DINOFLAG_E'
+   unit          '(m2/gC)'
+   value          0.2000E+00
+end-parameter
+parameter 'ExtVlDIN_N'
+   description   'extinction coeff. visible light by algae DINOFLAG_N'
+   unit          '(m2/gC)'
+   value          0.1750E+00
+end-parameter
+parameter 'ExtVlDIN_P'
+   description   'extinction coeff. visible light by algae DINOFLAG_P'
+   unit          '(m2/gC)'
+   value          0.1750E+00
+end-parameter
+parameter 'ExtVlPHA_E'
+   description   'extinction coeff. visible light by algae PHAEOCYS_E'
+   unit          '(m2/gC)'
+   value          0.4500E+00
+end-parameter
+parameter 'ExtVlPHA_N'
+   description   'extinction coeff. visible light by algae PHAEOCYS_N'
+   unit          '(m2/gC)'
+   value          0.4125E+00
+end-parameter
+parameter 'ExtVlPHA_P'
+   description   'extinction coeff. visible light by algae PHAEOCYS_P'
+   unit          '(m2/gC)'
+   value          0.4125E+00
+end-parameter
+parameter 'DMCFMDI_E'
+   description   'DM:C ratio algae MDIATOMS_E'
+   unit          '(gDM/gC)'
+   value          0.3000E+01
+end-parameter
+parameter 'DMCFMDI_N'
+   description   'DM:C ratio algae MDIATOMS_N'
+   unit          '(gDM/gC)'
+   value          0.3000E+01
+end-parameter
+parameter 'DMCFMDI_P'
+   description   'DM:C ratio algae MDIATOMS_P'
+   unit          '(gDM/gC)'
+   value          0.3000E+01
+end-parameter
+parameter 'DMCFMFL_E'
+   description   'DM:C ratio algae MFLAGELA_E'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFMFL_N'
+   description   'DM:C ratio algae MFLAGELA_N'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFMFL_P'
+   description   'DM:C ratio algae MFLAGELA_P'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFDIN_E'
+   description   'DM:C ratio algae DINOFLAG_E'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFDIN_N'
+   description   'DM:C ratio algae DINOFLAG_N'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFDIN_P'
+   description   'DM:C ratio algae DINOFLAG_P'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFPHA_E'
+   description   'DM:C ratio algae PHAEOCYS_E'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFPHA_N'
+   description   'DM:C ratio algae PHAEOCYS_N'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'DMCFPHA_P'
+   description   'DM:C ratio algae PHAEOCYS_P'
+   unit          '(gDM/gC)'
+   value          0.2500E+01
+end-parameter
+parameter 'NCRMDI_E'
+   description   'N:C ratio per algae type MDIATOMS_E'
+   unit          '(gN/gC)'
+   value          0.2550E+00
+end-parameter
+parameter 'NCRMDI_N'
+   description   'N:C ratio per algae type MDIATOMS_N'
+   unit          '(gN/gC)'
+   value          0.7000E-01
+end-parameter
+parameter 'NCRMDI_P'
+   description   'N:C ratio per algae type MDIATOMS_P'
+   unit          '(gN/gC)'
+   value          0.1050E+00
+end-parameter
+parameter 'NCRMFL_E'
+   description   'N:C ratio per algae type MFLAGELA_E'
+   unit          '(gN/gC)'
+   value          0.2000E+00
+end-parameter
+parameter 'NCRMFL_N'
+   description   'N:C ratio per algae type MFLAGELA_N'
+   unit          '(gN/gC)'
+   value          0.7800E-01
+end-parameter
+parameter 'NCRMFL_P'
+   description   'N:C ratio per algae type MFLAGELA_P'
+   unit          '(gN/gC)'
+   value          0.1130E+00
+end-parameter
+parameter 'NCRDIN_E'
+   description   'N:C ratio per algae type DINOFLAG_E'
+   unit          '(gN/gC)'
+   value          0.1625E+00
+end-parameter
+parameter 'NCRDIN_N'
+   description   'N:C ratio per algae type DINOFLAG_N'
+   unit          '(gN/gC)'
+   value          0.6400E-01
+end-parameter
+parameter 'NCRDIN_P'
+   description   'N:C ratio per algae type DINOFLAG_P'
+   unit          '(gN/gC)'
+   value          0.7100E-01
+end-parameter
+parameter 'NCRPHA_E'
+   description   'N:C ratio per algae type PHAEOCYS_E'
+   unit          '(gN/gC)'
+   value          0.1875E+00
+end-parameter
+parameter 'NCRPHA_N'
+   description   'N:C ratio per algae type PHAEOCYS_N'
+   unit          '(gN/gC)'
+   value          0.7500E-01
+end-parameter
+parameter 'NCRPHA_P'
+   description   'N:C ratio per algae type PHAEOCYS_P'
+   unit          '(gN/gC)'
+   value          0.1040E+00
+end-parameter
+parameter 'PCRMDI_E'
+   description   'P:C ratio per algae type MDIATOMS_E'
+   unit          '(gP/gC)'
+   value          0.3150E-01
+end-parameter
+parameter 'PCRMDI_N'
+   description   'P:C ratio per algae type MDIATOMS_N'
+   unit          '(gP/gC)'
+   value          0.1200E-01
+end-parameter
+parameter 'PCRMDI_P'
+   description   'P:C ratio per algae type MDIATOMS_P'
+   unit          '(gP/gC)'
+   value          0.1000E-01
+end-parameter
+parameter 'PCRMFL_E'
+   description   'P:C ratio per algae type MFLAGELA_E'
+   unit          '(gP/gC)'
+   value          0.2000E-01
+end-parameter
+parameter 'PCRMFL_N'
+   description   'P:C ratio per algae type MFLAGELA_N'
+   unit          '(gP/gC)'
+   value          0.1000E-01
+end-parameter
+parameter 'PCRMFL_P'
+   description   'P:C ratio per algae type MFLAGELA_P'
+   unit          '(gP/gC)'
+   value          0.7000E-02
+end-parameter
+parameter 'PCRDIN_E'
+   description   'P:C ratio per algae type DINOFLAG_E'
+   unit          '(gP/gC)'
+   value          0.1675E-01
+end-parameter
+parameter 'PCRDIN_N'
+   description   'P:C ratio per algae type DINOFLAG_N'
+   unit          '(gP/gC)'
+   value          0.1100E-01
+end-parameter
+parameter 'PCRDIN_P'
+   description   'P:C ratio per algae type DINOFLAG_P'
+   unit          '(gP/gC)'
+   value          0.1000E-01
+end-parameter
+parameter 'PCRPHA_E'
+   description   'P:C ratio per algae type PHAEOCYS_E'
+   unit          '(gP/gC)'
+   value          0.2250E-01
+end-parameter
+parameter 'PCRPHA_N'
+   description   'P:C ratio per algae type PHAEOCYS_N'
+   unit          '(gP/gC)'
+   value          0.1400E-01
+end-parameter
+parameter 'PCRPHA_P'
+   description   'P:C ratio per algae type PHAEOCYS_P'
+   unit          '(gP/gC)'
+   value          0.1100E-01
+end-parameter
+parameter 'SCRMDI_E'
+   description   'Si:C ratio per algae type MDIATOMS_E'
+   unit          '(gSi/gC)'
+   value          0.4470E+00
+end-parameter
+parameter 'SCRMDI_N'
+   description   'Si:C ratio per algae type MDIATOMS_N'
+   unit          '(gSi/gC)'
+   value          0.2830E+00
+end-parameter
+parameter 'SCRMDI_P'
+   description   'Si:C ratio per algae type MDIATOMS_P'
+   unit          '(gSi/gC)'
+   value          0.1520E+00
+end-parameter
+parameter 'SCRMFL_E'
+   description   'Si:C ratio per algae type MFLAGELA_E'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRMFL_N'
+   description   'Si:C ratio per algae type MFLAGELA_N'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRMFL_P'
+   description   'Si:C ratio per algae type MFLAGELA_P'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRDIN_E'
+   description   'Si:C ratio per algae type DINOFLAG_E'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRDIN_N'
+   description   'Si:C ratio per algae type DINOFLAG_N'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRDIN_P'
+   description   'Si:C ratio per algae type DINOFLAG_P'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRPHA_E'
+   description   'Si:C ratio per algae type PHAEOCYS_E'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRPHA_N'
+   description   'Si:C ratio per algae type PHAEOCYS_N'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'SCRPHA_P'
+   description   'Si:C ratio per algae type PHAEOCYS_P'
+   unit          '(gSi/gC)'
+   value          0.0000E+00
+end-parameter
+parameter 'ChlaCMDI_E'
+   description   'Chlorophyll-a:C ratio per algae type MDIATOMS_E'
+   unit          '(gChla/gC)'
+   value          0.5300E-01
+end-parameter
+parameter 'ChlaCMDI_N'
+   description   'Chlorophyll-a:C ratio per algae type MDIATOMS_N'
+   unit          '(gChla/gC)'
+   value          0.1000E-01
+end-parameter
+parameter 'ChlaCMDI_P'
+   description   'Chlorophyll-a:C ratio per algae type MDIATOMS_P'
+   unit          '(gChla/gC)'
+   value          0.1000E-01
+end-parameter
+parameter 'ChlaCMFL_E'
+   description   'Chlorophyll-a:C ratio per algae type MFLAGELA_E'
+   unit          '(gChla/gC)'
+   value          0.2860E-01
+end-parameter
+parameter 'ChlaCMFL_N'
+   description   'Chlorophyll-a:C ratio per algae type MFLAGELA_N'
+   unit          '(gChla/gC)'
+   value          0.7000E-02
+end-parameter
+parameter 'ChlaCMFL_P'
+   description   'Chlorophyll-a:C ratio per algae type MFLAGELA_P'
+   unit          '(gChla/gC)'
+   value          0.7000E-02
+end-parameter
+parameter 'ChlaCDIN_E'
+   description   'Chlorophyll-a:C ratio per algae type DINOFLAG_E'
+   unit          '(gChla/gC)'
+   value          0.2860E-01
+end-parameter
+parameter 'ChlaCDIN_N'
+   description   'Chlorophyll-a:C ratio per algae type DINOFLAG_N'
+   unit          '(gChla/gC)'
+   value          0.7000E-02
+end-parameter
+parameter 'ChlaCDIN_P'
+   description   'Chlorophyll-a:C ratio per algae type DINOFLAG_P'
+   unit          '(gChla/gC)'
+   value          0.7000E-02
+end-parameter
+parameter 'ChlaCPHA_E'
+   description   'Chlorophyll-a:C ratio per algae type PHAEOCYS_E'
+   unit          '(gChla/gC)'
+   value          0.2860E-01
+end-parameter
+parameter 'ChlaCPHA_N'
+   description   'Chlorophyll-a:C ratio per algae type PHAEOCYS_N'
+   unit          '(gChla/gC)'
+   value          0.7000E-02
+end-parameter
+parameter 'ChlaCPHA_P'
+   description   'Chlorophyll-a:C ratio per algae type PHAEOCYS_P'
+   unit          '(gChla/gC)'
+   value          0.7000E-02
+end-parameter
+parameter 'PPMaxMDI_E'
+   description   'pot. maximum growth rate at 0 dg C MDIATOMS_E'
+   unit          '(1/d)'
+   value          0.8300E-01
+end-parameter
+parameter 'PPMaxMDI_N'
+   description   'pot. maximum growth rate at 0 dg C MDIATOMS_N'
+   unit          '(1/d)'
+   value          0.6600E-01
+end-parameter
+parameter 'PPMaxMDI_P'
+   description   'pot. maximum growth rate at 0 dg C MDIATOMS_P'
+   unit          '(1/d)'
+   value          0.6600E-01
+end-parameter
+parameter 'PPMaxMFL_E'
+   description   'pot. maximum growth rate at 0 dg C MFLAGELA_E'
+   unit          '(1/d)'
+   value          0.9000E-01
+end-parameter
+parameter 'PPMaxMFL_N'
+   description   'pot. maximum growth rate at 0 dg C MFLAGELA_N'
+   unit          '(1/d)'
+   value          0.7500E-01
+end-parameter
+parameter 'PPMaxMFL_P'
+   description   'pot. maximum growth rate at 0 dg C MFLAGELA_P'
+   unit          '(1/d)'
+   value          0.7500E-01
+end-parameter
+parameter 'PPMaxDIN_E'
+   description   'pot. maximum growth rate at 0 dg C DINOFLAG_E'
+   unit          '(1/d)'
+   value          0.1320E+00
+end-parameter
+parameter 'PPMaxDIN_N'
+   description   'pot. maximum growth rate at 0 dg C DINOFLAG_N'
+   unit          '(1/d)'
+   value          0.1130E+00
+end-parameter
+parameter 'PPMaxDIN_P'
+   description   'pot. maximum growth rate at 0 dg C DINOFLAG_P'
+   unit          '(1/d)'
+   value          0.1120E+00
+end-parameter
+parameter 'PPMaxPHA_E'
+   description   'pot. maximum growth rate at 0 dg C PHAEOCYS_E'
+   unit          '(1/d)'
+   value          0.8400E-01
+end-parameter
+parameter 'PPMaxPHA_N'
+   description   'pot. maximum growth rate at 0 dg C PHAEOCYS_N'
+   unit          '(1/d)'
+   value          0.7800E-01
+end-parameter
+parameter 'PPMaxPHA_P'
+   description   'pot. maximum growth rate at 0 dg C PHAEOCYS_P'
+   unit          '(1/d)'
+   value          0.7800E-01
+end-parameter
+parameter 'TcPMxMDI_E'
+   description   'temperature coefficient for growth MDIATOMS_E'
+   unit          '(-)'
+   value         -0.1750E+01
+end-parameter
+parameter 'TcPMxMDI_N'
+   description   'temperature coefficient for growth MDIATOMS_N'
+   unit          '(-)'
+   value         -0.2000E+01
+end-parameter
+parameter 'TcPMxMDI_P'
+   description   'temperature coefficient for growth MDIATOMS_P'
+   unit          '(-)'
+   value         -0.2000E+01
+end-parameter
+parameter 'TcPMxMFL_E'
+   description   'temperature coefficient for growth MFLAGELA_E'
+   unit          '(-)'
+   value         -0.1000E+01
+end-parameter
+parameter 'TcPMxMFL_N'
+   description   'temperature coefficient for growth MFLAGELA_N'
+   unit          '(-)'
+   value         -0.1000E+01
+end-parameter
+parameter 'TcPMxMFL_P'
+   description   'temperature coefficient for growth MFLAGELA_P'
+   unit          '(-)'
+   value         -0.1000E+01
+end-parameter
+parameter 'TcPMxDIN_E'
+   description   'temperature coefficient for growth DINOFLAG_E'
+   unit          '(-)'
+   value          0.5500E+01
+end-parameter
+parameter 'TcPMxDIN_N'
+   description   'temperature coefficient for growth DINOFLAG_N'
+   unit          '(-)'
+   value          0.4750E+01
+end-parameter
+parameter 'TcPMxDIN_P'
+   description   'temperature coefficient for growth DINOFLAG_P'
+   unit          '(-)'
+   value          0.4750E+01
+end-parameter
+parameter 'TcPMxPHA_E'
+   description   'temperature coefficient for growth PHAEOCYS_E'
+   unit          '(-)'
+   value         -0.3250E+01
+end-parameter
+parameter 'TcPMxPHA_N'
+   description   'temperature coefficient for growth PHAEOCYS_N'
+   unit          '(-)'
+   value         -0.3000E+01
+end-parameter
+parameter 'TcPMxPHA_P'
+   description   'temperature coefficient for growth PHAEOCYS_P'
+   unit          '(-)'
+   value         -0.3000E+01
+end-parameter
+parameter 'TFPMxMDI_E'
+   description   'growth response temp. (0-lin,<>0-expon) MDIATOMS_E'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxMDI_N'
+   description   'growth response temp. (0-lin,<>0-expon) MDIATOMS_N'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxMDI_P'
+   description   'growth response temp. (0-lin,<>0-expon) MDIATOMS_P'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxMFL_E'
+   description   'growth response temp. (0-lin,<>0-expon) MFLAGELA_E'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxMFL_N'
+   description   'growth response temp. (0-lin,<>0-expon) MFLAGELA_N'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxMFL_P'
+   description   'growth response temp. (0-lin,<>0-expon) MFLAGELA_P'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxDIN_E'
+   description   'growth response temp. (0-lin,<>0-expon) DINOFLAG_E'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxDIN_N'
+   description   'growth response temp. (0-lin,<>0-expon) DINOFLAG_N'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxDIN_P'
+   description   'growth response temp. (0-lin,<>0-expon) DINOFLAG_P'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxPHA_E'
+   description   'growth response temp. (0-lin,<>0-expon) PHAEOCYS_E'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxPHA_N'
+   description   'growth response temp. (0-lin,<>0-expon) PHAEOCYS_N'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'TFPMxPHA_P'
+   description   'growth response temp. (0-lin,<>0-expon) PHAEOCYS_P'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'Mort0MDI_E'
+   description   'mortality rate at 0 dg C MDIATOMS_E'
+   unit          '(1/d)'
+   value          0.7000E-01
+end-parameter
+parameter 'Mort0MDI_N'
+   description   'mortality rate at 0 dg C MDIATOMS_N'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'Mort0MDI_P'
+   description   'mortality rate at 0 dg C MDIATOMS_P'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'Mort0MFL_E'
+   description   'mortality rate at 0 dg C MFLAGELA_E'
+   unit          '(1/d)'
+   value          0.7000E-01
+end-parameter
+parameter 'Mort0MFL_N'
+   description   'mortality rate at 0 dg C MFLAGELA_N'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'Mort0MFL_P'
+   description   'mortality rate at 0 dg C MFLAGELA_P'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'Mort0DIN_E'
+   description   'mortality rate at 0 dg C DINOFLAG_E'
+   unit          '(1/d)'
+   value          0.7500E-01
+end-parameter
+parameter 'Mort0DIN_N'
+   description   'mortality rate at 0 dg C DINOFLAG_N'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'Mort0DIN_P'
+   description   'mortality rate at 0 dg C DINOFLAG_P'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'Mort0PHA_E'
+   description   'mortality rate at 0 dg C PHAEOCYS_E'
+   unit          '(1/d)'
+   value          0.7000E-01
+end-parameter
+parameter 'Mort0PHA_N'
+   description   'mortality rate at 0 dg C PHAEOCYS_N'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'Mort0PHA_P'
+   description   'mortality rate at 0 dg C PHAEOCYS_P'
+   unit          '(1/d)'
+   value          0.8000E-01
+end-parameter
+parameter 'TcMrtMDI_E'
+   description   'temperature coefficient for mortality MDIATOMS_E'
+   unit          '(-)'
+   value          0.1072E+01
+end-parameter
+parameter 'TcMrtMDI_N'
+   description   'temperature coefficient for mortality MDIATOMS_N'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'TcMrtMDI_P'
+   description   'temperature coefficient for mortality MDIATOMS_P'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'TcMrtMFL_E'
+   description   'temperature coefficient for mortality MFLAGELA_E'
+   unit          '(-)'
+   value          0.1072E+01
+end-parameter
+parameter 'TcMrtMFL_N'
+   description   'temperature coefficient for mortality MFLAGELA_N'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'TcMrtMFL_P'
+   description   'temperature coefficient for mortality MFLAGELA_P'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'TcMrtDIN_E'
+   description   'temperature coefficient for mortality DINOFLAG_E'
+   unit          '(-)'
+   value          0.1072E+01
+end-parameter
+parameter 'TcMrtDIN_N'
+   description   'temperature coefficient for mortality DINOFLAG_N'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'TcMrtDIN_P'
+   description   'temperature coefficient for mortality DINOFLAG_P'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'TcMrtPHA_E'
+   description   'temperature coefficient for mortality PHAEOCYS_E'
+   unit          '(-)'
+   value          0.1072E+01
+end-parameter
+parameter 'TcMrtPHA_N'
+   description   'temperature coefficient for mortality PHAEOCYS_N'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'TcMrtPHA_P'
+   description   'temperature coefficient for mortality PHAEOCYS_P'
+   unit          '(-)'
+   value          0.1085E+01
+end-parameter
+parameter 'MRespMDI_E'
+   description   'maintenance respiration rate at 0 dg C MDIATOMS_E'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespMDI_N'
+   description   'maintenance respiration rate at 0 dg C MDIATOMS_N'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespMDI_P'
+   description   'maintenance respiration rate at 0 dg C MDIATOMS_P'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespMFL_E'
+   description   'maintenance respiration rate at 0 dg C MFLAGELA_E'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespMFL_N'
+   description   'maintenance respiration rate at 0 dg C MFLAGELA_N'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespMFL_P'
+   description   'maintenance respiration rate at 0 dg C MFLAGELA_P'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespDIN_E'
+   description   'maintenance respiration rate at 0 dg C DINOFLAG_E'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespDIN_N'
+   description   'maintenance respiration rate at 0 dg C DINOFLAG_N'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespDIN_P'
+   description   'maintenance respiration rate at 0 dg C DINOFLAG_P'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespPHA_E'
+   description   'maintenance respiration rate at 0 dg C PHAEOCYS_E'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespPHA_N'
+   description   'maintenance respiration rate at 0 dg C PHAEOCYS_N'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'MRespPHA_P'
+   description   'maintenance respiration rate at 0 dg C PHAEOCYS_P'
+   unit          '(1/d)'
+   value          0.6000E-01
+end-parameter
+parameter 'TcRspMDI_E'
+   description   'temperature coefficient for respiration MDIATOMS_E'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspMDI_N'
+   description   'temperature coefficient for respiration MDIATOMS_N'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspMDI_P'
+   description   'temperature coefficient for respiration MDIATOMS_P'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspMFL_E'
+   description   'temperature coefficient for respiration MFLAGELA_E'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspMFL_N'
+   description   'temperature coefficient for respiration MFLAGELA_N'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspMFL_P'
+   description   'temperature coefficient for respiration MFLAGELA_P'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspDIN_E'
+   description   'temperature coefficient for respiration DINOFLAG_E'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspDIN_N'
+   description   'temperature coefficient for respiration DINOFLAG_N'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspDIN_P'
+   description   'temperature coefficient for respiration DINOFLAG_P'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspPHA_E'
+   description   'temperature coefficient for respiration PHAEOCYS_E'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspPHA_N'
+   description   'temperature coefficient for respiration PHAEOCYS_N'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'TcRspPHA_P'
+   description   'temperature coefficient for respiration PHAEOCYS_P'
+   unit          '(-)'
+   value          0.1066E+01
+end-parameter
+parameter 'EffiAlg'
+   description   'average light efficiency algae (BLOOM step)'
+   unit          '(-)'
+   value         -1
+end-parameter
+parameter 'TcNit'
+   description   'temperature coefficient for nitrification'
+   unit          '(-)'
+   value          0.1070E+01
+end-parameter
+parameter 'CTNit'
+   description   'critical temperature for nitrification'
+   unit          '(oC)'
+   value          0.3000E+01
+end-parameter
+parameter 'COXNIT'
+   description   'critical oxygen concentration for nitrification'
+   unit          '(g/m3)'
+   value          0.1000E+01
+end-parameter
+parameter 'RcNit'
+   description   'first-order nitrification rate'
+   unit          '(1/d)'
+   value          0.1000E+00
+end-parameter
+parameter 'OOXNIT'
+   description   'optimum oxygen concentration for nitrification'
+   unit          '(gO2/m3)'
+   value          0.5000E+01
+end-parameter
+parameter 'Salinity'
+   description   'Salinity'
+   unit          '(g/kg)'
+   value          0.3500E+02
+end-parameter
+parameter 'Velocity'
+   description   'horizontal flow velocity'
+   unit          '(m/s)'
+   value          0.5000E+00
+end-parameter
+parameter 'Tau'
+   description   'total bottom shear stress'
+   unit          '(N/m2)'
+   value          0.0
+end-parameter
+parameter 'VWind'
+   description   'wind speed'
+   unit          '(m/s)'
+   value          0.3000E+01
+end-parameter
+parameter 'RadSurf'
+   description   'surface radiation'
+   unit          '(W/m2)'
+   value          0.0
+end-parameter
+parameter 'SWRear'
+   description   'switch for oxygen reaeration formulation (1-13)'
+   unit          '(-)'
+   value          0.9000E+01
+end-parameter
+parameter 'KLRear'
+   description   'reaeration transfer coefficient'
+   unit          '(m/d)'
+   value          0.1000E+01
+end-parameter
+parameter 'RcDetCS1'
+   description   'first-order mineralisation rate DetC in layer S1'
+   unit          '(1/d)'
+   value          0.3000E-01
+end-parameter
+parameter 'TcBMDetC'
+   description   'temperature coeff. mineralisation DetC in sediment'
+   unit          '(-)'
+   value          0.1090E+01
+end-parameter
+parameter 'VSedIM1'
+   description   'sedimentation velocity IM1'
+   unit          '(m/d)'
+   value          0.1000E+00
+end-parameter
+parameter 'TaucSIM1'
+   description   'critical shear stress for sedimentation IM1'
+   unit          '(N/m2)'
+   value          0.1000E+00
+end-parameter
+parameter 'MinDepth'
+   description   'minimum waterdepth for sedimentation/resuspension'
+   unit          '(m)'
+   value          0.1000E+00
+end-parameter
+parameter 'FrIM1S1'
+   description   'fraction IM1 in layer S1'
+   unit          '(gDM/gDM)'
+   value         0.02
+end-parameter
+parameter 'PAConstant'
+   description   'Poole-Atkins constant'
+   unit          '(-)'
+   value          0.1700E+01
+end-parameter
+parameter 'RcDetNS1'
+   description   'first-order mineralisation rate DetN in layer S1'
+   unit          '(1/d)'
+   value          0.3000E-01
+end-parameter
+parameter 'TcBMDetN'
+   description   'temperature coeff. mineralisation DetN in sediment'
+   unit          '(-)'
+   value          0.1090E+01
+end-parameter
+parameter 'ku_dFdcC20'
+   description   'upper limit mineralization rate fast detr-C'
+   unit          '(1/d)'
+   value          0.1800E+00
+end-parameter
+parameter 'kl_dFdcC20'
+   description   'lower limit mineralization rate fast detr-C'
+   unit          '(1/d)'
+   value          0.1200E+00
+end-parameter
+parameter 'ku_dFdcN20'
+   description   'upper limit mineralization rate fast detr-N'
+   unit          '(1/d)'
+   value          0.1800E+00
+end-parameter
+parameter 'kl_dFdcN20'
+   description   'lower limit mineralization rate fast detr-N'
+   unit          '(1/d)'
+   value          0.1200E+00
+end-parameter
+parameter 'ku_dFdcP20'
+   description   'upper limit mineralization rate fast detr-P'
+   unit          '(1/d)'
+   value          0.1800E+00
+end-parameter
+parameter 'kl_dFdcP20'
+   description   'lower limit mineralization rate fast detr-P'
+   unit          '(1/d)'
+   value          0.1200E+00
+end-parameter
+parameter 'kT_dec'
+   description   'temperature coefficient for decomposition'
+   unit          '(-)'
+   value          0.1047E+01
+end-parameter
+parameter 'b_poc1poc2'
+   description   'fraction POC1 converted to POC2'
+   unit          '(-)'
+   value          0.0
+end-parameter
+parameter 'SWOMDec'
+   description   'option: 0.0 for stripping, 1.0 for different rates'
+   unit          '{no unit}'
+   value          0.0000E+00
+end-parameter
+parameter 'fAtmDepNH4'
+   description   'atmospheric deposition flux NH4'
+   unit          '(gN/m2/d)'
+   value         3.2000E-04
+end-parameter
+parameter 'RcDenSed'
+   description   'first-order denitrification rate in the sediment'
+   unit          '(m/d)'
+   value          0.1000E+00
+end-parameter
+parameter 'fAtmDepNO3'
+   description   'atmospheric deposition flux NO3'
+   unit          '(gN/m2/d)'
+   value         6.2000E-04
+end-parameter
+parameter 'RcDetPS1'
+   description   'first-order mineralisation rate DetP in layer S1'
+   unit          '(1/d)'
+   value          0.3000E-01
+end-parameter
+parameter 'TcBMDetP'
+   description   'temperature coeff. mineralisation DetP in sediment'
+   unit          '(-)'
+   value          0.1090E+01
+end-parameter
+parameter 'fAtmDepPO4'
+   description   'atmospheric deposition flux PO4'
+   unit          '(gP/m2/d)'
+   value         0.0
+end-parameter
+parameter 'RcDetSiS1'
+   description   'first-order mineralisation rate DetSi in layer S1'
+   unit          '(1/d)'
+   value          0.1500E-01
+end-parameter
+parameter 'TcBMDetSi'
+   description   'temp. coeff. mineralisation DetSi in sediment'
+   unit          '(-)'
+   value          0.1090E+01
+end-parameter
+parameter 'RCdisSi20'
+   description   '2nd order dissolution rate SiO2 at 20 oC'
+   unit          '(m3/gSi/d)'
+   value          0.1000E-03
+end-parameter
+parameter 'TCdisSi'
+   description   'temperature dependency dissolution Si'
+   unit          '(-)'
+   value          0.1000E+01
+end-parameter
+parameter 'SWDisSi'
+   description   'option: 0.0 2nd order diss., 1.0 1st order diss.'
+   unit          '{no unit}'
+   value          0.0000E+00
+end-parameter
+parameter 'VSedOpal'
+   description   'sedimentation velocity Opal'
+   unit          '(m/d)'
+   value          0.5000E+00
+end-parameter
+parameter 'TaucSOpal'
+   description   'critical shear stress for sedimentation Opal'
+   unit          '(N/m2)'
+   value          0.1000E+00
+end-parameter
+parameter 'TaucSPOC1'
+   description   'critical shear stress for sedimentation POC1'
+   unit          '(N/m2)'
+   value          0.1000E+00
+end-parameter
+parameter 'IM1S1'
+   description   'IM1 in layer S1'
+   unit          '(gDM/m2)'
+   value          0.0000E+00
+end-parameter
+parameter 'TaucS'
+   description   'critical shear stress for sedimentation algae'
+   unit          '(N/m2)'
+   value          0.1000E+00
+end-parameter
+parameter 'ExtVlIM1'
+   description   'VL specific extinction coefficient IM1'
+   unit          '(m2/gDM)'
+   value          0.1000E-01
+end-parameter
+parameter 'ExtVlPOC1'
+   description   'VL specific extinction coefficient POC1'
+   unit          '(m2/gC)'
+   value          0.1000E+00
+end-parameter
+parameter 'ExtVlBak'
+   description   'background extinction visible light'
+   unit          '(1/m)'
+   value          0.8000E-01
+end-parameter
+parameter 'ExtVLSal0'
+   description   'extra VL extinction at Salinity = 0'
+   unit          '(1/m)'
+   value          0.0000E+00
+end-parameter
+parameter 'SWDepAve'
+   description   'switch for module DepAve (0=off, 1=on)'
+   unit          '(-)'
+   value          1.0000E+00
+end-parameter
+parameter 'Latitude'
+   description   'latitude of study area'
+   unit          '(degrees)'
+   value          37.30
+end-parameter
+parameter 'RefDay'
+   description   'daynumber of reference day simulation'
+   unit          '(d)'
+   value          0.0000E+00
+end-parameter
+parameter 'PeriodVTRA'
+   description   'period for calculating vertical distribution'
+   unit          '(h)'
+   value         24.
+end-parameter
+parameter 'Disp3'
+   description   'uniform dispersion in third direction'
+   unit          '(m2/s)'
+   value         5.0000E-06
+end-parameter
+parameter 'ZResDM'
+   description   'zeroth-order resuspension flux'
+   unit          '(gDM/m2/d)'
+   value          0.0000E+00
+end-parameter
+parameter 'TaucRS1DM'
+   description   'critical shear stress for resuspension DM layer S1'
+   unit          '(N/m2)'
+   value          0.2000E+00
+end-parameter
+parameter 'VBurDMS1'
+   description   'first order burial rate for layer S1'
+   unit          '(1/d)'
+   value          0.0000E+00
+end-parameter
+parameter 'SWSediment'
+   description   'switch for sediment (0=fixed, 1=variable)'
+   unit          '(-)'
+   value          0.0000E+00
+end-parameter
+parameter 'V0SedPOC1'
+   description   'sedimentation velocity POC1'
+   unit          '(m/d)'
+   value         1.5000E+00
+end-parameter
+parameter 'V0SedMDI_E'
+   description   'sedimentation velocity algal type MDIATOMS_E'
+   unit          '(m/d)'
+   value          0.5000E+00
+end-parameter
+parameter 'V0SedMDI_N'
+   description   'sedimentation velocity algal type MDIATOMS_N'
+   unit          '(m/d)'
+   value          0.1000E+01
+end-parameter
+parameter 'V0SedMDI_P'
+   description   'sedimentation velocity algal type MDIATOMS_P'
+   unit          '(m/d)'
+   value          0.1000E+01
+end-parameter
+parameter 'V0SedMFL_E'
+   description   'sedimentation velocity algal type MFLAGELA_E'
+   unit          '(m/d)'
+   value          0.0000E+00
+end-parameter
+parameter 'V0SedMFL_N'
+   description   'sedimentation velocity algal type MFLAGELA_N'
+   unit          '(m/d)'
+   value          0.5000E+00
+end-parameter
+parameter 'V0SedMFL_P'
+   description   'sedimentation velocity algal type MFLAGELA_P'
+   unit          '(m/d)'
+   value          0.5000E+00
+end-parameter
+parameter 'V0SedDIN_E'
+   description   'sedimentation velocity algal type DINOFLAG_E'
+   unit          '(m/d)'
+   value          0.0000E+00
+end-parameter
+parameter 'V0SedDIN_N'
+   description   'sedimentation velocity algal type DINOFLAG_N'
+   unit          '(m/d)'
+   value          0.0000E+00
+end-parameter
+parameter 'V0SedDIN_P'
+   description   'sedimentation velocity algal type DINOFLAG_P'
+   unit          '(m/d)'
+   value          0.0000E+00
+end-parameter
+parameter 'V0SedPHA_E'
+   description   'sedimentation velocity algal type PHAEOCYS_E'
+   unit          '(m/d)'
+   value          0.0000E+00
+end-parameter
+parameter 'V0SedPHA_N'
+   description   'sedimentation velocity algal type PHAEOCYS_N'
+   unit          '(m/d)'
+   value          0.5000E+00
+end-parameter
+parameter 'V0SedPHA_P'
+   description   'sedimentation velocity algal type PHAEOCYS_P'
+   unit          '(m/d)'
+   value          0.5000E+00
+end-parameter
+output 'ExtVl'
+   description   'total extinction coefficient visible light'
+end-output
+output 'fPPtot'
+   description   'total net primary production'
+end-output
+output 'SatPercOXY'
+   description   'Actual saturation percentage O2'
+end-output
+output 'Phyt'
+   description   'total carbon in phytoplankton'
+end-output
+output 'AlgN'
+   description   'total nitrogen in algae'
+end-output
+output 'AlgP'
+   description   'total phosphorus in algae'
+end-output
+output 'AlgSi'
+   description   'total silica in algae'
+end-output
+output 'SS'
+   description   'suspended solids'
+end-output
+output 'POC'
+   description   'Particulate Organic Carbon (including algae)'
+end-output
+output 'TotN'
+   description   'total nitrogen (including algae)'
+end-output
+output 'DIN'
+   description   'dissolved inorganic nitrogen'
+end-output
+output 'PON'
+   description   'Particulate Organic Nitrogen (including algae)'
+end-output
+output 'TotP'
+   description   'total phosphorus (including algae)'
+end-output
+output 'POP'
+   description   'particulate organic P (incl algae)'
+end-output
+output 'TotSi'
+   description   'total silica (including algae)'
+end-output
+output 'Tau'
+   description   'total bottom shear stress'
+end-output
+output 'Chlfa'
+   description   'Chlorophyll-a concentration'
+end-output
+output 'DINOFLAG'
+   description   'Dinoflagellates'
+end-output
+output 'MDIATOMS'
+   description   'Marine Diatoms'
+end-output
+output 'MFLAGELA'
+   description   'Marine flagellates'
+end-output
+output 'PHAEOCYS'
+   description   'Phaeocystis'
+end-output
+output 'FrIM1S1'
+   description   'fraction IM1 in layer S1'
+end-output
+output 'fResS1IM1'
+   description   'xxx'
+end-output
+active-processes
+   name  'Salinchlor' 'Conversion of salinity into chloride or vv'
+   name  'VertDisp' 'Vertical dispersion (segment -> exchange)'
+   name  'BLOOM_P' 'BLOOM II algae module'
+   name  'Nitrif_NH4' 'Nitrification of ammonium'
+   name  'RearOXY' 'Reaeration of oxygen'
+   name  'BMS1_DetC' 'Mineralisation detritus carbon in sediment S1'
+   name  'CONSELAC' 'Consumption oxygen/other electron acceptors'
+   name  'Compos' 'Composition'
+   name  'Sed_IM1' 'Sedimentation IM1'
+   name  'S12TraIM1' 'Resuspension, transport in S1-S2 IM1'
+   name  'Secchi' 'Secchi depth for visible-light (370-680nm)'
+   name  'BMS1_DetN' 'Mineralisation detritus nitrogen in sediment S1'
+   name  'DecFast' 'Mineralization fast decomp. detritus POC1'
+   name  'AtmDep_NH4' 'Atmospheric deposition NH4'
+   name  'DenSed_NO3' 'Denitrification in sediment'
+   name  'AtmDep_NO3' 'Atmospheric deposition NO3'
+   name  'BMS1_DetP' 'Mineralisation detritus phosphorus in sediment S1'
+   name  'AtmDep_PO4' 'Atmospheric deposition PO4'
+   name  'BMS1_DetSi' 'Mineralisation detritus silica in sediment S1'
+   name  'DisSi' 'Dissolution of Si in opal (SWITCH defaults)'
+   name  'Sed_Opal' 'Sedimentation Opal 3d'
+   name  'S12TraDetS' 'Resuspension, transport in S1-S2 DetSi'
+   name  'Sed_POC1' 'Sedimentation POC1 3d'
+   name  'S12TraDetC' 'Resuspension, transport in S1-S2 DetC'
+   name  'SedNPOC1' 'Sedim. nutrients in POC1'
+   name  'S12TraDetN' 'Resuspension, transport in S1-S2 DetN'
+   name  'S12TraDetP' 'Resuspension, transport in S1-S2 DetP'
+   name  'S1_Comp' 'Composition sediment layer S1'
+   name  'SedPhBlo_P' 'Sum sedimentation of algae - Bloom'
+   name  'Phy_Blo_P' 'Computation of phytoplankton output - Bloom'
+   name  'SEDALG' 'Sedimentation of algae species'
+   name  'Extinc_VLG' 'Extinction of visible-light (370-680nm) DLWQ-G'
+   name  'EXTINABVLP' 'Extinction of light by algae (Bloom)'
+   name  'CalcRad' 'Radiation at segment upper and lower boundaries'
+   name  'DynDepth' 'dynamic calculation of the depth'
+   name  'DepAve' 'Average depth for Bloom step'
+   name  'Daylength' 'Daylength calculation'
+   name  'vtrans' 'Vertical mixing distribution over a period'
+   name  'SaturOXY' 'Saturation concentration oxygen'
+   name  'TotDepth' 'depth water column'
+   name  'Res_DM' 'Resuspension total bottom material (dry mass)'
+   name  'Bur_DM' 'Burial total bottom mass (dry matter)'
+   name  'CalVS_POC1' 'Sedimentation velocity POC1 = f (Temp SS Sal)'
+   name  'CalVSALG' 'Sedimentation velocity algae = f (Temp SS Sal)'
+   name  'Sum_Sedim' 'Total of all sedimenting substances'
+end-active-processes
