@@ -37,8 +37,8 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
     "--variable", "zos",
     "--variable", "uo",
     "--variable", "vo",
-    "--out-dir", "/data/cmems",
-    "--out-name", "cmems_physics.nc",
+    "--out-dir", "/data",
+    "--out-name", "cmems_thetao_bottomT_so_zos_uo_vo.nc",
     "--user", username,
     "--pwd", password])
 

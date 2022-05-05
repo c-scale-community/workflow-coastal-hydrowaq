@@ -36,8 +36,8 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
     "--variable", "phyc",
     "--variable", "po4",
     "--variable", "si",
-    "--out-dir", "/data/cmems",
-    "--out-name", "cmems_biogeochemistry.nc",
+    "--out-dir", "/data",
+    "--out-name", "cmems_no3_o2_phyc_po4_si.nc",
     "--user", username,
     "--pwd", password])
 
