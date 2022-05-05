@@ -57,6 +57,7 @@ To run these docker containers locally on Windows we suggest using the Windows S
 To install WSL and Ubuntu 20.04 follow instructions here: https://docs.microsoft.com/en-us/windows/wsl/install
 
 To install Docker Desktop follow instructions here: https://www.docker.com/products/docker-desktop/
+
 In Docker Desktop under Settings > General, make sure the "Use the WSL 2 based engine" checkbox is checked.
 
 
