@@ -1,16 +1,48 @@
+"""Purpose: download ERA5 data from the Copernicus Data Store
+"""
 import cdsapi
 import click
-import os
+from datetime import datetime, timedelta
 
 @click.command()
-@click.option('--year', required=True, type=str, help='Year of Era5 data')
-@click.option('--output', required=True, type=str, help='Output path for nc file',)
-def download_era5(year, output):
-    """Download Era5 data."""
-    c = cdsapi.Client()
+@click.option("--longitude_min", default=22.5, help="Set minimum longitude for region of interest")
+@click.option("--longitude_max", default=24.5, help="Set maximum longitude for region of interest")
+@click.option("--latitude_min", default=36.5, help="Set minimum latitude for region of interest")
+@click.option("--latitude_max", default=38.5, help="Set maximum latitude for region of interest")
+@click.option("--date_min", default=(datetime.now()-timedelta(days=5)).strftime('%Y-%m-%d'), help="Set start date for data download. Format: YYYY-MM-DD. Default is today minus 5 days.")
+@click.option("--date_max", default=(datetime.now()).strftime('%Y-%m-%d'), help="Set end date for data download. Format: YYYY-MM-DD. Default is today.")
 
-    filename = f'ERA5_{year}.nc'
-    output_path = os.path.join(output, filename)
+def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date_min, date_max):
+    c = cdsapi.Client()
+    
+    fname = f'/data/era5.nc'
+   
+    # here we make the strings to use in the api 
+    areastr = [str(longitude_min)+'/'+str(latitude_min)+'/'+str(longitude_max)+'/'+str(latitude_min)]
+
+    yearstr = []
+    if datetime.strptime(date_min, '%Y-%m-%d').year == datetime.strptime(date_max, '%Y-%m-%d').year:
+        i = datetime.strptime(date_min, '%Y-%m-%d').year
+        yearstr.append(f'{i:0>2}')
+    else:
+        for i in range(datetime.strptime(date_min, '%Y-%m-%d').year, datetime.strptime(date_max, '%Y-%m-%d').year, 1):
+            yearstr.append(f'{i}')
+
+    monthstr = []
+    if datetime.strptime(date_min, '%Y-%m-%d').month == datetime.strptime(date_max, '%Y-%m-%d').month:
+        i = datetime.strptime(date_min, '%Y-%m-%d').month
+        monthstr.append(f'{i:0>2}')
+    else:
+        for i in range(datetime.strptime(date_min, '%Y-%m-%d').month, datetime.strptime(date_max, '%Y-%m-%d').month, 1):
+            monthstr.append(f'{i:0>2}')
+
+    daystr = []
+    if datetime.strptime(date_min, '%Y-%m-%d').day == datetime.strptime(date_max, '%Y-%m-%d').day:
+        i = datetime.strptime(date_min, '%Y-%m-%d').day
+        daystr.append(f'{i:0>2}')
+    else:
+        for i in range(datetime.strptime(date_min, '%Y-%m-%d').day, datetime.strptime(date_max, '%Y-%m-%d').day, 1):
+            daystr.append(f"{i:0>2}")
 
     c.retrieve(
         'reanalysis-era5-single-levels',
@@ -27,24 +59,10 @@ def download_era5(year, output):
                 '2m_temperature',
                 'total_cloud_cover'
             ],
-            'year':[
-                year
-            ],
-            'area': '35.50/22.00/38.50/25.00',
-            'month':['01' , '02', '03', '04' , '05', '06', '07', '08', '09', '10', '11', '12'],
-            'day':[
-                '01','02','03',
-                '04','05','06',
-                '07','08','09',
-                '10','11','12',
-                '13','14','15',
-                '16','17','18',
-                '19','20','21',
-                '22','23','24',
-                '25','26','27',
-                '28','29','30',
-                '31'
-            ],
+            'year':yearstr,
+            'area':areastr,
+            'month':monthstr,
+            'day':daystr,
             'time':[
                 '00:00','01:00','02:00',
                 '03:00','04:00','05:00',
@@ -58,7 +76,7 @@ def download_era5(year, output):
             'format':'netcdf'
         },
 
-        output_path)
+        fname)
 
 if __name__ == '__main__':
     download_era5()

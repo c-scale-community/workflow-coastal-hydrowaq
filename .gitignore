@@ -2,3 +2,5 @@
 scripts/download/.README.md.swp
 scripts/download/.download_cmems_physics.sh.swp
 scripts/download/.README.md.swo
+scripts/.cdsapirc
+*.swp
