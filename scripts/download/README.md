@@ -8,7 +8,7 @@ This folder contains the following files needed to build and run the docker cont
 
 **Dependencies**
 * the `download_cmems_physics.py` and `download_cmems_biogeochemistry.py` require a `username` and `password` which can be obtained by registering at https://resources.marine.copernicus.eu/registration-form.
-* the `download_era5,py` script requires a CDS API key. follow instructions at https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key to generate the key. 
+* the `download_era5.py` script requires a CDS API key. follow instructions at https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key to generate the key. 
 
 
 ## `docker build`
