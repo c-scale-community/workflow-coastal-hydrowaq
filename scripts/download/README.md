@@ -48,8 +48,8 @@ For more information about the CDS API see: https://cds.climate.copernicus.eu/ap
 Follow instruction at: https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key
 1. If you don't have an account, register at https://cds.climate.copernicus.eu/user/register?destination=%2F%23!%2Fhome
 2. Login at https://cds.climate.copernicus.eu/user/login?destination=%2F%23!%2Fhome
-3. Copy the code displayed (url and key) into the file .cdsapirc
-4. Move the .cdsapirc file to $HOME
+3. Copy the code displayed (url and key) into the file `.cdsapirc`
+4. Move the `.cdsapirc` file to `$HOME`
 
 ## Windows users
 To run these docker containers locally on Windows we suggest using the Windows Subsystem for Linux (WSL) with Ubuntu 20.04 and Docker Desktop.
