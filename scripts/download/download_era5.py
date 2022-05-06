@@ -1,4 +1,8 @@
 """Purpose: download ERA5 data from the Copernicus Data Store
+Dependencies: $HOME/.cdsapirc (for more info: https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key)
+
+Creation date: 5 May 2022
+Author: backeb <bjorn.backeberg@deltares.nl> Bjorn Backeberg
 """
 import cdsapi
 import click
