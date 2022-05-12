@@ -1,3 +1,4 @@
+#!/bin/sh
 # Purpose: Update helpfile explaining how to use download_*.py scripts
 #
 # Creation date: 5 May 2022
