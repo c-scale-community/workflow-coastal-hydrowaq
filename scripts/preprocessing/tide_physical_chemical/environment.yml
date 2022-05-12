@@ -8,4 +8,3 @@ dependencies:
   - netCDF4
   - scipy
   - pandas
-prefix: /home/wilms/anaconda3/envs/coastserv
