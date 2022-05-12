@@ -29,7 +29,7 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
         i = datetime.strptime(date_min, '%Y-%m-%d').year
         yearstr.append(f'{i:0>2}')
     else:
-        for i in range(datetime.strptime(date_min, '%Y-%m-%d').year, datetime.strptime(date_max, '%Y-%m-%d').year, 1):
+        for i in range(datetime.strptime(date_min, '%Y-%m-%d').year, datetime.strptime(date_max, '%Y-%m-%d').year+1, 1):
             yearstr.append(f'{i}')
 
     monthstr = []
@@ -37,7 +37,7 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
         i = datetime.strptime(date_min, '%Y-%m-%d').month
         monthstr.append(f'{i:0>2}')
     else:
-        for i in range(datetime.strptime(date_min, '%Y-%m-%d').month, datetime.strptime(date_max, '%Y-%m-%d').month, 1):
+        for i in range(datetime.strptime(date_min, '%Y-%m-%d').month, datetime.strptime(date_max, '%Y-%m-%d').month+, 1):
             monthstr.append(f'{i:0>2}')
 
     daystr = []
@@ -45,7 +45,7 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
         i = datetime.strptime(date_min, '%Y-%m-%d').day
         daystr.append(f'{i:0>2}')
     else:
-        for i in range(datetime.strptime(date_min, '%Y-%m-%d').day, datetime.strptime(date_max, '%Y-%m-%d').day, 1):
+        for i in range(datetime.strptime(date_min, '%Y-%m-%d').day, datetime.strptime(date_max, '%Y-%m-%d').day+1, 1):
             daystr.append(f"{i:0>2}")
 
     c.retrieve(

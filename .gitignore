@@ -6,3 +6,5 @@ scripts/.cdsapirc
 *.swp
 scripts/download/.cdsapirc
 *.nc
+scripts/download/data/era5_new
+scripts/download/data/era5_old
