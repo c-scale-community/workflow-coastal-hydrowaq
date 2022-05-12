@@ -2,17 +2,24 @@ This container has the following scripts to download data:
  
 1. download_cmems_physics.py
      download hydrodynamic input data for Delft3D FM from the Copernicus Marine Service
+     this script requires a username and password which you can get by registering at: https://resources.marine.copernicus.eu/registration-form
  
 2. download_cmems_biogeochemistry.py
      download biogeochemistry input data for Delft3D FM from the Copernicus Marine Service
+     this script requires a username and password which you can get by registering at: https://resources.marine.copernicus.eu/registration-form
  
 3. download_era5.py
      download ERA5 input data for Delft3D FM from the Copernicus Data Store
+     this script requires a CDS API key. 
+     follow instructions at https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key to generate the key
  
-Below are the usage options for the scripts.
  
-To run these in docker type:
-     docker run download-input python download_???.py [OPTIONS]
+########### USAGE ###########
+ 
+To run the scripts in docker type
+      $ docker run download-input python download_???.py [OPTIONS]
+ 
+Below are the usage options for the scripts:
  
 Usage: download_cmems_physics.py [OPTIONS]
 
@@ -52,3 +59,7 @@ Options:
                          Default is today.
   --help                 Show this message and exit.
  
+ 
+Dependencies:
+  download_era5.py requires a CDS API key placed in $HOME/.cdsapirc
+  follow instructions at https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key to generate the key

@@ -37,7 +37,7 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
         i = datetime.strptime(date_min, '%Y-%m-%d').month
         monthstr.append(f'{i:0>2}')
     else:
-        for i in range(datetime.strptime(date_min, '%Y-%m-%d').month, datetime.strptime(date_max, '%Y-%m-%d').month+, 1):
+        for i in range(datetime.strptime(date_min, '%Y-%m-%d').month, datetime.strptime(date_max, '%Y-%m-%d').month+1, 1):
             monthstr.append(f'{i:0>2}')
 
     daystr = []
