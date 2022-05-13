@@ -20,12 +20,12 @@ import click
 """dict[variable name as shown in era5 netcdf] = [standard name, offset, float]. 
 If you need to add more parameter types, expand this dictionary."""
 dict_stdNames = {}
-dict_stdNames['d2m'] = ['2 metre dewpoint temperature', np.float(270.0), np.float(0.0002)]
-dict_stdNames['t2m'] = ['2 metre temperature',np.float(275) , np.float(0.0003)]
-dict_stdNames['tcc'] = ['Total cloud cover', np.float(0.5), np.float(0.000015)]
-dict_stdNames['u10'] = ['eastward_wind', np.float(0), np.float(0.01)]
-dict_stdNames['v10'] = ['northward_wind', np.float(0), np.float(0.01)]
-dict_stdNames['msl'] = ['air_pressure', np.float(100000.0), np.float(1.0)]
+dict_stdNames['d2m'] = ['2 metre dewpoint temperature', np.float64(270.0), np.float64(0.0002)]
+dict_stdNames['t2m'] = ['2 metre temperature',np.float64(275) , np.float64(0.0003)]
+dict_stdNames['tcc'] = ['Total cloud cover', np.float64(0.5), np.float64(0.000015)]
+dict_stdNames['u10'] = ['eastward_wind', np.float64(0), np.float64(0.01)]
+dict_stdNames['v10'] = ['northward_wind', np.float64(0), np.float64(0.01)]
+dict_stdNames['msl'] = ['air_pressure', np.float64(100000.0), np.float64(1.0)]
 
 @click.command()
 @click.option('--input', required=True, type=str, help='Folder downloaded era5 data')
@@ -34,6 +34,10 @@ def era5_fm(input, output):
     """
     Convert ERA5 data to FM input netcdf
     """
+    print(' ')
+    print('Converting ERA5 to Delft3D-FM input format.')
+    print(' ')
+    
     path_in = input
     path_out = output
 
@@ -114,9 +118,13 @@ def era5_fm(input, output):
 
         maps.close()
     dest.close()
+    print(' ')
+    print('ERA5 successfully converted to Delft3D-FM input format.')
+    print(' ')
 
 if __name__ == '__main__':
     era5_fm()
+    
 
 
 # docker run -it -v ~/data/hisea/download/:/data/input -v ~/data/hisea/era5:/data/output --entrypoint /bin/bash era5_fm
