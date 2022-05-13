@@ -15,7 +15,6 @@ ENV PATH /opt/conda/envs/download_env/bin:$PATH
 # copy the necessary scripts into the container
 COPY README.md helpfile updatehelpfile.sh download_cmems_physics.py download_cmems_biogeochemistry.py download_era5.py /scripts/.
 # run the sed command to deal with windows users to get rid of ^M in updatehelpfile.sh
-RUN sed -i 's/\r//' updatehelpfile.sh
 RUN ./updatehelpfile.sh
 
 # tell the container to use bash
