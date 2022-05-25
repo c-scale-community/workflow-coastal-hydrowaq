@@ -1,5 +1,5 @@
 # download
-This folder contains the following files needed to build and run the docker container to download the necessary input data for the workflow:
+This folder contains the files needed to build and run the docker container to download the necessary input data for the workflow.
 
 **Download scripts**
 1. `download_cmems_physics.py`
