@@ -29,7 +29,7 @@ class Boundary(object):
         """
         
         self.ext       = ext
-        print('data files expected to be found in ' + data_list)
+        #print('data files expected to be found in ' + data_list)
         self.data_list = data_list   
         self.sub_in    = sub
         self.tref      = tref

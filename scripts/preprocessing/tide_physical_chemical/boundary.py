@@ -18,7 +18,12 @@ def boundary(interp, simultaneous, steric, input, output, model):
     model_path = Path(model)
     #Find all ext file from the model
     fm_ext = list(model_path.glob('*.ext'))
+    # TODO backeb - 25 May 2022: could be that there is an error with the variables names in sub
+        # do we just need to change the variable names?
+        # in cmems_thetao_bottomT_so_zos_uo_vo.nc dict_keys(['depth', 'latitude', 'vo', 'thetao', 'uo', 'time', 'bottomT', 'so', 'longitude', 'zos'])
+        # in cmems_no3_o2_phyc_po4_si.nc dict_keys(['no3', 'depth', 'o2', 'po4', 'phyc', 'si', 'latitude', 'time', 'longitude'])
     sub = ['Opal', 'PON1', 'POP1', 'POC1', 'OXY', 'NO3', 'PO4', 'salinity', 'temperature', 'uxuy', 'steric', 'Green', 'Diat', 'Si']
+    #sub = ['vo','thetao','uo','so','zos','no3','o2','po4','phyc','si'] # couldn't find file with this approach...
 
     #Get tref from model .mdu file
     mdu_files=[]
