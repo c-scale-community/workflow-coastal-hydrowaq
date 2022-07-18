@@ -11,3 +11,4 @@ scripts/download/data/era5_old
 *.pyc
 *.ext
 *.bc
+.DS_Store
