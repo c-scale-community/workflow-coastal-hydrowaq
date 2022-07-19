@@ -323,6 +323,11 @@ class Boundary(object):
         '''
 
         all_times, depths, fill = self.get_sub_shared_data(data_list, csub)
+        # not sure what order the times will be in, so we sort them
+        all_times.sort()
+        # 1950 01 01 is the reference time for CMEMS
+        # this is times across all files, used to pre_allocate array
+        all_times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in all_times])
         meta = {'depths' : depths, 'times': all_times}
         data = {}
 
@@ -342,10 +347,8 @@ class Boundary(object):
                 ds = nc.Dataset(data_file, 'r')
                 # these are times local to only this file
                 # these are needed to determine the location in the all array for the data to be inserted
-                #times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in ds.variables['time'][:]])
-                time_var = ds.variables['time']
-                times = nc.num2date(time_var[:],units=time_var.units,only_use_cftime_datetimes=False)
-
+                times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in ds.variables['time'][:]])
+                
                 if self.simultaneous and self.interp:
                     # interpolate all points accross all data
                     st = datetime.datetime.now()
@@ -400,7 +403,7 @@ class Boundary(object):
         look through all of a substance's files and make a time and depth array
         '''
         times = np.array([])
-        
+
         # first get all times and the depth, where the associated data will be filled incrementally
         for file_index, data_file in enumerate(data_list[0]):
             ds = nc.Dataset(data_file, 'r')
@@ -410,9 +413,7 @@ class Boundary(object):
                 except:
                     # 2D file
                     depths = [0]
-            time_var = ds.variables['time']
-            #file_time = ds.variables['time'][:]
-            file_time = nc.num2date(time_var[:],units=time_var.units,only_use_cftime_datetimes=False)
+            file_time = ds.variables['time'][:]
             times = np.concatenate((times, file_time))
         try:
             fill = ds.variables[csub['substance'][0]]._FillValue 
@@ -424,11 +425,6 @@ class Boundary(object):
             print('ERROR: critical lack of files!')
             raise
         times = np.array(times)
-        # not sure what order the times will be in, so we sort them
-        times.sort()
-        # 1950 01 01 is the reference time for CMEMS
-        # this is times across all files, used to pre_allocate array
-        #times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in times])
 
         return times, depths, fill
 
@@ -628,7 +624,8 @@ class Boundary(object):
                     arr_t[:, :, position] = self.get_nearest_array(ds, sub, bnd, position, depths)
         else:
             # steric
-            arr_t = ds.variables[sub][:, :, :]
+            arr_t = ds.variables[sub][:, :, :, :]
+            arr_t = arr_t.squeeze()
             arr_t = self.clean_array(arr_t, sub)
 
 
@@ -637,11 +634,11 @@ class Boundary(object):
             # reravel, it went times -> depths, so go back
             arr_t = arr.reshape(len(times), -1)
             # check for nan and do nearest instead
-            for position in range(0, arr_t.shape[-1]):
+            #for position in range(0, arr_t.shape[-1]):
                 # will not be nan but could be fill!!!!!
-                if np.isnan(np.nanmean(arr_t[:, position])):
-                    print('getting nearest array instead for position %i' % position)
-                    arr_t[:, position] = self.get_nearest_array(ds, sub, bnd, position, depths)        
+                #if np.isnan(np.nanmean(arr_t[:, position])):
+                #    print('getting nearest array instead for position %i' % position)
+                #    arr_t[:, position] = self.get_nearest_array(ds, sub, bnd, position, depths)        
 
         return arr_t 
 
@@ -681,7 +678,7 @@ class Boundary(object):
                         handle.write('Unit                            = %s\n' % constituent_boundary_type[sub]['unit'])
                         handle.write('Vertical position               = %s\n' % str(dep + 1))
                 else:
-                    handle.write('Quantity                        = tracerbnd%s\n'%(sub))
+                    handle.write('Quantity                        = tracerbnd\n')
                     handle.write('Unit                            = g/m3\n')
                     handle.write('Vertical position               = %s\n' % str(dep + 1))
         else:
@@ -751,7 +748,7 @@ class Boundary(object):
                                             # advection, inconsistent naming
                                             new_ext.write('quantity=uxuyadvectionvelocitybnd\n')
                                     else:
-                                        new_ext.write('quantity=tracerbnd%s\n'%(sub))
+                                        new_ext.write('quantity=tracerbnd%s\n' % sub)
                                                                     
                                     new_ext.write('locationfile=%s.pli\n' % (bnd))
                                     new_ext.write('forcingfile=%s_%s.bc\n' % (sub, bnd))

@@ -10,10 +10,12 @@ usefor = {
         'NO3'        : {'substance' : ['no3']      , 'conversion' : 14.0 / 1000.0},
         'PO4'        : {'substance' : ['po4']      , 'conversion' : 30.97 / 1000.0},
         'Si'         : {'substance' : ['si']       , 'conversion' : 28.08 / 1000.0},
-
         'PON1'       : {'substance' : ['phyc']     , 'conversion' : 2. * 16. * 14. / (106. * 1000.0)},
         'POP1'       : {'substance' : ['phyc']     , 'conversion' : 2. * 30.97 / (106. * 1000.0)},
-        'POC1'       : {'substance' : ['phyc']     , 'conversion' : 2. * 12.0 / 1000.0},
+        'POC1'       : {'substance' : ['phyc']     , 'conversion' : 2. * 12. / 1000.0},
+        'DON'        : {'substance' : ['phyc']     , 'conversion' : 3.24 * 2. * 16. * 14. / (106. * 1000.0)}, #conversions used for MWRA model
+        'DOP'        : {'substance' : ['phyc']     , 'conversion' : 1.0 * 2. * 30.97 / (106. * 1000.0)}, #conversions used for MWRA model
+        'DOC'        : {'substance' : ['phyc']     , 'conversion' : (199. / 20.) * 3.24 * 2. * 16. * 12. / (106. * 1000.0)}, #conversions used for MWRA model
         'Opal'       : {'substance' : ['phyc']     , 'conversion' : 0.5 * 0.13 * 28.08 / (1000.0)},
         'Green'      : {'substance' : ['phyc']     , 'conversion' : 0.5 * 12. / 1000.0},
         'Diat'       : {'substance' : ['phyc']     , 'conversion' : 0.5 * 12. / 1000.0},

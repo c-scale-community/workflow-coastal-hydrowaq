@@ -29,21 +29,12 @@ class Tide(object):
         self.coords = coords
         self.out = out    
 
-        # self.const = ['2N2',
-        #     'Mf'   ,
-        #     'P1'   ,
-        #     'M2'   , 'MKS2' , 'Mu2'  , 'Q1'   , 'T2'  , 'J1'  , 'M3'  , 'Mm'  ,  'N2'  ,
-        #     'R2'  ,  'K1'  ,  'M4'  ,  'MN4' ,  'S1'  ,  'K2'  ,  'M6'  , 'MS4' ,  'Nu2' ,
-        #     'S2'  ,  'L2'  ,  'M8'  ,  'MSf' ,  'O1'  ,  'S4' ]
-
-        self.const = ['2N2', 'La2',
-            'Mf'   , 'Mtm',
-            'P1'   , 'Ssa', 'E2',
-            'M2'   , 'MKS2' , 'Mu2'  , 'Q1'   , 'T2'  , 'J1'  , 'M3'  , 'Mm'  ,  'N2'  ,
-            'R2'  ,  'K1'  ,  'M4'  ,  'MN4' , 'N4', 'S1'  ,  'K2'  ,  'M6'  , 'MS4' ,  'Nu2' ,
-            'S2'  ,  'L2'  ,  'M8'  ,  'MSf' ,  'O1'  ,  'S4', 'Z0' ]
-
-        """missing: 'La2', 'Mtm', 'Ssa', 'E2', 'N4', 'Z0' """
+        self.const = ['2N2',   
+            'MF'   , 
+            'P1'   , 
+            'M2'   , 'MKS2' , 'MU2'  , 'Q1'   , 'T2'  , 'J1'  , 'M3'  , 'MM'  ,  'N2'  ,  
+            'R2'  ,  'K1'  ,  'M4'  ,  'MN4' ,  'S1'  ,  'K2'  ,  'M6'  , 'MS4' ,  'NU2' ,  
+            'S2'  ,  'L2'  ,  'M8'  ,  'MSF' ,  'O1'  ,  'S4' ] 
 
         XY = utils.read_pli(pli)
 
@@ -105,7 +96,7 @@ class Tide(object):
                     bnd.write('Unit = deg\n')
                     bnd.write('A0   0.0   0.0\n')
                     for co in range(0,len(self.const)):
-                        bnd.write('%s   %e   %e\n' % (self.const[co], self.amp[ss,co] / 100, self.pha[ss,co]))
+                        bnd.write('%s   %f   %f\n' % (self.const[co], self.amp[ss,co] / 100, self.pha[ss,co]))
                     bnd.write('\n')
 
 
@@ -230,8 +221,8 @@ class Tide(object):
                 #print(np.transpose(np.array([self.X.reshape(-1,1)[np.isnan(amp)], self.Y.reshape(-1,1)[np.isnan(amp)]])))
                 try:
                     xi = np.transpose(np.array([self.X.reshape(-1,1)[np.isnan(amp)], self.Y.reshape(-1,1)[np.isnan(amp)]]))
-                    amp[np.isnan(amp)] = scipy.interpolate.griddata(valid_pos, valid_amp, xi, fill_value = np.nan, method = 'linear')
-                    pha[np.isnan(pha)] = scipy.interpolate.griddata(valid_pos, valid_pha, xi, fill_value = np.nan, method = 'linear')
+                    amp[np.isnan(amp)] = scipy.interpolate.griddata(valid_pos, valid_amp, xi, fill_value = np.nan, method = 'nearest')
+                    pha[np.isnan(pha)] = scipy.interpolate.griddata(valid_pos, valid_pha, xi, fill_value = np.nan, method = 'nearest')
                 except ValueError:
                     print('ERROR: Mismatch between area in coords array and locations in pli')
                     raise
