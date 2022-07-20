@@ -596,8 +596,8 @@ class Boundary(object):
         x = ds.variables['longitude'][:]
         y = ds.variables['latitude'][:]
         
-        #if len(depths) > 1:
-        if len(np.shape(sub)) == 4:
+        if len(depths) > 1:
+        #if len(np.shape(sub)) == 4:
             # 3D
             arr_t = ds.variables[sub][:, :, :, :]  
             arr_t = self.clean_array(arr_t, sub)
