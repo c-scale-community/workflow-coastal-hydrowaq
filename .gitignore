@@ -12,3 +12,6 @@ scripts/download/data/era5_old
 *.ext
 *.bc
 .DS_Store
+scripts/preprocessing/tide_physical_chemical/coastserv/models/boundary.py.fine
+scripts/preprocessing/tide_physical_chemical/coastserv/models/boundary.py.stendert
+*.orig
