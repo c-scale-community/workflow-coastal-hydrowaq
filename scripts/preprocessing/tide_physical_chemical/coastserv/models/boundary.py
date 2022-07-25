@@ -30,7 +30,7 @@ class Boundary(object):
         """
         
         self.ext       = ext
-        print('data files expected to be found in ' + data_list)
+        #print('data files expected to be found in ' + data_list)
         self.data_list = data_list   
         self.sub_in    = sub
         self.tref      = tref
@@ -96,8 +96,8 @@ class Boundary(object):
         count = list()
         sub_data_list = list()
         
-        self.data_list = glob.glob(self.data_list)
-            
+        self.data_list = glob.glob(os.path.join(self.data_list,'*'))
+        
         for sub in self.subs:
             if sub in usefor.keys():
                 csub = usefor[sub] # csub is name of sub in CMEMS nomenclature
@@ -597,7 +597,6 @@ class Boundary(object):
         y = ds.variables['latitude'][:]
         
         if len(depths) > 1:
-        #if len(np.shape(sub)) == 4:
             # 3D
             arr_t = ds.variables[sub][:, :, :, :]  
             arr_t = self.clean_array(arr_t, sub)
