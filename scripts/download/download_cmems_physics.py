@@ -52,4 +52,3 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
 
 if __name__ == '__main__':
     runcommand()
-
