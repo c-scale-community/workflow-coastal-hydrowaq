@@ -24,20 +24,10 @@ import xarray as xr # note dependencies: dask, netCDF4
 
 def runcommand(username, password, longitude_min, longitude_max, latitude_min, latitude_max, date_min, date_max, vars):
 
-    #print('longitude_min '+str(longitude_min)) 
-    #print('longitude_max '+str(longitude_max)) 
-    #print('latitude_min '+str(latitude_min)) 
-    #print('latitude_max '+str(latitude_max)) 
-    #print('date_min '+date_min)
-    #print('date_max '+date_max)
-    #print('var '+str(var))
-
     #make the /data/tmp directory if it does not exist
-    Path('/Users/backeb/Documents/data/tmp').mkdir(parents=True, exist_ok=True)
-    #Path('/data/tmp').mkdir(parents=True, exist_ok=True)
+    Path('/data/tmp').mkdir(parents=True, exist_ok=True)
 
     delta = datetime.strptime(date_max, '%Y-%m-%d') - datetime.strptime(date_min, '%Y-%m-%d')
-    #print('days to download '+str(delta.days+1))
 
     for var in vars:
         for i in range(delta.days+1):
@@ -56,14 +46,13 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
             '--depth-min', '0.493',
             '--depth-max', '5727.918000000001',
             '--variable', str(var),
-            #'--out-dir', '/data/tmp',
-            '--out-dir', '/Users/backeb/Documents/data/tmp',
+            '--out-dir', '/data/tmp',
             '--out-name', 'cmems_'+str(var)+'_'+str(day)+'.nc',
             '--user', username,
             '--pwd', password])
             
-            ds = xr.open_mfdataset('/Users/backeb/Documents/data/tmp/cmems_'+var+'_*.nc')
-            ds.to_netcdf('/Users/backeb/Documents/data/cmems_'+var+'.nc')
+        ds = xr.open_mfdataset('/data/tmp/cmems_'+var+'_*.nc')
+        ds.to_netcdf('/data/cmems_'+var+'.nc')
 
 
 if __name__ == '__main__':
