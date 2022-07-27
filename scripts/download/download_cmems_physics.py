@@ -3,13 +3,14 @@
 
 Creation Date: 2 May 2022
 Author: backeb <bjorn.backeberg@deltares.nl> Bjorn Backeberg
+
+TODO figure out how to deal with missing files from [ERROR] 010-1
 '''
 import click
 from datetime import timedelta, datetime
 from pathlib import Path
 import subprocess
 import xarray as xr # note dependencies: dask, netCDF4
-
 
 @click.command()
 @click.option('--username', default='', help='To get a username and password register at: https://resources.marine.copernicus.eu/registration-form')
@@ -23,16 +24,12 @@ import xarray as xr # note dependencies: dask, netCDF4
 @click.option('--vars', multiple=True, help='List of available vars: https://catalogue.marine.copernicus.eu/documents/PUM/CMEMS-GLO-PUM-001-024.pdf', default=('thetao', 'bottomT', 'so', 'zos', 'uo', 'vo'), show_default=True)
 
 def runcommand(username, password, longitude_min, longitude_max, latitude_min, latitude_max, date_min, date_max, vars):
-
     #make the /data/tmp directory if it does not exist
     Path('/data/tmp').mkdir(parents=True, exist_ok=True)
-
     delta = datetime.strptime(date_max, '%Y-%m-%d') - datetime.strptime(date_min, '%Y-%m-%d')
-
     for var in vars:
         for i in range(delta.days+1):
             day = datetime.strptime(date_min, '%Y-%m-%d').date() + timedelta(days=i)
-
             subprocess.run(['python', '-m', 'motuclient', 
             '--motu', 'https://nrt.cmems-du.eu/motu-web/Motu',
             '--service-id', 'GLOBAL_ANALYSIS_FORECAST_PHY_001_024-TDS',
@@ -50,10 +47,8 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
             '--out-name', 'cmems_'+str(var)+'_'+str(day)+'.nc',
             '--user', username,
             '--pwd', password])
-            
         ds = xr.open_mfdataset('/data/tmp/cmems_'+var+'_*.nc')
         ds.to_netcdf('/data/cmems_'+var+'.nc')
-
 
 if __name__ == '__main__':
     runcommand()
