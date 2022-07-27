@@ -3,8 +3,6 @@
 
 Creation Date: 2 May 2022
 Author: backeb <bjorn.backeberg@deltares.nl> Bjorn Backeberg
-
-TODO figure out how to deal with missing files from [ERROR] 010-1
 '''
 import click
 from datetime import timedelta, datetime
