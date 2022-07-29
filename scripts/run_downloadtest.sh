@@ -12,7 +12,7 @@
 # $ ./run_downloadtest.sh
 
 # setup some input variables
-DOWNLOAD_TEST=01
+DOWNLOAD_TEST=02
 CDSAPIRC_LOC=/home/centos/.cdsapirc
 CMEMS_UNAME=bbackeberg
 CMEMS_PWD=iaTmwJ7D
@@ -20,8 +20,8 @@ LON_MIN=22.5
 LON_MAX=24.5
 LAT_MIN=36.5
 LAT_MAX=38.5
-DATE_MIN='2022-04-01'
-DATE_MAX='2022-04-05'
+DATE_MIN='2022-06-01'
+DATE_MAX='2022-06-30'
 
 #
 #
