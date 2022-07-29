@@ -26,11 +26,40 @@ DATE_MIN='2022-04-01'
 DATE_MAX='2022-04-05'
 
 # download era5
-docker run -v $CDSAPIRC_LOC:/root/.cdsapirc -v $DATA_DOWNLOAD_LOC:/data download-input python download_era5.py --longitude_min $LON_MIN --longitude_max $LON_MAX --latitude_min $LAT_MIN --latitude_max $LAT_MAX --date_min $DATE_MIN --date_max $DATE_MAX
+docker run \
+	-v $CDSAPIRC_LOC:/root/.cdsapirc \
+	-v $DATA_DOWNLOAD_LOC:/data \
+	download-input python download_era5.py \
+		--longitude_min $LON_MIN \
+		--longitude_max $LON_MAX \
+		--latitude_min $LAT_MIN \
+		--latitude_max $LAT_MAX \
+		--date_min $DATE_MIN \
+		--date_max $DATE_MAX
 
 # download cmems physics
-docker run -v $DATA_DOWNLOAD_LOC:/data download-input python download_cmems_physics.py --username $CMEMS_UNAME --password $CMEMS_PWD --longitude_min $LON_MIN --longitude_max $LON_MAX --latitude_min $LAT_MIN --latitude_max $LAT_MAX --date_min $DATE_MIN --date_max $DATE_MAX
+docker run \
+	-v $DATA_DOWNLOAD_LOC:/data \
+	download-input python download_cmems_physics.py \
+		--username $CMEMS_UNAME \
+		--password $CMEMS_PWD \
+		--longitude_min $LON_MIN \
+		--longitude_max $LON_MAX \
+		--latitude_min $LAT_MIN \
+		--latitude_max $LAT_MAX \
+		--date_min $DATE_MIN \
+		--date_max $DATE_MAX
 
 # download cmems biogeochemistry
-docker run -v $DATA_DOWNLOAD_LOC:/data download-input python download_cmems_biogeochemistry.py --username $CMEMS_UNAME --password $CMEMS_PWD --longitude_min $LON_MIN --longitude_max $LON_MAX --latitude_min $LAT_MIN --latitude_max $LAT_MAX --date_min $DATE_MIN --date_max $DATE_MAX
+docker run \
+	-v $DATA_DOWNLOAD_LOC:/data \
+	download-input python download_cmems_biogeochemistry.py \
+		--username $CMEMS_UNAME \
+		--password $CMEMS_PWD \
+		--longitude_min $LON_MIN \
+		--longitude_max $LON_MAX \
+		--latitude_min $LAT_MIN \
+		--latitude_max $LAT_MAX \
+		--date_min $DATE_MIN \
+		--date_max $DATE_MAX
 

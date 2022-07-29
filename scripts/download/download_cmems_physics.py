@@ -30,7 +30,7 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
             day = datetime.strptime(date_min, '%Y-%m-%d').date() + timedelta(days=i)
             check_file = Path('/data/tmp/cmems_'+str(var)+'_'+str(day)+'.nc')
             while not check_file.is_file():
-                subprocess.run(['python', '-m', 'motuclient', 
+                subprocess.run(['python', '-m', 'motuclient',
                 '--motu', 'https://nrt.cmems-du.eu/motu-web/Motu',
                 '--service-id', 'GLOBAL_ANALYSIS_FORECAST_PHY_001_024-TDS',
                 '--product-id', 'global-analysis-forecast-phy-001-024',
