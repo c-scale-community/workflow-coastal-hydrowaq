@@ -62,7 +62,7 @@ docker run \
 end=`date +%s`
 echo 'download time' >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 echo '	seconds: '$((end-start)) >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
-
+echo 'files downloaded and sizes' >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 du -sh $DATA_DOWNLOAD_LOC/era5.nc >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 
 echo 'downloading cmems physics data'
@@ -84,7 +84,7 @@ docker run -v $DATA_DOWNLOAD_LOC:/data \
 end=`date +%s`
 echo 'download time' >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 echo '	seconds: '$((end-start)) >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
-
+echo 'files downloaded and sizes' >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 du -shc \
 	$DATA_DOWNLOAD_LOC/cmems_bottomT.nc \
 	$DATA_DOWNLOAD_LOC/cmems_so.nc \
@@ -100,8 +100,7 @@ echo '###################################################' >> ${LOGFILES_LOC}/do
 echo '#### CMEMS BIOGEOCHEMISTRY' >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 
 start=`date +%s`
-docker run \
-	-v $DATA_DOWNLOAD_LOC:/data \
+docker run -v $DATA_DOWNLOAD_LOC:/data \
 	download-input python download_cmems_biogeochemistry.py \
 		--username $CMEMS_UNAME \
 		--password $CMEMS_PWD \
@@ -114,7 +113,7 @@ docker run \
 end=`date +%s`
 echo 'download time' >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 echo '	seconds: '$((end-start)) >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
-
+echo 'files downloaded and sizes' >> ${LOGFILES_LOC}/download.test${DOWNLOAD_TEST}.out
 du -shc \
 	$DATA_DOWNLOAD_LOC/cmems_no3.nc \
 	$DATA_DOWNLOAD_LOC/cmems_o2.nc \
