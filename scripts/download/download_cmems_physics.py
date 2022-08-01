@@ -11,15 +11,52 @@ import subprocess
 import xarray as xr # note dependencies: dask, netCDF4
 
 @click.command()
-@click.option('--username', default='', help='To get a username and password register at: https://resources.marine.copernicus.eu/registration-form')
-@click.option('--password', default='', help='To get a username and password register at: https://resources.marine.copernicus.eu/registration-form')
-@click.option('--longitude_min', type=(float), help='Minimum longitude for region of interest', default=-180, show_default=True)
-@click.option('--longitude_max', type=(float), help='Maximum longitude for region of interest', default=180, show_default=True)
-@click.option('--latitude_min', type=(float), help='Minimum latitude for region of interest', default=-90, show_default=True)
-@click.option('--latitude_max', type=(float), help='Maximum latitude for region of interest', default=90, show_default=True)
-@click.option('--date_min', type=(str), help='Start date for data download. Format: YYYY-MM-DD', default=(datetime.now()).strftime('%Y-%m-%d'), show_default=True)
-@click.option('--date_max', type=(str), help='End date for data download. Format: YYYY-MM-DD', default=(datetime.now()).strftime('%Y-%m-%d'), show_default=True)
-@click.option('--vars', multiple=True, help='List of available vars: https://catalogue.marine.copernicus.eu/documents/PUM/CMEMS-GLO-PUM-001-024.pdf', default=('thetao', 'bottomT', 'so', 'zos', 'uo', 'vo'), show_default=True)
+@click.option('--username', 
+              default='', 
+              help='register at: https://resources.marine.copernicus.eu/registration-form')
+@click.option('--password', 
+              default='', 
+              help='register at: https://resources.marine.copernicus.eu/registration-form')
+@click.option('--longitude_min', 
+              type=(float), 
+              help='Minimum longitude for region of interest', 
+              default=-180, 
+              show_default=True)
+@click.option('--longitude_max', 
+              type=(float), 
+              help='Maximum longitude for region of interest', 
+              default=180, 
+              show_default=True)
+@click.option('--latitude_min', 
+              type=(float), 
+              help='Minimum latitude for region of interest', 
+              default=-90, 
+              show_default=True)
+@click.option('--latitude_max', 
+              type=(float), 
+              help='Maximum latitude for region of interest', 
+              default=90, 
+              show_default=True)
+@click.option('--date_min', 
+              type=(str), 
+              help='Start date for data download. Format: YYYY-MM-DD', 
+              default=(datetime.now()).strftime('%Y-%m-%d'), 
+              show_default=True)
+@click.option('--date_max', 
+              type=(str), 
+              help='End date for data download. Format: YYYY-MM-DD', 
+              default=(datetime.now()).strftime('%Y-%m-%d'), 
+              show_default=True)
+@click.option('--vars', 
+              multiple=True, 
+              help='available vars: https://catalogue.marine.copernicus.eu/documents/PUM/CMEMS-GLO-PUM-001-024.pdf',
+              default=('thetao', 
+                       'bottomT', 
+                       'so', 
+                       'zos', 
+                       'uo', 
+                       'vo'), 
+              show_default=True)
 
 def runcommand(username, password, longitude_min, longitude_max, latitude_min, latitude_max, date_min, date_max, vars):
     #make the /data/tmp directory if it does not exist
