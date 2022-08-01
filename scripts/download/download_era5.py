@@ -7,6 +7,8 @@ Author: backeb <bjorn.backeberg@deltares.nl> Bjorn Backeberg
 import cdsapi
 import click
 from datetime import datetime, timedelta
+import pandas as pd
+import numpy as np
 
 @click.command()
 @click.option("--longitude_min", default=22.5, help="Set minimum longitude for region of interest")
