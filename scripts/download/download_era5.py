@@ -22,32 +22,20 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
     fname = f'/data/era5.nc'
    
     # here we make the strings to use in the api 
-    areastr = [str(longitude_min)+'/'+str(latitude_min)+'/'+str(longitude_max)+'/'+str(latitude_min)]
+    areastr = [str(longitude_min)+'/'+str(latitude_min)+'/'+str(longitude_max)+'/'+str(latitude_max)]
 
     yearstr = []
-    if datetime.strptime(date_min, '%Y-%m-%d').year == datetime.strptime(date_max, '%Y-%m-%d').year:
-        i = datetime.strptime(date_min, '%Y-%m-%d').year
-        yearstr.append(f'{i:0>2}')
-    else:
-        for i in range(datetime.strptime(date_min, '%Y-%m-%d').year, datetime.strptime(date_max, '%Y-%m-%d').year+1, 1):
-            yearstr.append(f'{i}')
-
+    pdyears = pd.period_range(start=date_min, end=date_max, freq='Y')
+    [yearstr.append(f'{year:0>4}') for year in pdyears.year]
+    
     monthstr = []
-    if datetime.strptime(date_min, '%Y-%m-%d').month == datetime.strptime(date_max, '%Y-%m-%d').month:
-        i = datetime.strptime(date_min, '%Y-%m-%d').month
-        monthstr.append(f'{i:0>2}')
-    else:
-        for i in range(datetime.strptime(date_min, '%Y-%m-%d').month, datetime.strptime(date_max, '%Y-%m-%d').month+1, 1):
-            monthstr.append(f'{i:0>2}')
-
+    pdmonths = pd.period_range(start=date_min, end=date_max, freq='M')
+    [monthstr.append(f'{month:0>2}') for month in np.unique(pdmonths.month)]
+    
     daystr = []
-    if datetime.strptime(date_min, '%Y-%m-%d').day == datetime.strptime(date_max, '%Y-%m-%d').day:
-        i = datetime.strptime(date_min, '%Y-%m-%d').day
-        daystr.append(f'{i:0>2}')
-    else:
-        for i in range(datetime.strptime(date_min, '%Y-%m-%d').day, datetime.strptime(date_max, '%Y-%m-%d').day+1, 1):
-            daystr.append(f"{i:0>2}")
-
+    pddays = pd.period_range(start=date_min, end=date_max, freq='D')
+    [daystr.append(f'{day:0>2}') for day in np.unique(pddays.day)]
+    
     c.retrieve(
         'reanalysis-era5-single-levels',
         {
