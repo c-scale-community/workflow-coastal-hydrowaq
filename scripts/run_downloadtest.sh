@@ -12,7 +12,7 @@
 # $ ./run_downloadtest.sh
 
 # setup some input variables
-DOWNLOAD_TEST=03
+DOWNLOAD_TEST=05
 CDSAPIRC_LOC=/home/centos/.cdsapirc
 CMEMS_UNAME=bbackeberg
 CMEMS_PWD=iaTmwJ7D
