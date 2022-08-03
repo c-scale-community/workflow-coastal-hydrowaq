@@ -1,10 +1,7 @@
 This directory contains all the scripts necessary to run the workflow for "On demand coastal hydrodynamic and water quality modelling" on [C-SCALE](https://c-scale.eu/). There a 3 components / subfolders to the workflow:
-```
-+ scripts
-+--+ download
-+--+ preprocessing
-+--+ postprocessing
-```
+1. `download`
+2. `preprocessing`
+3. `postprocessing`
 
 Information on how to build the docker containers and how to run each of the scripts is in the README.md files under each folder.
 
@@ -19,8 +16,8 @@ Here you will two bash scripts:
 To adapt and run the bash scripts, open eith `run_downloadtest.sh` or `run_workflow.sh` in your preferred editor and change the below input variables:
 ```
 CDSAPIRC_LOC=/home/centos/.cdsapirc
-CMEMS_UNAME=**register at https://resources.marine.copernicus.eu/registration-form for a username and password**
-CMEMS_PWD=**register at https://resources.marine.copernicus.eu/registration-form for a username and password**
+CMEMS_UNAME=
+CMEMS_PWD=
 DATA_DOWNLOAD_LOC=/home/centos/data/download
 PREPROC_OUTPUT_LOC=/home/centos/data/preprocout
 FM_MODEL_LOC=/home/centos/repos/use-case-hisea/fm_model
@@ -32,4 +29,4 @@ DATE_MIN='2022-04-01'
 DATE_MAX='2022-04-05'
 ```
 
-Note that the docker containers need to have been built for the bash scrips to work.
+Note that the docker containers need to have been built for the bash scrips to work. Also note the instruction [here](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/download) on how to use the CMEMS MOTUCLIENT and how to get a CDS API key.
