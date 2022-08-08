@@ -67,36 +67,37 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
 			run = 0
 			day = datetime.strptime(date_min, '%Y-%m-%d').date() + timedelta(days=i)
 			check_file = Path('/data/tmp/cmems_'+str(var)+'_'+str(day)+'.nc')
-			while not check_file.is_file() and run < max_runs:
-				try:
-					subprocess.run(['python', '-m', 'motuclient',
-						'--motu', 'https://nrt.cmems-du.eu/motu-web/Motu',
-						'--service-id', 'GLOBAL_ANALYSIS_FORECAST_BIO_001_028-TDS',
-						'--product-id', 'global-analysis-forecast-bio-001-028-daily',
-						'--longitude-min',str(longitude_min),
-						'--longitude-max', str(longitude_max),
-						'--latitude-min', str(latitude_min),
-						'--latitude-max', str(latitude_max),
-						'--date-min', str(day)+' 12:00:00',
-						'--date-max', str(day)+' 12:00:00',
-						'--depth-min', '0.493',
-						'--depth-max', '5727.918000000001',
-						'--variable', str(var),
-						'--out-dir', '/data/tmp',
-						'--out-name', 'cmems_'+str(var)+'_'+str(day)+'.nc',
-						'--user', username,
-						'--pwd', password],
-						check=True,
-						timeout=300)
-				except subprocess.TimeoutExpired as e:
-					print(var)
-					print(e.stdout)
-					print(e.stderr)
-					continue
-				else:
-					break
-				finally:
-					run += 1
+			while not check_file.is_file():
+				while run < max_runs:
+					try:
+						subprocess.run(['python', '-m', 'motuclient',
+							'--motu', 'https://nrt.cmems-du.eu/motu-web/Motu',
+							'--service-id', 'GLOBAL_ANALYSIS_FORECAST_BIO_001_028-TDS',
+							'--product-id', 'global-analysis-forecast-bio-001-028-daily',
+							'--longitude-min',str(longitude_min),
+							'--longitude-max', str(longitude_max),
+							'--latitude-min', str(latitude_min),
+							'--latitude-max', str(latitude_max),
+							'--date-min', str(day)+' 12:00:00',
+							'--date-max', str(day)+' 12:00:00',
+							'--depth-min', '0.493',
+							'--depth-max', '5727.918000000001',
+							'--variable', str(var),
+							'--out-dir', '/data/tmp',
+							'--out-name', 'cmems_'+str(var)+'_'+str(day)+'.nc',
+							'--user', username,
+							'--pwd', password],
+							check=True,
+							timeout=300)
+					except subprocess.TimeoutExpired as e:
+						print(var)
+						print(e.stdout)
+						print(e.stderr)
+						continue
+					else:
+						break
+					finally:
+						run += 1
 		ds = xr.open_mfdataset('/data/tmp/cmems_'+var+'_*.nc')
 		ds.to_netcdf('/data/cmems_'+var+'.nc')
 
