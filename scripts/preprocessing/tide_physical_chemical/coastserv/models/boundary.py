@@ -11,7 +11,6 @@ import numpy as np
 import shutil as sh
 import netCDF4 as nc 
 from scipy.interpolate import griddata, LinearNDInterpolator, RegularGridInterpolator
-import scipy.ndimage as nd
 from coastserv.models.units.units import usefor, constituent_boundary_type, ini
 import coastserv.models.utils as utils
 
@@ -129,6 +128,12 @@ class Boundary(object):
         print(self.subs)
         print('# of files available:')
         print(count)
+        newsubs = []
+        for i,val in enumerate(self.subs):
+            if not count[i]==0:
+                newsubs.append(self.subs[i])
+        print(newsubs, 'newsublist')
+        self.subs = newsubs
         if len(set(count)) > 1:
             print('WARNING: SOME VARIABLES COVER DIFFERENT TIME SPANS THAN OTHERS, RESULTING BOUNDARIES WILL NOT BE VALID. SEE INCONGRUENCY BETWEEN NUMBER OF FILES FOUND IN ARRAY ABOVE')
         
@@ -248,7 +253,6 @@ class Boundary(object):
                 print('writing file...')
 
                 # for every position, go through all the data files and read data
-                val_save = np.empty([len(self.boundaries[bnd]['CMEMS_index']),len(times)])
                 for position in range(0, len(self.boundaries[bnd]['CMEMS_index'])):
 
                     self.write_bc_preamble(bcfile, bnd, position, sub, depths)
@@ -258,10 +262,8 @@ class Boundary(object):
                         # to minutes
                         bcfile.write(str((tdiff.seconds / 60) + (tdiff.days * 1440)))
                         bcfile.write('  ')
-                        # find valid fill value in selected water column, dependent on parameter and depth
-                        valid = {}
-                        for part_sub in csub['substance']:
-                            valid[part_sub] = self.find_valid_value(data, part_sub, csub, tind, position)
+                        # find valid fill value, dependent on parameter and depth
+                        valid = self.find_valid_value(data, part_sub, csub, tind, position)
 
                         # FLIP THE ARRAY?
                         #for dind, _ in enumerate(depths):
@@ -274,43 +276,16 @@ class Boundary(object):
                                     val = data[part_sub][tind, position]
 
                                 if val == float(self.fill[part_sub]) or np.isnan(val):
-                                    val = valid[part_sub]
+                                    val = valid
                                 else:
-                                    valid[part_sub] = val
+                                    valid = val
 
                                 bcfile.write('%.4e' % (val * csub['conversion']))
                                 bcfile.write('  ')
-                                
-                        if sub == 'steric':
-                            val_save[position, tind] = val * csub['conversion']
-                                
                         bcfile.write('\n')
                 print('finished writing %s boundary for position %i/%i in boundary %s' % (sub, position+1, len(self.boundaries[bnd]['CMEMS_index']), bnd))
                 gc.collect()
-        if sub == 'steric':
-            with open(os.path.join(self.dir, '%s_timeAveraged_%s.bc' % (sub, bnd)),'w') as bcfile:
 
-                print('substance: %s_timeAveraged' % sub)
-                print('time-averaging steric data...')
-                
-                for position in range(0, len(self.boundaries[bnd]['CMEMS_index'])):
-                
-                    val = np.mean(val_save[position,:])
-
-                    self.write_bc_preamble(bcfile, bnd, position, sub, depths)
-                    
-                    bcfile.write(str(0))
-                    bcfile.write('  ')
-                    bcfile.write('%.4e' % (val))
-                    bcfile.write('  ')
-                    bcfile.write('\n')
-                    bcfile.write(str(10000000))
-                    bcfile.write('  ')
-                    bcfile.write('%.4e' % (val))
-                    bcfile.write('  ')
-                    bcfile.write('\n')
-                print('finished writing time-averaged %s boundary for position %i/%i in boundary %s' % (sub, position+1, len(self.boundaries[bnd]['CMEMS_index']), bnd))
-                gc.collect()
 
     def read_nc_data(self, data_list, bnd, csub):
         '''
@@ -323,6 +298,11 @@ class Boundary(object):
         '''
 
         all_times, depths, fill = self.get_sub_shared_data(data_list, csub)
+        # not sure what order the times will be in, so we sort them
+        all_times.sort()
+        # 1950 01 01 is the reference time for CMEMS
+        # this is times across all files, used to pre_allocate array
+        all_times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in all_times])
         meta = {'depths' : depths, 'times': all_times}
         data = {}
 
@@ -342,10 +322,8 @@ class Boundary(object):
                 ds = nc.Dataset(data_file, 'r')
                 # these are times local to only this file
                 # these are needed to determine the location in the all array for the data to be inserted
-                #times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in ds.variables['time'][:]])
-                time_var = ds.variables['time']
-                times = nc.num2date(time_var[:],units=time_var.units,only_use_cftime_datetimes=False)
-
+                times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in ds.variables['time'][:]])
+                
                 if self.simultaneous and self.interp:
                     # interpolate all points accross all data
                     st = datetime.datetime.now()
@@ -400,7 +378,7 @@ class Boundary(object):
         look through all of a substance's files and make a time and depth array
         '''
         times = np.array([])
-        
+
         # first get all times and the depth, where the associated data will be filled incrementally
         for file_index, data_file in enumerate(data_list[0]):
             ds = nc.Dataset(data_file, 'r')
@@ -410,11 +388,10 @@ class Boundary(object):
                 except:
                     # 2D file
                     depths = [0]
-            time_var = ds.variables['time']
-            #file_time = ds.variables['time'][:]
-            file_time = nc.num2date(time_var[:],units=time_var.units,only_use_cftime_datetimes=False)
+            file_time = ds.variables['time'][:]
             times = np.concatenate((times, file_time))
         try:
+            print(csub['substance'], 'printing the csub value')
             fill = ds.variables[csub['substance'][0]]._FillValue 
             # assign same fill value
             for part_sub in range(0, len(csub['substance'])):
@@ -424,11 +401,6 @@ class Boundary(object):
             print('ERROR: critical lack of files!')
             raise
         times = np.array(times)
-        # not sure what order the times will be in, so we sort them
-        times.sort()
-        # 1950 01 01 is the reference time for CMEMS
-        # this is times across all files, used to pre_allocate array
-        #times = np.array([datetime.datetime(1950,1,1,0,0,0) + datetime.timedelta(hours = int(tt)) for tt in times])
 
         return times, depths, fill
 
@@ -600,18 +572,7 @@ class Boundary(object):
             # 3D
             arr_t = ds.variables[sub][:, :, :, :]  
             arr_t = self.clean_array(arr_t, sub)
-            
-            # SCL 20200821: option to fill NaNs per layer with surrounding values (horizontal search)
-            if False:
-                for depth in range(0,arr_t.shape[1]):
-                    if not np.isnan(np.nanmean(arr_t[0,depth,:,:])):
-                        invalid = np.isnan(arr_t[0,depth,:,:])
-                        ind = nd.distance_transform_edt(invalid, return_distances=False, return_indices=True)
-                        for time in range(0,arr_t.shape[0]):
-                            data = arr_t[time,depth,:,:]
-                            data = data[tuple(ind)]
-                            arr_t[time,depth,:,:] = data
-            
+
             inter = RegularGridInterpolator((times, depths, y, x), arr_t, fill_value=np.nan)
             arr = inter(xii)
             '''
@@ -681,7 +642,8 @@ class Boundary(object):
                         handle.write('Unit                            = %s\n' % constituent_boundary_type[sub]['unit'])
                         handle.write('Vertical position               = %s\n' % str(dep + 1))
                 else:
-                    handle.write('Quantity                        = tracerbnd%s\n'%(sub))
+                    # handle.write('Quantity                        = tracerbnd\n')
+                    handle.write('Quantity                        = tracerbnd%s\n' % sub)
                     handle.write('Unit                            = g/m3\n')
                     handle.write('Vertical position               = %s\n' % str(dep + 1))
         else:
@@ -751,7 +713,7 @@ class Boundary(object):
                                             # advection, inconsistent naming
                                             new_ext.write('quantity=uxuyadvectionvelocitybnd\n')
                                     else:
-                                        new_ext.write('quantity=tracerbnd%s\n'%(sub))
+                                        new_ext.write('quantity=tracerbnd%s\n' % sub)
                                                                     
                                     new_ext.write('locationfile=%s.pli\n' % (bnd))
                                     new_ext.write('forcingfile=%s_%s.bc\n' % (sub, bnd))

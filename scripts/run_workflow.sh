@@ -63,3 +63,16 @@ docker run \
 		--date_min $DATE_MIN \
 		--date_max $DATE_MAX
 
+# preprocess CMEMS data
+docker run \
+	-v $DATA_DOWNLOAD_LOC:/data/input \
+	-v $FM_MODEL_LOC:/data/model \
+	-v $PREPROC_OUTPUT_LOC:/data/output \
+	preprocessing boundary.py \
+		--interp true \
+		--simultaneous true \
+		--steric true \
+		--input /data/input \
+		--model /data/model \
+		--output /data/output
+
