@@ -3,7 +3,7 @@ This directory contains all the scripts necessary to run the workflow for "On de
 2. `preprocessing`
 3. `postprocessing`
 
-Information on how to build the docker containers and how to run each of the scripts is in the README.md files under each folder.
+Information on how to build the docker containers and how to run each of the scripts is in the `README.md` files under each folder.
 
 Here you will two bash scripts:
 1. `run_downloadtest.sh`
