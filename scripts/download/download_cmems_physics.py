@@ -100,7 +100,8 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
 					finally:
 						run += 1
 		ds = xr.open_mfdataset('/data/tmp/cmems_'+var+'_*.nc')
-		ds.to_netcdf('/data/cmems_'+var+'.nc')
+		ds.to_netcdf(	'/data/cmems_'+var+'.nc', 
+				encoding={'time':{'units': "hours since 1950-01-01 00:00:00"}})
 
 if __name__ == '__main__':
 	runcommand()
