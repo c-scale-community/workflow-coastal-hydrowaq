@@ -19,11 +19,13 @@ The directory structure of this folder should look like:
 ## `docker build`
 
 To build the docker container image run the following command from this directoy
+
 	docker build --tag getera .
 
 ## Usage `docker run`
 
 After you've built the docker container you can run it by typing
+
 	docker run -v /path/to/downloaded/era5/data:/data/input -v /path/to/where/you/want/to/save/the/output:/data/output getera ERA5_convert2_FM_and_merge_allVars.py --input /data/input --output /data/output
 
 An `era5_FM.nc` file will be created in `/path/to/where/you/want/to/save/the/output`. To use this file with your DFlowFM simulation, copy the `era5_FM.nc` file into your DFlowFM model directory. Ensure that DFlowFM can find it by setting the FILENAME variable in the `.ext` file to `era5_FM.nc`
