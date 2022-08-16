@@ -1,9 +1,0 @@
-name: coastserv
-channels:
-  - conda-forge
-  - defaults
-dependencies:
-  - click
-  - numpy
-  - netCDF4
-prefix: /home/wilms/anaconda3/envs/coastserv
