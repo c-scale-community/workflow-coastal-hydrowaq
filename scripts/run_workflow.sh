@@ -63,16 +63,27 @@ docker run \
 		--date_min $DATE_MIN \
 		--date_max $DATE_MAX
 
-## preprocess CMEMS data
-#docker run \
-	#-v $DATA_DOWNLOAD_LOC:/data/input \
-	#-v $FM_MODEL_LOC:/data/model \
-	#-v $PREPROC_OUTPUT_LOC:/data/output \
-	#preprocessing boundary.py \
-		#--interp true \
-		#--simultaneous true \
-		#--steric true \
-		#--input /data/input \
-		#--model /data/model \
-		#--output /data/output
+# preprocess CMEMS phyics and biogeochemistry data
+docker run \
+	-v $DATA_DOWNLOAD_LOC:/data/input \
+	-v $FM_MODEL_LOC:/data/model \
+	-v $PREPROC_OUTPUT_LOC:/data/output \
+	preprocessing boundary.py \
+		--interp true \
+		--simultaneous true \
+		--steric true \
+		--input /data/input \
+		--model /data/model \
+		--output /data/output
 
+# preprocess tide data
+#TODO
+
+
+# preprocess ERA5 data
+docker run \
+	-v $DATA_DOWNLOAD_LOC/era5:/data/input \
+	-v /home/centos/data/preprocout:/data/output \
+	getera ERA5_convert2_FM_and_merge_allVars.py \
+		--input /data/input \
+		--output /data/output
