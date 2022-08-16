@@ -92,7 +92,7 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
 				'format':'netcdf'
 				},
 				check_file)
-	ds = xr.open_mfdataset('/data/tmp/era5_*.nc')
+	ds = xr.open_mfdataset('/data/tmp/era5_*.nc', combine='by_coords', decode_times=False)
 	ds.to_netcdf('/data/era5.nc')
 
 if __name__ == '__main__':

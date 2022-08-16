@@ -23,7 +23,7 @@ LON_MAX=24.5
 LAT_MIN=36.5
 LAT_MAX=38.5
 DATE_MIN='2022-04-01'
-DATE_MAX='2022-04-05'
+DATE_MAX='2022-04-02'
 
 # download era5
 docker run \
@@ -63,16 +63,16 @@ docker run \
 		--date_min $DATE_MIN \
 		--date_max $DATE_MAX
 
-# preprocess CMEMS data
-docker run \
-	-v $DATA_DOWNLOAD_LOC:/data/input \
-	-v $FM_MODEL_LOC:/data/model \
-	-v $PREPROC_OUTPUT_LOC:/data/output \
-	preprocessing boundary.py \
-		--interp true \
-		--simultaneous true \
-		--steric true \
-		--input /data/input \
-		--model /data/model \
-		--output /data/output
+## preprocess CMEMS data
+#docker run \
+	#-v $DATA_DOWNLOAD_LOC:/data/input \
+	#-v $FM_MODEL_LOC:/data/model \
+	#-v $PREPROC_OUTPUT_LOC:/data/output \
+	#preprocessing boundary.py \
+		#--interp true \
+		#--simultaneous true \
+		#--steric true \
+		#--input /data/input \
+		#--model /data/model \
+		#--output /data/output
 

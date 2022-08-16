@@ -5,7 +5,7 @@ dependencies:
         - python=3.7
         - click
         - pathlib
-        - xarray
+        - xarray=0.14.1
         - dask
         - netCDF4
         - motuclient
