@@ -20,25 +20,17 @@ The ambition is to expand the workflow solution to include options to deploy a h
 ## Folders
 
 * [fm_model](https://github.com/c-scale-community/use-case-hisea/tree/main/fm_model) - example Delft3D Flexible Mesh model files
-* [img]() - folder containing images used in this README.md
+* [img](https://github.com/c-scale-community/use-case-hisea/tree/main/img) - folder containing images used in this README.md
 * [notebooks](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks) - Jupyter Notebooks used for development and troubleshooting purposes
 * [scripts](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts) - scripts and instructions to build and run the docker containers used to run the workflow
 
-## Workflow
+## TODO's
 
-- Download data
-- Preprocessing
-    - tidal boundaries -> script/processing/tide_physical_chemical/boundary.py
-    - pyshical chemical -> script/processing/tide_physical_chemical/tide.py
-    - convert era -> script/processing/era5/ERA5_convert2_FM_and_merge_allVars.py
-- FM Model
-- Postprocessing
-
-## TODO
-
-- [x] fix convert era 5 python script. Did the ERA5 downloaded data change?
-- [ ] Update the model with the output from the preprocessing steps. These will output model files which need to be copied to the fm model directory
-- [ ] Try model run with output from the preprocessing container
-- [ ] Check postprocessing
+- [ ] confirm example DFlowFM model runs with preprocessed files
+	- [ ] clean up fm_model folder (many unnecessary files)
+- [ ] confirm postprocessing works
+	- [ ] improve input arguments
+	- [ ] dockerise
+- [ ] make visualisations
 
 
