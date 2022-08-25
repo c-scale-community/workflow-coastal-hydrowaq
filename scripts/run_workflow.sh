@@ -15,7 +15,7 @@
 CDSAPIRC_LOC=/home/centos/.cdsapirc
 CMEMS_UNAME=bbackeberg
 CMEMS_PWD=iaTmwJ7D
-DATA_DOWNLOAD_LOC=/home/centos/data/download
+DATA_DOWNLOAD_LOC=/home/centos/data/download # note: only provide the base directory, don't add `cmems` or `era5` etc 
 PREPROC_OUTPUT_LOC=/home/centos/data/preprocout
 FM_MODEL_LOC=/home/centos/repos/use-case-hisea/fm_model
 LON_MIN=22.5
@@ -65,7 +65,7 @@ docker run \
 
 # preprocess CMEMS phyics and biogeochemistry data
 docker run \
-	-v $DATA_DOWNLOAD_LOC:/data/input \
+	-v $DATA_DOWNLOAD_LOC/cmems:/data/input \
 	-v $FM_MODEL_LOC:/data/model \
 	-v $PREPROC_OUTPUT_LOC:/data/output \
 	preprocessing boundary.py \

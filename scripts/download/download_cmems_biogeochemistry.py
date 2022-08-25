@@ -59,14 +59,14 @@ import xarray as xr # note dependencies: dask, netCDF4
 
 def runcommand(username, password, longitude_min, longitude_max, latitude_min, latitude_max, date_min, date_max, vars):
 	#make the /data/tmp directory if it does not exist
-	Path('/data/tmp').mkdir(parents=True, exist_ok=True)
+	Path('/data/cmems/tmp').mkdir(parents=True, exist_ok=True)
 	delta = datetime.strptime(date_max, '%Y-%m-%d') - datetime.strptime(date_min, '%Y-%m-%d')
 	for var in vars:
 		for i in range(delta.days+1):
 			max_runs = 2
 			run = 0
 			day = datetime.strptime(date_min, '%Y-%m-%d').date() + timedelta(days=i)
-			check_file = Path('/data/tmp/cmems_'+str(var)+'_'+str(day)+'.nc')
+			check_file = Path('/data/cmems/tmp/cmems_'+str(var)+'_'+str(day)+'.nc')
 			while not check_file.is_file():
 				while run < max_runs:
 					try:
@@ -83,7 +83,7 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
 							'--depth-min', '0.493',
 							'--depth-max', '5727.918000000001',
 							'--variable', str(var),
-							'--out-dir', '/data/tmp',
+							'--out-dir', '/data/cmems/tmp',
 							'--out-name', 'cmems_'+str(var)+'_'+str(day)+'.nc',
 							'--user', username,
 							'--pwd', password],
@@ -98,8 +98,8 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
 						break
 					finally:
 						run += 1
-		ds = xr.open_mfdataset('/data/tmp/cmems_'+var+'_*.nc', combine='by_coords', decode_times=False)
-		ds.to_netcdf('/data/cmems_'+var+'.nc')
+		ds = xr.open_mfdataset('/data/cmems/tmp/cmems_'+var+'_*.nc', combine='by_coords', decode_times=False)
+		ds.to_netcdf('/data/cmems/cmems_'+var+'.nc')
 
 if __name__ == '__main__':
 	runcommand()

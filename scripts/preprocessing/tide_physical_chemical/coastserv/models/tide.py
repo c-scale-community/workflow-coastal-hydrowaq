@@ -30,11 +30,11 @@ class Tide(object):
         self.out = out    
 
         self.const = ['2N2',   
-            'MF'   , 
+            'Mf'   , 
             'P1'   , 
-            'M2'   , 'MKS2' , 'MU2'  , 'Q1'   , 'T2'  , 'J1'  , 'M3'  , 'MM'  ,  'N2'  ,  
-            'R2'  ,  'K1'  ,  'M4'  ,  'MN4' ,  'S1'  ,  'K2'  ,  'M6'  , 'MS4' ,  'NU2' ,  
-            'S2'  ,  'L2'  ,  'M8'  ,  'MSF' ,  'O1'  ,  'S4' ] 
+            'M2'   , 'MKS2' , 'Mu2'  , 'Q1'   , 'T2'  , 'J1'  , 'M3'  , 'Mm'  ,  'N2'  ,  
+            'R2'  ,  'K1'  ,  'M4'  ,  'MN4' ,  'S1'  ,  'K2'  ,  'M6'  , 'MS4' ,  'Nu2' ,  
+            'S2'  ,  'L2'  ,  'M8'  ,  'MSf' ,  'O1'  ,  'S4' ] 
 
         XY = utils.read_pli(pli)
 
