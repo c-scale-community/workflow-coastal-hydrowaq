@@ -4,18 +4,6 @@ This folder contains the files needed to build and run the docker container to p
 It converts the daily ERA5 NetCDF files downloaded using `download_era5.py` to a single NetCDF input file (called era5_FM.nc) that can then be used to drive a DFlowFM model. 
 The `download_era5.py` script and instructions on how to build the download docker container can be found [here](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/download).
 
-The directory structure of this folder should look like:
-
-```bash
-+-- era5
-    +-- Dockerfile
-    +-- ERA5_convert2_FM_and_merge_allVars.py
-    +-- Retrieve_ERA5.py
-    +-- environment.yml
-    +-- era_maps_allVars.py
-    +-- README.md
-```
-
 ## `docker build`
 
 To build the docker container image run the following command from this directoy
