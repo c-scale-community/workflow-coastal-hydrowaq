@@ -1,7 +1,7 @@
 # C-SCALE HiSea Use Case
-## Workflow solution for on demand coastal hydrodynamic and water quality modelling using Delft3D FM
+## Workflow solution for coastal hydrodynamic and water quality modelling using Delft3D FM
 
-With this workflow solution a user can easily produce hydrodynamic and water quality hindcasts or forecasts for the coastal ocean for a geographic area of interest.
+With this workflow solution a user can easily produce hydrodynamic and water quality hindcasts or forecasts for the coastal ocean for a Delft3D FM model schematisation.
 
 The workflow solution has the following functionality
 
