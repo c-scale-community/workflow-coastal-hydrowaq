@@ -7,6 +7,8 @@ This folder contains the files needed to build and run the docker container to d
 1. `download_cmems_physics.py`
 2. `download_cmems_biogeochemistry.py`
 3. `download_era5.py`
+- [ ] TODO `download_fes.py`
+- [ ] TODO `download_gfs.py`
 
 ## Dependencies
 
