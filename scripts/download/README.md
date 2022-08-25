@@ -29,15 +29,15 @@ For help
 
 `download_cmems_physics.py`:
 
-    docker run -v /path/to/data/store:/data download-input python download_cmems_physics.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
+    docker run -v /path/to/where/you/want/to/download/to:/data download-input python download_cmems_physics.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
 
 `download_cmems_biogeochemistry.py`:
 
-    docker run -v /path/to/data/store:/data download-input python download_cmems_biogeochemistry.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
+    docker run -v /path/to/where/you/want/to/download/to:/data download-input python download_cmems_biogeochemistry.py --username TEXT --password TEXT --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
 
 `download_era5.py`:
 
-    docker run -v /path/to/.cdsapirc:/root/.cdsapirc -v /path/to/data/store:/data download-input python download_era5.py --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
+    docker run -v /path/to/.cdsapirc:/root/.cdsapirc -v /path/to/where/you/want/to/download/to:/data download-input python download_era5.py --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
 
 ## Additional information
 
