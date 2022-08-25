@@ -7,7 +7,7 @@ The `download_era5.py` script and instructions on how to build the download dock
 The directory structure of this folder should look like:
 
 ```bash
-+-- scripts
++-- era5
     +-- Dockerfile
     +-- ERA5_convert2_FM_and_merge_allVars.py
     +-- Retrieve_ERA5.py
