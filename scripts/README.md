@@ -11,7 +11,7 @@ Here you will find two *example* bash scripts:
 
 `run_downloadtest.sh` is a script with which you can test the scalability and performance of downloading data from the [Copernicus Marine Service](https://marine.copernicus.eu/) and the [Climate Data Store](https://cds.climate.copernicus.eu/). It only uses scripts from the `download` folder.
 
-`run_workflow.sh` is a script that runs the complete workflow, first downloading data, then preprocessing it, (`TODO: run model`) and finally postprocessing and visualising the model output.
+`run_workflow.sh` is a script that runs the complete workflow, first downloading data, then preprocessing it, (`TODO: run model`) and finally (`TODO: postprocessing and visualising the model output`).
 
 To adapt and run the bash scripts, open eith `run_downloadtest.sh` or `run_workflow.sh` in your preferred editor and change the below input variables:
 ```
