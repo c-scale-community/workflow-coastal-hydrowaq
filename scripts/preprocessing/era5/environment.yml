@@ -1,4 +1,4 @@
-name: coastserv
+name: preprocessing_era5
 channels:
   - conda-forge
   - defaults
@@ -6,4 +6,3 @@ dependencies:
   - click
   - numpy
   - netCDF4
-prefix: /home/wilms/anaconda3/envs/coastserv

@@ -1,4 +1,4 @@
-name: preprocessing_tide_physical_chemical
+name: preprocessing
 channels:
   - conda-forge
   - defaults
