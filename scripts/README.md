@@ -5,7 +5,7 @@ This directory contains all the scripts necessary to run the workflow for "On de
 
 Information on how to build the docker containers and how to run each of the scripts is in the `README.md` files under each folder.
 
-Here you will two bash scripts:
+Here you will find two *example* bash scripts:
 1. `run_downloadtest.sh`
 2. `run_workflow.sh` (in development)
 
