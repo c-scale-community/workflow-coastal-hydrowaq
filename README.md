@@ -24,6 +24,9 @@ The ambition is to expand the workflow solution to include options to deploy a h
 * [notebooks](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks) - Jupyter Notebooks used for development and troubleshooting purposes
 * [scripts](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts) - scripts and instructions to build and run the docker containers used to run the workflow
 
+# Getting started
+- [ ] to do.
+
 ## TODO's
 
 - [ ] confirm example DFlowFM model runs with preprocessed files
