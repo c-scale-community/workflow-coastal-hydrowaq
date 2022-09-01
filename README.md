@@ -26,6 +26,10 @@ The ambition is to expand the workflow solution to include options to deploy a h
 
 # Getting started
 
+### Prerequisites
+1. Github account
+2. DockerHub account and access to https://hub.docker.com/repository/docker/deltares/delft3dfm (contact software.support@deltares.nl to arrange access)
+
 ### Set up your computing environment
 
 It is recommended to run the workflow in a Linux environment with [docker](https://www.docker.com/). This could be a virtual machine in the cloud, or your local computer. To run the workflow locally on a Linux or Apple Mac computer requires [docker desktop](https://www.docker.com/products/docker-desktop/). 
@@ -51,7 +55,9 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	`docker build --tag getera .`
 3. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/tide_physical_chemical` and do: \
 	`docker build --tag preprocessing .`
-- [ ] todo: pull docker container for dfm from dockerhub
+4. Pull docker image for Delft3D Flexible Mesh by doing: \
+	`docker login --username ... --password ...`
+	`docker image pull deltares/delft3dfm:latest`
 - [ ] todo: build post-processing docker container
 
 ### Run the work flow
