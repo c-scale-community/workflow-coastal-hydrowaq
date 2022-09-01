@@ -102,11 +102,11 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 	
 2. Download CMEMS physics data
 
-		docker run -v /home/$USER/data/download:/data download-input python download_cmems_physics.py --username $CMEMS_USERNAME --password $CMEMS_PWD --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min $DATE_MIN '2022-04-01' --date_max '2022-04-05'
+		docker run -v /home/$USER/data/download:/data download-input python download_cmems_physics.py --username $CMEMS_USERNAME --password $CMEMS_PWD --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
 	
 3. Download CMEMS biogeochemistry data
 
-		docker run -v /home/$USER/data/download:/data download-input python download_cmems_biogeochemistry.py --username $CMEMS_USERNAME --password $CMEMS_PWD --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min $DATE_MIN '2022-04-01' --date_max '2022-04-05'
+		docker run -v /home/$USER/data/download:/data download-input python download_cmems_biogeochemistry.py --username $CMEMS_USERNAME --password $CMEMS_PWD --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
 	
 4. Preprocess ERA5 data 
 
