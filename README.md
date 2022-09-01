@@ -42,7 +42,7 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 
 1. Open a terminal on your local computer or log on to your virtual machine in the cloud.
 2. Navigate to the folder where you want to work, here we use the `$HOME` directory, which typically has the path `home/$USER`, where `$USER` is your username.
-3. In `$HOME` create the folders to where you want the data from the workflow to be stored, e.g.: \
+3. In `$HOME` create the folders to where you want the data from the workflow to be stored, e.g.: 
 		
 	Create the directory to which you [download](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/download) data from CMEMS and CDS, and where you place the FES data by doing:
 		
