@@ -44,13 +44,13 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 2. Navigate to the folder where you want to work, here we use the `$HOME` directory, which typically has the path `home/$USER`, where `$USER` is your username.
 3. In `$HOME` create the folders to where you want the data from the workflow to be stored, e.g.: 
 		
-	Create the directory to which you [download](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/download) data from CMEMS and CDS, and where you place the FES data by doing:
-		
 		mkdir -p data/download/
-
-	Create the directory where the output from the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) will be written to by doing:
 		
+	The above command creates the directory `$HOME/data/download/` to which you can [download](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/download) the input data needed to run the model.
+	
 		mkdir -p data/preprocout/
+		
+	The above command creates the directory `$HOME/data/preprocout` where you can store the output from the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) needed to run the model.
 	
 
 4. In `$HOME` (or some other preferred directory) clone this repository by doing: 
@@ -60,13 +60,14 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	This will create the folder `$HOME/use-case-hisea` containing all the files you need for the workflow. Note that for private repos authentication will be required. The user will be prompted to enter the github username and the [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 	
 ### Build and pull the docker containers for the workflow
-(Note: if you have permission denied error, add sudo before all commands)
+(Note: if you have permission denied error, add `sudo` before all commands)
+(Note: to check if docker is installed run `docker ps` or `docker info`)
 
-0. If Docker is not installed yet, use the following commands for quick installation
+0. If docker is not installed yet, use the following commands for quick installation
 
-	sudo yum check-update
-	curl -fsSL https://get.docker.com/ | sh
-	sudo systemctl start docker
+		sudo yum check-update
+		curl -fsSL https://get.docker.com/ | sh
+		sudo systemctl start docker
 
 1. Navigate to `$HOME/use-case-hisea/scripts/download` and do: 
 		
