@@ -65,7 +65,7 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	curl -fsSL https://get.docker.com/ | sh
 	sudo systemctl start docker
 
-1. Navigate to `$HOME/use-case-hisea/scripts/download` and do: 
+1. Navigate to `$HOME/use-case-hisea/scripts/download` and do (if you have permission denied error, add sudo before the command): 
 		
 		docker build --tag download-input .
 		
