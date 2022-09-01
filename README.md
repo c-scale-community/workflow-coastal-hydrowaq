@@ -60,7 +60,7 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	This will create the folder `$HOME/use-case-hisea` containing all the files you need for the workflow. Note that for private repos authentication will be required. The user will be prompted to enter the github username and the [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 	
 ### Build and pull the docker containers for the workflow
-(Note: if you have permission denied error, add `sudo` before all commands)
+(Note: if you have permission denied error, add `sudo` before all commands) \
 (Note: to check if docker is installed run `docker ps` or `docker info`)
 
 0. If docker is not installed yet, use the following commands for quick installation
