@@ -101,7 +101,7 @@ docker run \
 # preprocess ERA5 data
 docker run \
 	-v $DATA_DOWNLOAD_LOC/era5:/data/input \
-	-v /home/centos/data/preprocout:/data/output \
+	-v $PREPROC_OUTPUT_LOC:/data/output \
 	getera ERA5_convert2_FM_and_merge_allVars.py \
 		--input /data/input \
 		--output /data/output
