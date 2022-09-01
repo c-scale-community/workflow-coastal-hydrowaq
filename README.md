@@ -29,6 +29,8 @@ The ambition is to expand the workflow solution to include options to deploy a h
 ### Prerequisites
 1. Github account. Sign up [here](https://github.com/signup)
 2. DockerHub account and access to https://hub.docker.com/repository/docker/deltares/delft3dfm (contact software.support@deltares.nl to arrange access)
+3. CMEMS account, which can be obtained by registering at <https://resources.marine.copernicus.eu/registration-form>.
+4. CDS API key. Follow instructions at <https://cds.climate.copernicus.eu/api-how-to#install-the-cds-api-key> to generate the key.
 
 ### Set up your computing environment
 
