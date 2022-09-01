@@ -26,7 +26,7 @@ The ambition is to expand the workflow solution to include options to deploy a h
 
 # Getting started
 
-## Set up your computing environment
+### Set up your computing environment
 
 It is recommended to run the workflow in a Linux environment with [docker](https://www.docker.com/). This could be a virtual machine in the cloud, or your local computer. To run the workflow locally on a Linux or Apple Mac computer requires [docker desktop](https://www.docker.com/products/docker-desktop/). 
 
