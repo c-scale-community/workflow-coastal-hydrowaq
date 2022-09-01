@@ -56,7 +56,7 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 3. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/tide_physical_chemical` and do: \
 	`docker build --tag preprocessing .`
 4. Pull docker image for Delft3D Flexible Mesh by doing: \
-	`docker login --username ... --password ...`
+	`docker login --username ... --password ...` \
 	`docker image pull deltares/delft3dfm:latest`
 - [ ] todo: build post-processing docker container
 
