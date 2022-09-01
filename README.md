@@ -41,23 +41,41 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 1. Open a terminal on your local computer or log on to your virtual machine in the cloud.
 2. Navigate to the folder where you want to work, here we use the `$HOME` directory, which typically has the path `home/$USER`, where `$USER` is your username.
 3. In `$HOME` create the folders to where you want the data from the workflow to be stored, e.g.: \
-	`mkdir -p data/download/` - the directory to which you download data from CMEMS and CDS, and where you place the FES data \
-	`mkdir -p data/preprocout/` - the directory where the output from the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) will be written to \
-4. In `$HOME` (or some other preferred directory) clone this repository by doing: \
-	`git clone https://github.com/c-scale-community/use-case-hisea.git` \
+		
+	Create the directory to which you [download](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/download) data from CMEMS and CDS, and where you place the FES data by doing:
+		
+		mkdir -p data/download/
+
+	Create the directory where the output from the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) will be written to by doing:
+		
+		mkdir -p data/preprocout/
+	
+
+4. In `$HOME` (or some other preferred directory) clone this repository by doing: 
+		
+		git clone https://github.com/c-scale-community/use-case-hisea.git
+	
 	This will create the folder `$HOME/use-case-hisea` containing all the files you need for the workflow.
 	
 ### Build and pull the docker containers for the workflow
 
-1. Navigate to `$HOME/use-case-hisea/scripts/download` and do: \
-	`docker build --tag download-input .`
-2. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/era5` and do: \
-	`docker build --tag getera .`
-3. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/tide_physical_chemical` and do: \
-	`docker build --tag preprocessing .`
-4. Pull docker image for Delft3D Flexible Mesh by doing: \
-	`docker login --username ... --password ...` \
-	`docker image pull deltares/delft3dfm:latest`
+1. Navigate to `$HOME/use-case-hisea/scripts/download` and do: 
+		
+		docker build --tag download-input .
+		
+2. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/era5` and do: 
+		
+		docker build --tag getera .
+		
+3. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/tide_physical_chemical` and do: 
+	
+	docker build --tag preprocessing .
+	
+4. Pull docker image for Delft3D Flexible Mesh by doing: 
+	
+	docker login --username ... --password ...
+	docker image pull deltares/delft3dfm:latest
+	
 - [ ] todo: build post-processing docker container
 
 ### Run the docker containers of the workflow one-by-one
