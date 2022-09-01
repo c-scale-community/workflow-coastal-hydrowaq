@@ -25,7 +25,61 @@ The ambition is to expand the workflow solution to include options to deploy a h
 * [scripts](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts) - scripts and instructions to build and run the docker containers used to run the workflow
 
 # Getting started
-- [ ] to do.
+
+## Set up your computing environment
+
+It is recommended to run the workflow in a Linux environment with [docker](https://www.docker.com/). This could be a virtual machine in the cloud, or your local computer. To run the workflow locally on a Linux or Apple Mac computer requires [docker desktop](https://www.docker.com/products/docker-desktop/). 
+
+For Windows users, it is recommended to [install the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install), upgrade to [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2) and [install the docker desktop WSL2 backend](https://docs.docker.com/desktop/windows/wsl/).
+
+### Setting up the folder structure and cloning the repo
+
+1. Open a terminal on your local computer or log on to your virtual machine in the cloud.
+2. Navigate to the folder where you want to work, here we use the `$HOME` directory, which typically has the path `home/$USER`, where `$USER` is your username.
+3. In `$HOME` create the folders to where you want the data from the workflow to be stored, e.g.: \
+	`mkdir -p data/download/` - the directory to which you download data from CMEMS and CDS, and where you place the FES data \
+	`mkdir -p data/preprocout/` - the directory where the output from the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) will be written to \
+4. In `$HOME` (or some other preferred directory) clone this repository by doing: \
+	`git clone https://github.com/c-scale-community/use-case-hisea.git` \
+	This will create the folder `$HOME/use-case-hisea` containing all the files you need for the workflow.
+	
+### Build and pull the docker containers for the workflow
+
+1. Navigate to `$HOME/use-case-hisea/scripts/download` and do: \
+	`docker build --tag download-input .`
+2. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/era5` and do: \
+	`docker build --tag getera .`
+3. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/tide_physical_chemical` and do: \
+	`docker build --tag preprocessing .`
+- [ ] todo: pull docker container for dfm from dockerhub
+- [ ] todo: build post-processing docker container
+
+### Run the work flow
+
+An example `bash` script to run each step of the workflow can be found at \
+`$HOME/use-case-hisea/scripts/run_workflow.sh`
+
+Navigate to `$HOME/use-case-hisea/scripts`, open `run_workflow.sh` in your preferred text editor and edit the below lines
+
+```
+CDSAPIRC_LOC=/path/to/your/.cdsapirc
+CMEMS_UNAME= 
+CMEMS_PWD=
+DATA_DOWNLOAD_LOC=/path/to/where/you/want/to/download/the/data/to # e.g. $HOME/data/download
+PREPROC_OUTPUT_LOC=/path/to/where/you/want/to/save/the/preprocessing/output # e.g. $HOME/data/preprocout
+FM_MODEL_LOC=/path/to/your/Delft3DFM/model/files 
+PLIFILE1=filename1.pli # e.g. south2.pli
+PLIFILE2=filename2.pli # e.g. east2.pli
+LON_MIN=22.5
+LON_MAX=24.5
+LAT_MIN=36.5
+LAT_MAX=38.5
+DATE_MIN='2022-04-01'
+DATE_MAX='2022-04-05'
+```
+
+Run the workflow from `$HOME/use-case-hisea/scripts` by typing `./run_workflow.sh`
+
 
 ## TODO's
 
