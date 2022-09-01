@@ -59,7 +59,7 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	
 ### Build and pull the docker containers for the workflow
 
-0.IF Docker is not installed yet, use the following commands for quick installation
+0. If Docker is not installed yet, use the following commands for quick installation
 
 	sudo yum check-update
 	curl -fsSL https://get.docker.com/ | sh
