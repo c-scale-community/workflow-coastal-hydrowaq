@@ -85,6 +85,9 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	docker image pull deltares/delft3dfm:latest
 	
 - [ ] todo: build post-processing docker container
+- Check the created images:\
+
+	docker images
 
 ### Run the docker containers of the workflow one-by-one
 
