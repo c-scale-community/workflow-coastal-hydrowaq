@@ -27,7 +27,7 @@ The ambition is to expand the workflow solution to include options to deploy a h
 # Getting started
 
 ### Prerequisites
-1. Github account
+1. Github account. Sign up [here](https://github.com/signup)
 2. DockerHub account and access to https://hub.docker.com/repository/docker/deltares/delft3dfm (contact software.support@deltares.nl to arrange access)
 
 ### Set up your computing environment
