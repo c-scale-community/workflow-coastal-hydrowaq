@@ -60,34 +60,45 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	`docker image pull deltares/delft3dfm:latest`
 - [ ] todo: build post-processing docker container
 
-### Run the work flow
+### Run the docker containers of the workflow one-by-one
 
-An example `bash` script to run each step of the workflow can be found at \
-`$HOME/use-case-hisea/scripts/run_workflow.sh`
+Below are examples of the `docker run` commands for a 5-day simulation from 1-Apr-2022 to 5-Apr-2022 for a small model in Greece (the example [fm_model](https://github.com/c-scale-community/use-case-hisea/tree/main/fm_model) included in this repository).
 
-Navigate to `$HOME/use-case-hisea/scripts`, open `run_workflow.sh` in your preferred text editor and edit the below lines
+1. Download ERA5 forcing data
 
-```
-CDSAPIRC_LOC=/path/to/your/.cdsapirc
-CMEMS_UNAME= 
-CMEMS_PWD=
-DATA_DOWNLOAD_LOC=/path/to/where/you/want/to/download/the/data/to # e.g. $HOME/data/download
-PREPROC_OUTPUT_LOC=/path/to/where/you/want/to/save/the/preprocessing/output # e.g. $HOME/data/preprocout
-FM_MODEL_LOC=/path/to/your/Delft3DFM/model/files 
-PLIFILE1=filename1.pli # e.g. south2.pli
-PLIFILE2=filename2.pli # e.g. east2.pli
-LON_MIN=22.5
-LON_MAX=24.5
-LAT_MIN=36.5
-LAT_MAX=38.5
-DATE_MIN='2022-04-01'
-DATE_MAX='2022-04-05'
-```
+		docker run -v /home/$USER/.cdsapirc:/root/.cdsapirc -v /home/$USER/data/download:/data download-input python download_era5.py --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min '2022-04-01' --date_max '2022-04-05'
+	
+2. Download CMEMS physics data
 
-Run the workflow from `$HOME/use-case-hisea/scripts` by typing `./run_workflow.sh`
+		docker run -v /home/$USER/data/download:/data download-input python download_cmems_physics.py --username $CMEMS_USERNAME --password $CMEMS_PWD --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min $DATE_MIN '2022-04-01' --date_max '2022-04-05'
+	
+3. Download CMEMS biogeochemistry data
 
+		docker run -v /home/$USER/data/download:/data download-input python download_cmems_biogeochemistry.py --username $CMEMS_USERNAME --password $CMEMS_PWD --longitude_min 22.5 --longitude_max 24.5 --latitude_min 36.5 --latitude_max 38.5 --date_min $DATE_MIN '2022-04-01' --date_max '2022-04-05'
+	
+4. Preprocess ERA5 data 
 
-## TODO's
+		docker run -v /home/$USER/data/download/era5:/data/input -v /home/centos/data/preprocout:/data/output getera ERA5_convert2_FM_and_merge_allVars.py --input /data/input --output /data/output
+
+5. Preprocess CMEMS phyics and biogeochemistry data
+
+		docker run -v /home/$USER/data/download/cmems:/data/input -v /home/$USER/repos/use-case-hisea/fm_model:/data/model -v /home/centos/data/preprocout:/data/output preprocessing boundary.py --interp true --simultaneous true --steric true --input /data/input --model /data/model --output /data/output
+	
+6. Preprocess tide data
+
+		docker run -v /home/$USER/data/download/fes2012:/data/input -v /home/$USER/repos/use-case-hisea/fm_model:/data/model -v /home/centos/data/preprocout:/data/output preprocessing tide.py --fespath /data/input --coords "22.5, 24.5, 36.5, 38.5" --pli south2.pli --pli east2.pli --output /data/output --model /data/model
+		
+7. Link output from preprocessing to your fm_model directory
+
+	In `/home/$USER/repos/use-case-hisea/fm_model` do
+	
+		ln -sf /home/$USER/data/preprocout/* .
+
+8. Run Delft3D FM docker container (run the model)
+
+		docker run -v /home/$USER/repos/use-case-hisea/fm_model:/data -t deltares/delft3dfm:latest
+
+# TODO's
 
 - [ ] confirm example DFlowFM model runs with preprocessed files
 	- [ ] clean up fm_model folder (many unnecessary files)
