@@ -126,7 +126,7 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 	
 		cp -v /home/$USER/data/preprocout/* .
 
-8. Run Delft3D FM docker container (run the model)
+8. Run Delft3D FM docker container (run the model). The /fm_model/ folder contains the `run_docker.sh` batch file in which you can set the number of cores and nodes (partitions).   
 
 		docker run -v /home/$USER/use-case-hisea/fm_model:/data -t deltares/delft3dfm:latest
 
