@@ -1,0 +1,346 @@
+* QUANTITY    : waterlevelbnd, velocitybnd, dischargebnd, tangentialvelocitybnd, normalvelocitybnd  filetype=9         method=2,3
+*             : salinitybnd                                                                         filetype=9         method=2,3
+*             : lowergatelevel, damlevel, pump                                                      filetype=9         method=2,3
+              : frictioncoefficient, horizontaleddyviscositycoefficient, advectiontype, ibotlevtype filetype=4,10      method=4
+*             : initialwaterlevel, initialsalinity                                                  filetype=4,10      method=4
+*             : windx, windy, windxy, rainfall_mmperday, atmosphericpressure                        filetype=1,2,4,7,8 method=1,2,3
+*             : shiptxy, movingstationtxy                                                           filetype=1         method=1
+*
+* kx = Vectormax = Nr of variables specified on the same time\space frame. Eg. Wind magnitude,direction: kx = 2
+* FILETYPE=1  : uniform              kx = 1 value               1 dim array      uni
+* FILETYPE=2  : unimagdir            kx = 2 values              1 dim array,     uni mag\dir transf to u,v, in index 1,2
+* FILETYPE=3  : svwp                 kx = 3 fields  u,v,p       3 dim array      nointerpolation
+* FILETYPE=4  : arcinfo              kx = 1 field               2 dim array      bilin\direct
+* FILETYPE=5  : spiderweb            kx = 3 fields              3 dim array      bilin\spw
+* FILETYPE=6  : curvi                kx = ?                                      bilin\findnm
+* FILETYPE=7  : triangulation        kx = 1 field               1 dim array      triangulation
+* FILETYPE=8  : triangulation_magdir kx = 2 fields consisting of Filetype=2      triangulation in (wind) stations
+*
+* FILETYPE=9  : polyline             kx = 1 For polyline points i= 1 through N specify boundary signals, either as
+*                                           timeseries or Fourier components or tidal constituents
+*                                           Timeseries are in files *_000i.tim, two columns: time (min)  values
+*                                           Fourier components and or tidal constituents are in files *_000i.cmp, three columns
+*                                           period (min) or constituent name (e.g. M2), amplitude and phase (deg)
+*                                           If no file is specified for a node, its value will be interpolated from surrounding nodes
+*                                           If only one signal file is specified, the boundary gets a uniform signal
+*                                           For a dischargebnd, only one signal file must be specified
+*
+* FILETYPE=10 : inside_polygon       kx = 1 field                                uniform value inside polygon for INITIAL fields
+*
+* METHOD  =0  : provider just updates, another provider that pointers to this one does the actual interpolation
+*         =1  : intp space and time (getval) keep  2 meteofields in memory
+*         =2  : first intp space (update), next intp. time (getval) keep 2 flowfields in memory
+*         =3  : save weightfactors, intp space and time (getval),   keep 2 pointer- and weight sets in memory
+*         =4  : only spatial interpolation
+*
+* OPERAND =O  : Override at all points
+*         =+  : Add to previously specified value
+*         =*  : Multiply with previously specified value
+*         =A  : Apply only if no value specified previously (For Initial fields, similar to Quickin preserving best data specified first)
+*
+* VALUE   =   : Offset value for this provider
+*
+* FACTOR  =   : Conversion factor for this provider
+*
+**************************************************************************************************************
+
+QUANTITY =windx
+FILENAME =era5_FM.nc
+FILETYPE =11
+METHOD   =3
+OPERAND  =O
+
+QUANTITY =windy
+FILENAME =era5_FM.nc
+FILETYPE =11
+METHOD   =3
+OPERAND  =O
+
+QUANTITY =atmosphericpressure
+FILENAME =era5_FM.nc
+FILETYPE =11
+METHOD   =3
+OPERAND  =O
+
+QUANTITY=dewpoint_airtemperature_cloudiness
+FILENAME=era5_FM.nc
+FILETYPE=11
+METHOD=3
+OPERAND=O 
+
+
+QUANTITY=waqfunctionRadSurf
+FILENAME=RadSurf_daily.tim
+FILETYPE=1
+METHOD=1
+OPERAND=O
+
+QUANTITY=initialtracerContinuity
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=1.0000e+00
+
+QUANTITY=initialtracerOXY
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=7.11249
+
+QUANTITY=initialtracerOXY
+FILENAME=initial_conditions/CMEMS_depthavg/OXY_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerIM1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerNH4
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerNO3
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.016095
+
+QUANTITY=initialtracerNO3
+FILENAME=initial_conditions/CMEMS_depthavg/NO3_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerPO4
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.007317
+
+QUANTITY=initialtracerPO4
+FILENAME=initial_conditions/CMEMS_depthavg/PO4_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerSi
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.11615
+
+QUANTITY=initialtracerSi
+FILENAME=initial_conditions/CMEMS_depthavg/Si_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerOpal
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.000127
+
+QUANTITY=initialtracerOpal
+FILENAME=initial_conditions/CMEMS_depthavg/Opal_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerPOC1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.019967
+
+QUANTITY=initialtracerPOC1
+FILENAME=initial_conditions/CMEMS_depthavg/POC1_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerPON1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.000293
+
+QUANTITY=initialtracerPON1
+FILENAME=initial_conditions/CMEMS_depthavg/PON1_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerPOP1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=4.05e-05
+
+QUANTITY=initialtracerPOP1
+FILENAME=initial_conditions/CMEMS_depthavg/POP1_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialtracerDINOFLAG_E
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerDINOFLAG_N
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerDINOFLAG_P
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerMDIATOMS_E
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerMDIATOMS_N
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerMDIATOMS_P
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerMFLAGELA_E
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerMFLAGELA_N
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerMFLAGELA_P
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerPHAEOCYS_E
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerPHAEOCYS_N
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialtracerPHAEOCYS_P
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.0
+
+QUANTITY=initialwaqbotDetCS1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.998356
+
+QUANTITY=initialwaqbotDetCS1
+FILENAME=initial_conditions/CMEMS_depthavg/DetCS1_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialwaqbotDetNS1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.014651
+
+QUANTITY=initialwaqbotDetNS1
+FILENAME=initial_conditions/CMEMS_depthavg/DetNS1_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialwaqbotDetPS1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.002026
+
+QUANTITY=initialwaqbotDetPS1
+FILENAME=initial_conditions/CMEMS_depthavg/DetPS1_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=initialwaqbotDetSiS1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=0.004218
+
+QUANTITY=initialwaqbotDetSiS1
+FILENAME=initial_conditions/CMEMS_depthavg/DetSiS1_ini2016_fromCMEMS_depthavg.xyz
+FILETYPE=7
+METHOD=5
+OPERAND=O
+
+QUANTITY=waqmassbalanceareaBalArea1
+FILENAME=domain.pol
+FILETYPE=10
+METHOD=4
+OPERAND=O
+VALUE=1.0
+
+

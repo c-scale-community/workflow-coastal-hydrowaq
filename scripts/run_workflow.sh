@@ -28,7 +28,7 @@ LON_MAX=24.5
 LAT_MIN=36.5
 LAT_MAX=38.5
 DATE_MIN='2022-04-01'
-DATE_MAX='2022-04-02'
+DATE_MAX='2022-04-05'
 
 ##
 ## running the workflow (in a perfect world nothing in the below needs to be changed)
