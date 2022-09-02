@@ -110,15 +110,15 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 	
 4. Preprocess ERA5 data 
 
-		docker run -v /home/$USER/data/download/era5:/data/input -v /home/centos/data/preprocout:/data/output getera ERA5_convert2_FM_and_merge_allVars.py --input /data/input --output /data/output
+		docker run -v /home/$USER/data/download/era5:/data/input -v /home/$USER/data/preprocout:/data/output getera ERA5_convert2_FM_and_merge_allVars.py --input /data/input --output /data/output
 
 5. Preprocess CMEMS phyics and biogeochemistry data
 
-		docker run -v /home/$USER/data/download/cmems:/data/input -v /home/$USER/repos/use-case-hisea/fm_model:/data/model -v /home/centos/data/preprocout:/data/output preprocessing boundary.py --interp true --simultaneous true --steric true --input /data/input --model /data/model --output /data/output
+		docker run -v /home/$USER/data/download/cmems:/data/input -v /home/$USER/repos/use-case-hisea/fm_model:/data/model -v /home/$USER/data/preprocout:/data/output preprocessing boundary.py --interp true --simultaneous true --steric true --input /data/input --model /data/model --output /data/output
 	
 6. Preprocess tide data
 
-		docker run -v /home/$USER/data/download/fes2012:/data/input -v /home/$USER/repos/use-case-hisea/fm_model:/data/model -v /home/centos/data/preprocout:/data/output preprocessing tide.py --fespath /data/input --coords "22.5, 24.5, 36.5, 38.5" --pli south2.pli --pli east2.pli --output /data/output --model /data/model
+		docker run -v /home/$USER/data/download/fes2012:/data/input -v /home/$USER/repos/use-case-hisea/fm_model:/data/model -v /home/$USER/data/preprocout:/data/output preprocessing tide.py --fespath /data/input --coords "22.5, 24.5, 36.5, 38.5" --pli south2.pli --pli east2.pli --output /data/output --model /data/model
 		
 7. Link output from preprocessing to your fm_model directory
 
