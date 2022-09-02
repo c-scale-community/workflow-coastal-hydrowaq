@@ -114,7 +114,7 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 5. Preprocess CMEMS phyics and biogeochemistry data
 
-		docker run -v /home/$USER/data/download/cmems:/data/input -v /home/$USER/repos/use-case-hisea/fm_model:/data/model -v /home/$USER/data/preprocout:/data/output preprocessing boundary.py --interp true --simultaneous true --steric true --input /data/input --model /data/model --output /data/output
+		docker run -v /home/$USER/data/download/cmems:/data/input -v /home/$USER/use-case-hisea/fm_model:/data/model -v /home/$USER/data/preprocout:/data/output preprocessing boundary.py --interp true --simultaneous true --steric true --input /data/input --model /data/model --output /data/output
 	
 6. Preprocess tide data
 
