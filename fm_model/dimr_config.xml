@@ -7,10 +7,11 @@
     <start name="DFlowFM"/>
   </control>
   <component name="DFlowFM">
-        <setting key="bloomspecies" value="/opt/delft3dfm_latest/lnx64/share/delft3d/bloom.spe"/>
-        <setting key="processlibrary" value="/opt/delft3dfm_latest/lnx64/share/delft3d/proc_def.dat"/>
+    <setting key="processlibrary" value="${PROC_DEF_DIR}/proc_def.dat"/>
+    <setting key="bloomspecies" value="${PROC_DEF_DIR}/bloom.spe"/>
     <library>dflowfm</library>
-    <process>0 1 2 3 4 5 6 7</process>
+    <process>0</process>
+    <mpiCommunicator>DFM_COMM_DFMWORLD</mpiCommunicator>
     <workingDir>.</workingDir>
     <inputFile>tttz_waq.mdu</inputFile>
   </component>
