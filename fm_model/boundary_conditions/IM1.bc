@@ -10,7 +10,7 @@ Quantity                        = tracerbndIM1
 Unit                            = mg/L
 Vertical position               = 1
 0       	0.
-3000000	    0.
+6000000	    0.
 
 [forcing]
 Name                            = south2_0001
@@ -24,4 +24,4 @@ Quantity                        = tracerbndIM1
 Unit                            = mg/L
 Vertical position               = 1
 0       	0.
-3000000	    0.
+6000000	    0.

@@ -165,8 +165,8 @@ DtInit                                    = 5.                  # Initial comput
 Timestepanalysis                          = 0                   # 0=no, 1=see file *.steps
 AutoTimestep                              = 3                   # 0 = no, 1 = 2D (hor. out), 3=3D (hor. out), 5 = 3D (hor. inout + ver. inout), smallest dt
 Tunit                                     = M                   # Time unit for start/stop times (D, H, M or S)
-TStart                                    = 526320.            # Start time w.r.t. RefDate (in TUnit)
-TStop                                     = 529200.           # Stop  time w.r.t. RefDate (in TUnit)
+TStart                                    = 3813120.            # Start time w.r.t. RefDate (in TUnit)
+TStop                                     = 3816000.            # Stop  time w.r.t. RefDate (in TUnit)
 
 [restart]
 RestartFile                               =                     # Restart netcdf-file, either *_rst.nc or *_map.nc

@@ -10,7 +10,7 @@ Quantity                        = tracerbndContinuity
 Unit                            = mg/L
 Vertical position               = 1
 0       	1.
-3000000	    1.
+6000000	    1.
 
 [forcing]
 Name                            = south2_0001
@@ -24,4 +24,4 @@ Quantity                        = tracerbndContinuity
 Unit                            = mg/L
 Vertical position               = 1
 0       	1.
-3000000	    1.
+6000000	    1.
