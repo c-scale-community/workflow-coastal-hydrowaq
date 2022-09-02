@@ -122,13 +122,13 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 		
 7. Copy output from preprocessing to your fm_model directory
 
-	In `/home/$USER/repos/use-case-hisea/fm_model` do
+	In `/home/$USER/use-case-hisea/fm_model` do
 	
 		cp -v /home/$USER/data/preprocout/* .
 
 8. Run Delft3D FM docker container (run the model)
 
-		docker run -v /home/$USER/repos/use-case-hisea/fm_model:/data -t deltares/delft3dfm:latest
+		docker run -v /home/$USER/use-case-hisea/fm_model:/data -t deltares/delft3dfm:latest
 
 # TODO's
 
