@@ -15,7 +15,7 @@ This folder contains all the necessary files to run the example Delft3D FM model
     In this file the boundary condition quantities, boundary location file (`.pli`) locations and forcing ('.bc') locations are specified.
 * `wind_heat_waq.ext` \
     In this file the forcing field quantitites and file locations (e.g. `input/era5_FM.nc`) as well as intitial condition quantities and file locations are specified.
-* 'input/' \
+* `input/` \
     [The input folder](https://github.com/c-scale-community/use-case-hisea/tree/main/fm_model/input) contains all the boundary condition, initial condition and forcing files needed for the simulation. Most of these files are created in the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) step.
 
 # TODOs
