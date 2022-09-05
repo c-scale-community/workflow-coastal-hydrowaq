@@ -6,6 +6,7 @@
 **/*.orig
 fm_model/input/*
 fm_model/DFM_OUTPUT_*
+fm_model/*.cache
 !fm_model/input/Continuity.bc
 !fm_model/input/*.xyz
 !fm_model/input/domain.pol
