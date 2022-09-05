@@ -1,182 +1,182 @@
 [boundary]
 quantity=waterlevelbnd
 locationfile=east2.pli
-forcingfile=tide_east2.bc
+forcingfile=input/tide_east2.bc
 
 [boundary]
 quantity=waterlevelbnd
 locationfile=east2.pli
-forcingfile=steric_east2.bc
+forcingfile=input/steric_east2.bc
 
 [boundary]
 quantity=waterlevelbnd
 locationfile=south2.pli
-forcingfile=tide_south2.bc
+forcingfile=input/tide_south2.bc
 
 [boundary]
 quantity=waterlevelbnd
 locationfile=south2.pli
-forcingfile=steric_south2.bc
+forcingfile=input/steric_south2.bc
 
 [boundary]
 quantity=salinitybnd
 locationfile=east2.pli
-forcingfile=salinity_east2.bc
+forcingfile=input/salinity_east2.bc
 
 [boundary]
 quantity=salinitybnd
 locationfile=south2.pli
-forcingfile=salinity_south2.bc
+forcingfile=input/salinity_south2.bc
 
 [boundary]
 quantity=temperaturebnd
 locationfile=east2.pli
-forcingfile=temperature_east2.bc
+forcingfile=input/temperature_east2.bc
 
 [boundary]
 quantity=temperaturebnd
 locationfile=south2.pli
-forcingfile=temperature_south2.bc
+forcingfile=input/temperature_south2.bc
 
 [boundary]
 quantity=uxuyadvectionvelocitybnd
 locationfile=east2.pli
-forcingfile=uxuy_east2.bc
+forcingfile=input/uxuy_east2.bc
 
 [boundary]
 quantity=uxuyadvectionvelocitybnd
 locationfile=south2.pli
-forcingfile=uxuy_south2.bc
+forcingfile=input/uxuy_south2.bc
 
 [boundary]
 quantity=tracerbndContinuity
 locationfile=east2.pli
-forcingfile=boundary_conditions/Continuity.bc
+forcingfile=input/Continuity.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndContinuity
 locationfile=south2.pli
-forcingfile=boundary_conditions/Continuity.bc
+forcingfile=input/Continuity.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndOXY
 locationfile=east2.pli
-forcingfile=OXY_east2.bc
+forcingfile=input/OXY_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndOXY
 locationfile=south2.pli
-forcingfile=OXY_south2.bc
+forcingfile=input/OXY_south2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndIM1
 locationfile=east2.pli
-forcingfile=boundary_conditions/IM1.bc
+forcingfile=input/IM1.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndIM1
 locationfile=south2.pli
-forcingfile=boundary_conditions/IM1.bc
+forcingfile=input/IM1.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndNH4
 locationfile=east2.pli
-forcingfile=boundary_conditions/NH4.bc
+forcingfile=input/NH4.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndNH4
 locationfile=south2.pli
-forcingfile=boundary_conditions/NH4.bc
+forcingfile=input/NH4.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndNO3
 locationfile=east2.pli
-forcingfile=NO3_east2.bc
+forcingfile=input/NO3_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndNO3
 locationfile=south2.pli
-forcingfile=NO3_south2.bc
+forcingfile=input/NO3_south2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPO4
 locationfile=east2.pli
-forcingfile=PO4_east2.bc
+forcingfile=input/PO4_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPO4
 locationfile=south2.pli
-forcingfile=PO4_south2.bc
+forcingfile=input/PO4_south2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndSi
 locationfile=east2.pli
-forcingfile=Si_east2.bc
+forcingfile=input/Si_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndSi
 locationfile=south2.pli
-forcingfile=Si_south2.bc
+forcingfile=input/Si_south2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndOpal
 locationfile=east2.pli
-forcingfile=Opal_east2.bc
+forcingfile=input/Opal_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndOpal
 locationfile=south2.pli
-forcingfile=Opal_south2.bc
+forcingfile=input/Opal_south2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPOC1
 locationfile=east2.pli
-forcingfile=POC1_east2.bc
+forcingfile=input/POC1_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPOC1
 locationfile=south2.pli
-forcingfile=POC1_south2.bc
+forcingfile=input/POC1_south2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPON1
 locationfile=east2.pli
-forcingfile=PON1_east2.bc
+forcingfile=input/PON1_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPON1
 locationfile=south2.pli
-forcingfile=PON1_south2.bc
+forcingfile=input/PON1_south2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPOP1
 locationfile=east2.pli
-forcingfile=POP1_east2.bc
+forcingfile=input/POP1_east2.bc
 return_time=0.0000000e+000
 
 [boundary]
 quantity=tracerbndPOP1
 locationfile=south2.pli
-forcingfile=POP1_south2.bc
+forcingfile=input/POP1_south2.bc
 return_time=0.0000000e+000
 

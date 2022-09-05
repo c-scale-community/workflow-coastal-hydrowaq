@@ -1,4 +1,0 @@
-[boundary]
-quantity=waterlevelbnd
-locationfile=east2.pli
-forcingfile=tide_east2.bc

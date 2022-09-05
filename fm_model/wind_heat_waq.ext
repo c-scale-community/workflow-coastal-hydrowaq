@@ -45,299 +45,299 @@
 **************************************************************************************************************
 
 QUANTITY =windx
-FILENAME =era5_FM.nc
+FILENAME=input/era5_FM.nc
 FILETYPE =11
 METHOD   =3
 OPERAND  =O
 
 QUANTITY =windy
-FILENAME =era5_FM.nc
+FILENAME=input/era5_FM.nc
 FILETYPE =11
 METHOD   =3
 OPERAND  =O
 
 QUANTITY =atmosphericpressure
-FILENAME =era5_FM.nc
+FILENAME=input/era5_FM.nc
 FILETYPE =11
 METHOD   =3
 OPERAND  =O
 
 QUANTITY=dewpoint_airtemperature_cloudiness
-FILENAME=era5_FM.nc
+FILENAME=input/era5_FM.nc
 FILETYPE=11
 METHOD=3
 OPERAND=O 
 
 
 QUANTITY=waqfunctionRadSurf
-FILENAME=RadSurf_daily.tim
+FILENAME=input/RadSurf_daily.tim
 FILETYPE=1
 METHOD=1
 OPERAND=O
 
 QUANTITY=initialtracerContinuity
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=1.0000e+00
 
 QUANTITY=initialtracerOXY
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=7.11249
 
 QUANTITY=initialtracerOXY
-FILENAME=initial_conditions/CMEMS_depthavg/OXY_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/OXY_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerIM1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerNH4
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerNO3
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.016095
 
 QUANTITY=initialtracerNO3
-FILENAME=initial_conditions/CMEMS_depthavg/NO3_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/NO3_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerPO4
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.007317
 
 QUANTITY=initialtracerPO4
-FILENAME=initial_conditions/CMEMS_depthavg/PO4_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/PO4_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerSi
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.11615
 
 QUANTITY=initialtracerSi
-FILENAME=initial_conditions/CMEMS_depthavg/Si_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/Si_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerOpal
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.000127
 
 QUANTITY=initialtracerOpal
-FILENAME=initial_conditions/CMEMS_depthavg/Opal_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/Opal_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerPOC1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.019967
 
 QUANTITY=initialtracerPOC1
-FILENAME=initial_conditions/CMEMS_depthavg/POC1_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/POC1_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerPON1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.000293
 
 QUANTITY=initialtracerPON1
-FILENAME=initial_conditions/CMEMS_depthavg/PON1_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/PON1_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerPOP1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=4.05e-05
 
 QUANTITY=initialtracerPOP1
-FILENAME=initial_conditions/CMEMS_depthavg/POP1_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/POP1_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialtracerDINOFLAG_E
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerDINOFLAG_N
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerDINOFLAG_P
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerMDIATOMS_E
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerMDIATOMS_N
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerMDIATOMS_P
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerMFLAGELA_E
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerMFLAGELA_N
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerMFLAGELA_P
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerPHAEOCYS_E
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerPHAEOCYS_N
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialtracerPHAEOCYS_P
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.0
 
 QUANTITY=initialwaqbotDetCS1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.998356
 
 QUANTITY=initialwaqbotDetCS1
-FILENAME=initial_conditions/CMEMS_depthavg/DetCS1_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/DetCS1_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialwaqbotDetNS1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.014651
 
 QUANTITY=initialwaqbotDetNS1
-FILENAME=initial_conditions/CMEMS_depthavg/DetNS1_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/DetNS1_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialwaqbotDetPS1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.002026
 
 QUANTITY=initialwaqbotDetPS1
-FILENAME=initial_conditions/CMEMS_depthavg/DetPS1_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/DetPS1_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=initialwaqbotDetSiS1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O
 VALUE=0.004218
 
 QUANTITY=initialwaqbotDetSiS1
-FILENAME=initial_conditions/CMEMS_depthavg/DetSiS1_ini2016_fromCMEMS_depthavg.xyz
+FILENAME=input/DetSiS1_ini2016_fromCMEMS_depthavg.xyz
 FILETYPE=7
 METHOD=5
 OPERAND=O
 
 QUANTITY=waqmassbalanceareaBalArea1
-FILENAME=domain.pol
+FILENAME=input/domain.pol
 FILETYPE=10
 METHOD=4
 OPERAND=O

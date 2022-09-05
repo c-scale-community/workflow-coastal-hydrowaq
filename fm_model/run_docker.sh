@@ -6,7 +6,6 @@ set -e
 
 # Set numbers of hosts and cores per host
 nNodes=1
-#nProc=8
 nProc=1
 
 # set DIMR version to be used inside DOCKER: 
@@ -36,7 +35,7 @@ if [ "$nPart" == "1" ]; then
     $dimrdir/lnx64/bin/run_dimr.sh -m $dimrFile
 else
     $dimrdir/lnx64/bin/run_dflowfm.sh --partition:ndomains=$nPart:icgsolver=6 $mduFile
-    #$dimrdir/lnx64/bin/run_dimr.sh --dockerparallel -c $nProc -m $dimrFile
-    $dimrdir/lnx64/bin/run_dimr.sh --dockerparallel -c $nProc -m $dimrFile >screen.log 2>&1
+    $dimrdir/lnx64/bin/run_dimr.sh --dockerparallel -c $nProc -m $dimrFile
+    #$dimrdir/lnx64/bin/run_dimr.sh --dockerparallel -c $nProc -m $dimrFile >screen.log 2>&1
 fi
 

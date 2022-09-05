@@ -1,6 +1,0 @@
-* Deltares, D-Flow FM Version 1.2.100.66357, Apr 10 2020, 02:20:29
-* Source: https://svn.oss.deltares.nl/repos/delft3d/trunk/
-* File creation date: 14:33:47, 03-07-2020
-** INFO   : Command: /opt/delft3dfm_latest/lnx64/bin/dflowfm --partition:ndomains=8:icgsolver=6 tttz_waq.mdu
-** DEBUG  :            0  0.1000010      NOD(KMAX)
-** DEBUG  :            6  0.7000070      XK (KMAX), YK (KMAX), ZK (KMAX), KC (KMAX), NMK (KMAX), RNOD(KMAX)
