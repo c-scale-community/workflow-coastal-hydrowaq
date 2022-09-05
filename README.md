@@ -87,10 +87,11 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	
 		docker image pull deltares/delft3dfm:latest
 	
-- [ ] todo: build post-processing docker container
-- Check the created images:
+- [ ] todo: make Jupyter Notebook docker with dfm_tools
 
-		docker images
+Check the created images:
+
+	docker images
 
 ### Run the docker containers of the workflow one-by-one
 
@@ -124,14 +125,12 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 	
 		ln -sf /home/$USER/data/preprocout/* /home/$USER/use-case-hisea/fm_model/input/.
 
-8. Run Delft3D FM docker container (run the model). The /fm_model/ folder contains the `run_docker.sh` batch file in which you can set the number of cores and nodes (partitions).   
+8. Run Delft3D FM docker container (run the model). The `fm_model/` folder contains the `run_docker.sh` batch file in which you can set the number of cores and nodes (partitions).   
 
 		docker run -v /home/$USER/use-case-hisea/fm_model:/data -t deltares/delft3dfm:latest
 
 # TODO's
 
-- [ ] confirm example DFlowFM model runs with preprocessed files
-	- [ ] clean up fm_model folder (many unnecessary files)
 - [ ] confirm postprocessing works
 	- [ ] improve input arguments
 	- [ ] dockerise
