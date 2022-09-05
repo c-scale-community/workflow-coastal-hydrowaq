@@ -1,0 +1,43 @@
+# fm_model
+
+This folder contains all the necessary files to run the example Delft3D FM model schematisation. Below we list the important files to take note of when running the model.
+
+## important files and folders
+* `dimr_config.xml` \
+    This is the `.xml`-file referenced when calling `docker run -v /path/to/fm_model:/data --ulimit stack=-1 -t deltares/delft3dfm:latest`. \
+    Contact software.support@deltares.nl for help to edit this file.
+* `run_docker.sh` \
+    This script is called during `docker run -v /path/to/fm_model:/data --ulimit stack=-1 -t deltares/delft3dfm:latest`. \
+    Contact software.support@deltares.nl for help to edit this file.
+* `tttz_waq.mdu` \
+    In the `.mdu`-file, users can specify a range of parameters for their simulations, including simulation start and stop time (`TStart` and `TStop`),  locations of the `.ext` forcing files and much more.
+* `boundary1_waq.ext` \
+    In this file the boundary condition quantities, boundary location file (`.pli`) locations and forcing ('.bc') locations are specified.
+* `wind_heat_waq.ext` \
+    In this file the forcing field quantitites and file locations (e.g. `input/era5_FM.nc`) as well as intitial condition quantities and file locations are specified.
+* `input/` 
+    This folder contains all the boundary condition, initial condition and forcing files needed for the simulation. Most of these files are created in the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) step.
+
+# TODOs
+
+- [ ] `make_continuity_bc.py` (`input/Continuity.bc`)
+- [ ] `make_im1_bc.py` (`input/IM1.bc`)
+- [ ] `make_nh4_bc` (`input/NH4.bc`)
+- [ ] `make_radsurf_daily_tim.py` (`input/RadSurf_daily.tim`)
+- [ ] `make_depthavg_xyz_ini.py` (`input/❓❓❓❓❓_❓❓❓❓❓_fromCMEMS_depthavg.xyz`)
+- [ ] `make_domain_pol.py` (`input/domain.pol`)
+
+## other file details
+
+* `Marine_Algae_20200603.sub` = Substance File called in `tttz_waq.mdu`, needed by Water Quality Module
+* `addhisout.eho` = Additional History Output File called in `tttz_waq.mdu`, needed by Water Quality Module
+* `bloom.spe` = bloom species setting key called in `dimr_config.xml`, needed by Water Quality Module
+* `initial_conditions` = folder containing depthavg initial conditions from CMEMS, called in `wind_heat_waq.ext`
+* `myortho3_net.nc` = Delft3D FM unstructured grid file, called in `tttz_waq.mdu`
+* `proc_def.dat` = Process Database File called in `tttz_waq.mdu` and `dimr_config.xml`, needed by Water Quality Module
+* `proc_def.def` = ????. Not called anywhere, but seems to be related to `proc_def.dat`.
+    - [ ] delete❓
+* `trial1.ldb` = Land boundary file used for visualisation, called in `tttz_waq.mdu`
+* `trial5_obs.xyn` = Obs file (points file with observation stations), called in `tttz_waq.mdu`
+* `east2.pli` = location file containing the lon/lat coordinates of a boundary, called in `tttz_waq.mdu`
+* `south2.pli` = location file containing the lon/lat coordinates of a boundary, called in `tttz_waq.mdu`
