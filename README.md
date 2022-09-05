@@ -121,9 +121,9 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 		docker run -v /home/$USER/data/download/fes2012:/data/input -v /home/$USER/use-case-hisea/fm_model:/data/model -v /home/$USER/data/preprocout:/data/output preprocessing tide.py --fespath /data/input --coords "22.5, 24.5, 36.5, 38.5" --pli south2.pli --pli east2.pli --output /data/output --model /data/model
 		
-7. Link the output from preprocessing to your `fm_model/input` directory
+7. Copy the output from preprocessing to your `fm_model/input` directory
 	
-		ln -sf /home/$USER/data/preprocout/* /home/$USER/use-case-hisea/fm_model/input/.
+		cp /home/$USER/data/preprocout/* /home/$USER/use-case-hisea/fm_model/input/.
 
 8. Run Delft3D FM docker container (run the model). The `fm_model/` folder contains the `run_docker.sh` batch file in which you can set the number of cores and nodes (partitions).   
 
