@@ -86,7 +86,7 @@ To check if docker is installed in your computing environment run `docker ps` or
 	
 		docker build --tag preprocessing .
 		
-4. Navigate to and do:
+4. Navigate to `$HOME/use-case-hisea/scripts/postprocessing` and do:
 
 		docker build -t postprocess .
 	
