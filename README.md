@@ -138,7 +138,7 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 		docker run -v /home/$USER/use-case-hisea/fm_model:/data --shm-size=4gb --ulimit stack=-1 -t deltares/delft3dfm:latest
 
-9. Post-process the model output. A single netcdf file will be created on a regular grid. You can define the output resolution (in the example: 500 x 400).
+9. Post-process the model output. A single netcdf file (no partitions) will be created on a regular grid. You can define the output resolution (in the example: 500 x 400). Note that currently only the surface layer is extracted, this can be modified in the script.
 
 		docker run -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/data/input -v /home/$USER/data/postprocout:/data/output postprocess tttz_waq_0000_map.nc 500 400
 
