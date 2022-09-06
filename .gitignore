@@ -14,3 +14,9 @@ fm_model/*.cache
 !fm_model/input/NH4.bc
 !fm_model/input/RadSurf_daily.tim
 
+*.irlog
+fm_model/tttz_waq_0000.mdu
+fm_model/tttz_waq_0001.mdu
+fm_model/tttz_waq_0002.mdu
+fm_model/tttz_waq_0003.mdu
+fm_model/unstruc.dia

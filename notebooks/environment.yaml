@@ -1,0 +1,17 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - pip
+  - python=3.8
+  - shapely>=1.7.0
+  - cartopy 
+  - pyepsg
+  - geopandas
+  - contextily 
+  - xarray
+  - dask
+  - ipykernel
+  - pip:
+    - git+https://github.com/openearth/dfm_tools.git
+
