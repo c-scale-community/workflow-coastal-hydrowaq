@@ -87,6 +87,7 @@ To check if docker is installed in your computing environment run `docker ps` or
 		docker build --tag preprocessing .
 		
 4. Navigate to and do:
+
 		docker build -t postprocess .
 	
 4. Pull docker image for Delft3D Flexible Mesh by doing: 
@@ -99,7 +100,7 @@ To check if docker is installed in your computing environment run `docker ps` or
 
 Check the created images:
 
-	docker images
+		docker images
 
 ### Run the docker containers of the workflow one-by-one
 
@@ -143,9 +144,6 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 # TODO's
 
-- [ ] confirm postprocessing works
-	- [ ] improve input arguments
-	- [ ] dockerise
 - [ ] make visualisations
 
 
