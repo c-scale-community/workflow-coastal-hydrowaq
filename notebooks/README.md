@@ -10,10 +10,10 @@ In this folder you will find Jupyter Notebooks and the files to build the docker
 
 To build the docker image run
 
-    docker build --tag hydro-nb .
+    docker build --tag dfmnb .
 
 ## `docker run`
 
-    docker run -p 8888:8888 -v v $(pwd):/home/jovyan/work hydro-nb
+    docker run -p 8888:8888 -v v $(pwd):/home/jovyan/work dfmnb
 
 Copy and past the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser
