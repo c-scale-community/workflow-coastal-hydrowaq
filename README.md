@@ -40,9 +40,9 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 
 If you are working on a virtual machin in the cloud and docker is not installed yet, use the following commands for quick installation
 
-		sudo yum check-update
-		curl -fsSL https://get.docker.com/ | sh
-		sudo systemctl start docker
+	sudo yum check-update
+	curl -fsSL https://get.docker.com/ | sh
+	sudo systemctl start docker
 		
 To check if docker is installed in your computing environment run `docker ps` or `docker info`.
 
