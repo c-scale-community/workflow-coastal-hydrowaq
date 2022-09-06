@@ -60,6 +60,10 @@ To check if docker is installed in your computing environment run `docker ps` or
 		
 	The above command creates the directory `$HOME/data/preprocout` where you can store the output from the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) needed to run the model.
 	
+		mkdir -p data/postprocout/
+		
+	The above command creates the directory `$HOME/data/postprocout` where you can store the output from the [postprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/postprocessing).
+	
 
 4. In `$HOME` (or some other preferred directory) clone this repository by doing: 
 		
@@ -81,6 +85,9 @@ To check if docker is installed in your computing environment run `docker ps` or
 3. Navigate to `$HOME/use-case-hisea/scripts/preprocessing/tide_physical_chemical` and do: 
 	
 		docker build --tag preprocessing .
+		
+4. Navigate to and do:
+		docker build -t postprocess .
 	
 4. Pull docker image for Delft3D Flexible Mesh by doing: 
 	
@@ -129,6 +136,10 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 8. Run Delft3D FM docker container (run the model). The `fm_model/` folder contains the `run_docker.sh` batch file in which you can set the number of cores and nodes (partitions).   
 
 		docker run -v /home/$USER/use-case-hisea/fm_model:/data --shm-size=4gb --ulimit stack=-1 -t deltares/delft3dfm:latest
+
+9. Post-process the model output. A single netcdf file will be created on a regular grid. You can define the output resolution (in the example: 500 x 400).
+
+		docker run -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/data/input -v /home/$USER/data/postprocout:/data/output postprocess tttz_waq_0000_map.nc 500 400
 
 # TODO's
 
