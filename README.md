@@ -38,6 +38,14 @@ It is recommended to run the workflow in a Linux environment with [docker](https
 
 For Windows users, it is recommended to [install the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install), upgrade to [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2) and [install the docker desktop WSL2 backend](https://docs.docker.com/desktop/windows/wsl/).
 
+If you are working on a virtual machin in the cloud and docker is not installed yet, use the following commands for quick installation
+
+		sudo yum check-update
+		curl -fsSL https://get.docker.com/ | sh
+		sudo systemctl start docker
+		
+To check if docker is installed in your computing environment run `docker ps` or `docker info`.
+
 ### Setting up the folder structure and cloning the repo
 
 1. Open a terminal on your local computer or log on to your virtual machine in the cloud.
@@ -61,13 +69,6 @@ For Windows users, it is recommended to [install the Windows Subsystem for Linux
 	
 ### Build and pull the docker containers for the workflow
 (Note: if you have permission denied error, add `sudo` before all commands) \
-(Note: to check if docker is installed run `docker ps` or `docker info`)
-
-0. If docker is not installed yet, use the following commands for quick installation
-
-		sudo yum check-update
-		curl -fsSL https://get.docker.com/ | sh
-		sudo systemctl start docker
 
 1. Navigate to `$HOME/use-case-hisea/scripts/download` and do: 
 		
