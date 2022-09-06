@@ -13,7 +13,7 @@ This script expects 3 paramaters:
 
 # Example Docker build
 
-docker build -t hisea .
+docker build -t postprocess .
 
 # Example Docker run
 
