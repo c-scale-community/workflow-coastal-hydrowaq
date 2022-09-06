@@ -10,7 +10,7 @@
     <setting key="processlibrary" value="${PROC_DEF_DIR}/proc_def.dat"/>
     <setting key="bloomspecies" value="${PROC_DEF_DIR}/bloom.spe"/>
     <library>dflowfm</library>
-    <process>0</process>
+    <process>0 1 2 3</process>
     <mpiCommunicator>DFM_COMM_DFMWORLD</mpiCommunicator>
     <workingDir>.</workingDir>
     <inputFile>tttz_waq.mdu</inputFile>
