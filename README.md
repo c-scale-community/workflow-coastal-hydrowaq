@@ -102,7 +102,7 @@ To check if docker is installed in your computing environment run `docker ps` or
 
 Check the created images:
 
-		docker images
+	docker images
 
 ### Run the docker containers of the workflow one-by-one
 
