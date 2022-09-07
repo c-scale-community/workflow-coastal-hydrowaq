@@ -6,7 +6,7 @@ set -e
 
 # Set numbers of hosts and cores per host
 nNodes=1
-nProc=4
+nProc=8
 
 # set DIMR version to be used inside DOCKER: 
 dimrdir=/opt/delft3dfm_latest
