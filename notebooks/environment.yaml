@@ -1,9 +1,8 @@
-name: dfm_tools_env
+name: base
 channels:
   - conda-forge
 dependencies:
   - pip
-  - python=3.8
   - shapely>=1.7.0
   - cartopy 
   - pyepsg
