@@ -8,8 +8,18 @@
 # 2. build the docker container to run preprocessing following instructions on
 #	<https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing>
 #
-## usage to also log how long it takes to run the workflow
-# $ ./run_workflow.sh
+# 3. build the docker container to run postprocessing following instructions on
+#	<https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/postprocessing>
+#
+# 4. pull the docker imageo fro Delft3D Flexible Mesh by doing
+#	docker login --username ... --password ..
+#	docker image pull deltares/delft3dfm:latest
+#
+# 5. build the docker container for the notebooks by following instructions on
+#	<https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks>
+#
+# 6. run the workflow by doing
+# 	./run_workflow.sh
 
 ##
 ## user defined input parameters
