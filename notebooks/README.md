@@ -14,7 +14,7 @@ To build the docker image run
 
 ## `docker run`
 
-    docker run -p 8888:8888 -v $(pwd):/home/jovyan/work dfmipynb
+    docker run -p 8888:8888 -v $(pwd):/home/jovyan/work -v /path/to/delft3dfm/output:/home/jovyan/work/data dfmipynb
 
 The above command will return output similar to the below:
 ```
@@ -42,6 +42,30 @@ The above command will return output similar to the below:
      or http://127.0.0.1:8888/lab?token=...
 ```
 
-If you are running the above locally, copy and past the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser.
+If you are running the above locally, copy and paste the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser.
 
-If you are running the above on a virtual machine in the cloud, replace `127.0.0.1` with the public IP of the virtual machine you are working on, and put that URL into your browser.
+If you are running the above on a virtual machine in the cloud it is a bit more envolved...
+
+## getting the above to run on an openstack virtual machine in the cloud
+
+1. Navigate to the OpenStack environment of your virtual machine cloud provider
+2. On the left hand side, click on `Security Groups`
+3. Click `Create Security Group` and in the pop-up window give your security group a name and click `Create Security Group`
+4. On the next page click `Add Rule` and do the following: \
+    a. For `Rule`, select `Custom TCP Rule` \
+    b. Provide a `Description` \
+    c. For `Direction`, select `Ingress` \
+    d. For `Open Port`, select `Port` (you can also select `Port Range`) \
+    e. For `Port` insert `8888` (if you selected `Port Range` in the previous step insert e.g. `8899` in `To Port`) \
+    f. `Remote` should be set to `CIDR` by default \
+    g. `CIDR` should be set to `0.0.0.0/0` by default \
+    e. Click `Add`
+5. Navigate to `Instances`
+6. For your `Instance Name`, on the far right under `Actions`, click on the drop-down menu and select `Edit Security Groups`
+7. In the pop-up window, click on the blue plus sign to add `Security Group` you've just created to your instance, and click `Save`
+
+Now, back in the terminal for your virtual machine run 
+
+    docker run -p 8888:8888 -v $(pwd):/home/jovyan/work -v /path/to/delft3dfm/output:/home/jovyan/work/data dfmipynb
+
+Copy and paste the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser but **replace** `127.0.0.1` with the public IP of the virtual machine you are working on.
