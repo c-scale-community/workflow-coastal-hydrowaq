@@ -18,4 +18,4 @@ To build the docker image run
 
 Copy and past the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser
 
-If you are running the above on a virtual machine in the cloud, replace `127.0.0.1` with the IP of the virtual machine you are working on.
+If you are running the above on a virtual machine in the cloud, replace `127.0.0.1` with the public IP of the virtual machine you are working on.
