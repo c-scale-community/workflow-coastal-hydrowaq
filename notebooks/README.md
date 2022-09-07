@@ -44,7 +44,7 @@ The above command will return output similar to the below:
 
 If you are running the above locally, copy and paste the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser.
 
-If you are running the above on a virtual machine in the cloud it is a bit more envolved...
+If you are running the above on a virtual machine in the cloud it is a bit more involved...
 
 ## getting the above to run on an openstack virtual machine in the cloud
 
