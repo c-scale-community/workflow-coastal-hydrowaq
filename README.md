@@ -21,7 +21,7 @@ The ambition is to expand the workflow solution to include options to deploy a h
 
 * [fm_model](https://github.com/c-scale-community/use-case-hisea/tree/main/fm_model) - example Delft3D Flexible Mesh model files
 * [img](https://github.com/c-scale-community/use-case-hisea/tree/main/img) - folder containing images used in this README.md
-* [notebooks](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks) - Jupyter Notebooks used for development and troubleshooting purposes
+* [notebooks](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks) - Jupyter Notebooks
 * [scripts](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts) - scripts and instructions to build and run the docker containers used to run the workflow
 
 # Getting started
@@ -90,13 +90,15 @@ To check if docker is installed in your computing environment run `docker ps` or
 
 		docker build --tag postprocess .
 	
-4. Pull docker image for Delft3D Flexible Mesh by doing: 
+5. Pull docker image for Delft3D Flexible Mesh by doing: 
 	
 		docker login --username ... --password ...
 	
 		docker image pull deltares/delft3dfm:latest
 	
-- [ ] todo: make Jupyter Notebook docker with dfm_tools
+6. Navigate to `$HOME/use-case-hisea/notebooks` and do:
+
+		docker build --tag dfmipynb .
 
 Check the created images:
 
@@ -142,8 +144,8 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 		docker run -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/data/input -v /home/$USER/data/postprocout:/data/output postprocess tttz_waq_0000_map.nc 500 400
 
-# TODO's
+10. Set up JupyterHub to analyse your data in Jupyter Notebooks (An OpenStack VM requires that the VM security groups are configured to allow inbound connectivity - follow [these instructions](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks#getting-the-above-to-run-on-an-openstack-virtual-machine-in-the-cloud) to set that up)
 
-- [ ] make visualisations
-
-
+		docker run -p 8888:8888 -v /home/$USER/use-case-hisea/notebooks:/home/jovyan/work -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data dfmipynb
+		
+	From the resultant output copy and paste the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser but replace `127.0.0.1` with the public IP of the virtual machine you are working on. This will give you access to the JupyerLab instance you've just launched.
