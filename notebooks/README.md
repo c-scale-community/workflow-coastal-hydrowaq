@@ -14,7 +14,7 @@ To build the docker image run
 
 ## `docker run`
 
-    docker run -p 8888:8888 -v v $(pwd):/home/jovyan/work dfmipynb
+    docker run -p 8888:8888 -v $(pwd):/home/jovyan/work dfmipynb
 
 The above command will return output similar to the below:
 ```
