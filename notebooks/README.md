@@ -16,6 +16,11 @@ To build the docker image run
 
     docker run -p 8888:8888 -v v $(pwd):/home/jovyan/work dfmipynb
 
-Copy and past the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser
+The above command will return output similar to the below:
+```
+paste output here
+```
 
-If you are running the above on a virtual machine in the cloud, replace `127.0.0.1` with the public IP of the virtual machine you are working on.
+If you are running the above locally, copy and past the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser.
+
+If you are running the above on a virtual machine in the cloud, replace `127.0.0.1` with the public IP of the virtual machine you are working on, and put that URL into your browser.
