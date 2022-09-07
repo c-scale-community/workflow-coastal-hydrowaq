@@ -88,7 +88,7 @@ To check if docker is installed in your computing environment run `docker ps` or
 		
 4. Navigate to `$HOME/use-case-hisea/scripts/postprocessing` and do:
 
-		docker build -t postprocess .
+		docker build --tag postprocess .
 	
 4. Pull docker image for Delft3D Flexible Mesh by doing: 
 	
