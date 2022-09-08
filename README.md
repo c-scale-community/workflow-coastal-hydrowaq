@@ -124,7 +124,7 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 		docker run -v /home/$USER/data/download/cmems:/data/input -v /home/$USER/use-case-hisea/fm_model:/data/model -v /home/$USER/data/preprocout:/data/output preprocessing boundary.py --interp true --simultaneous true --steric true --input /data/input --model /data/model --output /data/output
 	
-5. Preprocess tide data. For this step to work you must download FES2012 data. Copy your FES2012 tide data to `/home/$USER/data/download/fes2012`. Please go to https://www.aviso.altimetry.fr/data/products/auxiliary-products/global-tide-fes/description-fes2012.html for more details.
+5. Preprocess tide data. For this step to work you must download FES2012 data. Copy your FES2012 tide data to `/home/$USER/data/download/fes2012`. Please go to https://www.aviso.altimetry.fr/es/data/products/auxiliary-products/global-tide-fes/description-fes2012.html for more details.
 
 		docker run -v /home/$USER/data/download/fes2012:/data/input -v /home/$USER/use-case-hisea/fm_model:/data/model -v /home/$USER/data/preprocout:/data/output preprocessing tide.py --fespath /data/input --coords "22.5, 24.5, 36.5, 38.5" --pli south2.pli --pli east2.pli --output /data/output --model /data/model
 		
