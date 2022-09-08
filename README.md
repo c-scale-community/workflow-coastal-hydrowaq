@@ -144,7 +144,7 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 		docker run -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/data/input -v /home/$USER/data/postprocout:/data/output postprocess tttz_waq_0000_map.nc 500 400
 
-10. Set up JupyterHub to analyse your data in Jupyter Notebooks (An OpenStack VM requires that the VM security groups are configured to allow inbound connectivity - follow [these instructions](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks#getting-the-above-to-run-on-an-openstack-virtual-machine-in-the-cloud) to set that up)
+10. (Note that this step doesn't depend on Step 9) Set up JupyterHub to analyse your data in Jupyter Notebooks (An OpenStack VM requires that the VM security groups are configured to allow inbound connectivity - follow [these instructions](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks#getting-the-above-to-run-on-an-openstack-virtual-machine-in-the-cloud) to set that up)
 
 		docker run -p 8888:8888 -v /home/$USER/use-case-hisea/notebooks:/home/jovyan/work -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data dfmipynb
 		
