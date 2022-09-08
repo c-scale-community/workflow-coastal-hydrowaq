@@ -16,4 +16,4 @@ The below script is called in docker container.
 
 # Example Docker run
 
-    docker run -v /path/to/delf3dfm/output:/data/input -v /path/to/where/you/want/to/save/the/regular/gridded/data:/data/output hisea tttz_waq_0000_map.nc 500 400
+    docker run -v /path/to/delf3dfm/output:/data/input -v /path/to/where/you/want/to/save/the/regular/gridded/data:/data/output postprocess tttz_waq_0000_map.nc 500 400
