@@ -14,7 +14,7 @@ To build the docker image run
 
 ## `docker run`
 
-    docker run -p 8888:8888 -v $(pwd):/home/jovyan/work -v /path/to/delft3dfm/output:/home/jovyan/work/data dfmipynb
+    sudo docker run -p 8888:8888 -v $(pwd):/home/jovyan/work -v /path/to/unstructured/delft3dfm/data:/home/jovyan/work/data_unstruct -v /path/to/structured/data/from/postprocessing:/home/jovyan/work/data_struct dfmipynb
 
 The above command will return output similar to the below:
 ```
