@@ -146,6 +146,6 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 
 10. (*Note that this step doesn't depend on Step 9*) Set up JupyterHub to analyse your data in Jupyter Notebooks (An OpenStack VM requires that the VM security groups are configured to allow inbound connectivity - follow [these instructions](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks#getting-the-above-to-run-on-an-openstack-virtual-machine-in-the-cloud) to set that up)
 
-		docker run -p 8888:8888 -v /home/$USER/use-case-hisea/notebooks:/home/jovyan/work -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data dfmipynb
+		sudo docker run -p 8888:8888 -v /home/$USER/use-case-hisea/notebooks:/home/jovyan/work -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data_unstruct -v /home/$USER/data/postprocout:/home/jovyan/work/data_struct dfmipynb
 		
 	From the resultant output copy and paste the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser but replace `127.0.0.1` with the public IP of the virtual machine you are working on. This will give you access to the JupyerLab instance you've just launched.
