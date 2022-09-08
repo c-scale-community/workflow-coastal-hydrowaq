@@ -49,7 +49,7 @@ If you are running the above on a virtual machine in the cloud it is a bit more 
 ## getting the above to run on an openstack virtual machine in the cloud
 
 1. Navigate to the OpenStack environment of your virtual machine cloud provider
-2. On the left hand side, click on `Security Groups`
+2. On the left hand side, click on `Network/Security Groups`
 3. Click `Create Security Group` and in the pop-up window give your security group a name and click `Create Security Group`
 4. On the next page click `Add Rule` and do the following: \
     a. For `Rule`, select `Custom TCP Rule` \
@@ -60,7 +60,7 @@ If you are running the above on a virtual machine in the cloud it is a bit more 
     f. `Remote` should be set to `CIDR` by default \
     g. `CIDR` should be set to `0.0.0.0/0` by default \
     e. Click `Add`
-5. Navigate to `Instances`
+5. Navigate to `Compute/Instances`
 6. For your `Instance Name`, on the far right under `Actions`, click on the drop-down menu and select `Edit Security Groups`
 7. In the pop-up window, click on the blue plus sign to add `Security Group` you've just created to your instance, and click `Save`
 
