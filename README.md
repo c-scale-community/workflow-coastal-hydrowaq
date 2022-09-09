@@ -38,6 +38,10 @@ It is recommended to run the workflow in a Linux environment with [docker](https
 
 For Windows users, it is recommended to [install the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install), upgrade to [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2) and [install the docker desktop WSL2 backend](https://docs.docker.com/desktop/windows/wsl/).
 
+If you are logging in to a virtual machine on the cloud, it could be necessary to update packages on the virtual machine. On `CentOS` do
+
+	sudo yum upgrade
+
 If you are working on a virtual machine in the cloud and docker is not installed yet, use the following commands for quick installation
 
 	sudo yum check-update
@@ -76,7 +80,7 @@ If `git` is not installed, you can install it on `CentOS` by doing
 	sudo yum install git
 	
 ### Build and pull the docker containers for the workflow
-(Note: if you have permission denied error, add `sudo` before all commands) \
+(Note: if you have permission denied error, add `sudo` before all commands) 
 
 1. Navigate to `$HOME/use-case-hisea/scripts/download` and do: 
 		
