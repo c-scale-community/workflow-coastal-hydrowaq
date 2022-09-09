@@ -71,6 +71,10 @@ To check if docker is installed in your computing environment run `docker ps` or
 	
 	This will create the folder `$HOME/use-case-hisea` containing all the files you need for the workflow. Note that for private repos authentication will be required. The user will be prompted to enter the github username and the [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 	
+If `git` is not installed, you can install it on `CentOS` by doing
+	
+	sudo yum install git
+	
 ### Build and pull the docker containers for the workflow
 (Note: if you have permission denied error, add `sudo` before all commands) \
 
