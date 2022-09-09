@@ -156,7 +156,7 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 	
 # To do's
 - [ ] put workflow components into a workflow orchestrator, e.g. [snakemake](https://snakemake.readthedocs.io/en/stable/)
-- [ ] figure out what for which input files we still need to create download preprocessing scripts
+- [ ] figure out for which input files we still need to create download and preprocessing scripts
 - [ ] figure out hybrid cloud-HPC workflow (need to switch to Singularity for running Delft3D FM)
 - [ ] switch from `coastserv` to `hydrolib` for pre and postprocessing
 
