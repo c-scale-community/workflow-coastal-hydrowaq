@@ -34,9 +34,11 @@ The ambition is to expand the workflow solution to include options to deploy a h
 
 ### Set up your computing environment
 
-It is recommended to run the workflow in a Linux environment with [docker](https://www.docker.com/). This could be a virtual machine in the cloud, or your local computer. To run the workflow locally on a Linux or Apple Mac computer requires [docker desktop](https://www.docker.com/products/docker-desktop/). 
+It is recommended to run the workflow in a Linux environment with [docker](https://www.docker.com/). This could be a virtual machine in the cloud, or your local computer. 
 
-For Windows users, it is recommended to [install the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install), upgrade to [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2) and [install the docker desktop WSL2 backend](https://docs.docker.com/desktop/windows/wsl/).
+To run the workflow locally on a Linux or Apple Mac computer requires [docker desktop](https://www.docker.com/products/docker-desktop/). 
+
+For Windows users running locally, it is recommended to [install the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install), upgrade to [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2) and [install the docker desktop WSL2 backend](https://docs.docker.com/desktop/windows/wsl/).
 
 If you are logging in to a virtual machine on the cloud, it could be necessary to update packages on the virtual machine. On `CentOS` do
 
