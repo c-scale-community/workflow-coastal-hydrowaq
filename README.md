@@ -153,3 +153,10 @@ Below are examples of the `docker run` commands for a 5-day simulation from 1-Ap
 		sudo docker run -p 8888:8888 -v /home/$USER/use-case-hisea/notebooks:/home/jovyan/work -v /home/$USER/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data_unstruct -v /home/$USER/data/postprocout:/home/jovyan/work/data_struct dfmipynb
 		
 	From the resultant output copy and paste the URL starting with `http://127.0.0.1:8888/lab?token=...` to your browser but replace `127.0.0.1` with the public IP of the virtual machine you are working on. This will give you access to the JupyerLab instance you've just launched.
+	
+# To do's
+- [ ] put workflow components into a workflow orchestrator, e.g. [snakemake](https://snakemake.readthedocs.io/en/stable/)
+- [ ] figure out what for which input files we still need to create download preprocessing scripts
+- [ ] figure out hybrid cloud-HPC workflow (need to switch to Singularity for running Delft3D FM)
+- [ ] switch from `coastserv` to `hydrolib` for pre and postprocessing
+
