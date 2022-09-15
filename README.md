@@ -43,6 +43,10 @@ For Windows users running locally, it is recommended to [install the Windows Sub
 If you are logging in to a virtual machine on the cloud, it could be necessary to update packages on the virtual machine. On `CentOS` do
 
 	sudo yum upgrade
+	
+It is handy to have Midnight Commander installed
+
+	yum  install mc
 
 If you are working on a virtual machine in the cloud and docker is not installed yet, use the following commands for quick installation
 
