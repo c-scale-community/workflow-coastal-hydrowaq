@@ -17,7 +17,9 @@ Note the following dependencies.
 
 ## Run locally
 
-To run the workflow locally on a Linux or Apple Mac computer requires [docker desktop](https://www.docker.com/products/docker-desktop/). 
+To run the workflow locally on a Linux or Apple Mac computer requires 
+* [docker desktop](https://www.docker.com/products/docker-desktop/)
+* git
 
 For Windows users running locally, it is recommended to 
 1. [install the Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install), 
