@@ -8,16 +8,26 @@
 # 2. build the docker container to run preprocessing following instructions on
 #	<https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing>
 #
-## usage to also log how long it takes to run the workflow
-# $ ./run_workflow.sh
+# 3. build the docker container to run postprocessing following instructions on
+#	<https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/postprocessing>
+#
+# 4. pull the docker imageo fro Delft3D Flexible Mesh by doing
+#	docker login --username ... --password ..
+#	docker image pull deltares/delft3dfm:latest
+#
+# 5. build the docker container for the notebooks by following instructions on
+#	<https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks>
+#
+# 6. run the workflow by doing
+# 	./run_workflow.sh
 
 ##
 ## user defined input parameters
 ##
 
 CDSAPIRC_LOC=/home/centos/.cdsapirc
-CMEMS_UNAME=bbackeberg
-CMEMS_PWD=iaTmwJ7D
+CMEMS_UNAME=          
+CMEMS_PWD=        
 DATA_DOWNLOAD_LOC=/home/centos/data/download # note: only provide the base directory, don't add `cmems` or `era5` etc 
 PREPROC_OUTPUT_LOC=/home/centos/data/preprocout
 FM_MODEL_LOC=/home/centos/repos/use-case-hisea/fm_model
@@ -105,3 +115,15 @@ docker run \
 	getera ERA5_convert2_FM_and_merge_allVars.py \
 		--input /data/input \
 		--output /data/output
+
+# copy the output from preprocessing to your fm_model/input directory
+cp -v $PREPROC_OUTPUT_LOC/* $FM_MODEL_LOC/input/.
+
+# run the model
+docker run -v $FM_MODEL_LOC:/data --shm-size=4gb --ulimit stack=-1 -t deltares/delft3dfm:latest
+
+# Set up JupyterHub to analyse model output in a Jupyter Notebook
+docker run -p 8888:8888 -v ../notebooks:/home/jovyan/work -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data dfmipynb
+
+echo 'To access you notebook, copy and paste the URL starting with http://127.0.0.1:8888/lab?token=... to your browser but replace 127.0.0.1 with the public IP of the virtual machine you are working on'
+

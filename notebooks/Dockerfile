@@ -5,18 +5,8 @@ USER root
 # put the environment.yaml file int the container
 COPY environment.yaml /tmp/environment.yaml
 
-# create the environment
-RUN conda update -n base -c defaults conda
-RUN conda env create -f /tmp/environment.yaml
-
-# activate the environment
-RUN echo ". /opt/conda/etc/profile.d/conda.sh \
-	  conda activate dfm_tools_env" >> /home/jovyan/.bashrc && \
-    echo ". /opt/conda/etc/profile.d/conda.sh \
-	  conda activate dfm_tools_env" >> /root/.bashrc
-
-#ENV PATH /opt/conda/envs/dfm_tools_env/bin:$PATH
-
+# update the base environment with dependencies from environment.yaml
+RUN mamba env update --name base --file /tmp/environment.yaml --prune
 RUN jupyter labextension install jupyter-matplotlib
 
 # edit config
