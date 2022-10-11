@@ -1,0 +1,49 @@
+#!/bin/bash -l
+
+# export file functions as commands
+# by running: source ./env
+# all actions are performed in the login node
+# WARNING !
+# files, paths, directories, usernames etc, must
+# be specified accordingly
+
+send () {
+   echo 'Sending data to GRNET-HPC (ARIS)'
+   scp -i /path/to/rsa -r input username@login.aris.grnet.gr:/path/to/processing
+}
+
+clean () {
+   echo 'Deleting data in GRNET-HPC (ARIS)'
+   ssh -i /path/to/rsa username@login.aris.grnet.gr 'rm -rf /path/to/processing'
+   rm ./job
+}
+
+submit (){
+   echo 'Submitting job in GRNET-HPC (ARIS)'
+   ssh -i /path/to/rsa username@login.aris.grnet.gr 'sbatch /path/to/processing/submit.sh' > job
+}
+
+retrieve (){
+   echo 'Retrieving data from GRNET-HPC (ARIS)'
+   scp -i /path/to/rsa -r username@login.aris.grnet.gr:/path/to/processing output
+}
+
+check (){
+   jobid=$( cat ./job | awk '{print $4}' )
+   echo "Checking Job ($jobid) Status in GRNET-HPC (ARIS)"
+   # man sacct in ARIS for more info
+   state=$( ssh -i /path/to/rsa username@login.aris.grnet.gr "sacct -j $jobid -o state | head -n 3 | tail -n 1" )
+   # remove white spaces
+   state=$( echo $state | sed -e 's# \+\(.\+\) \+#\1#' )
+
+   echo $state
+}
+
+# if the data are exposed in the internet
+# they can be download instantly there, 
+# instead of downloading them locally and sending them to ARIS
+# wget, curl tools are most commonly known
+get (){
+   echo 'Downloading data to GRNET-HPC (ARIS)'
+   ssh -i /path/to/rsa username@login.aris.grnet.gr 'cd <path>; wget <url>'
+}

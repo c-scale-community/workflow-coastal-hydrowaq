@@ -1,0 +1,6 @@
+Follow the example of flow.sh
+# make it executable: chmod +x flow.sh
+
+Obviously, this is an idea of how the HPC framework could be established
+
+Apparently, many other commands and info could be exposed in a simplified way

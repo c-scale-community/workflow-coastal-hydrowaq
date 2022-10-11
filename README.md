@@ -38,6 +38,11 @@ Instructions on how to build and run each workflow component can be found in the
 ## Additional instructions
 * [Set up your computing environment](https://github.com/c-scale-community/use-case-hisea/blob/main/README-setup_compute.md)
 * [Run the fm_model example included in this repo](https://github.com/c-scale-community/use-case-hisea/blob/main/README_run_fm_model_example.md)
+
+## Flow Script
+* GRNET-HPC (ARIS) command-line Framework is introduced: [env](https://github.com/c-scale-community/use-case-hisea/tree/flow/flow/env)
+* A typical flow script that could connect all the individual sub-modules (pre-processing, main processing, post-processing) and run completely from the Cloud (or local machine): [flow.sh](https://github.com/c-scale-community/use-case-hisea/tree/flow/flow/flow.sh)
+* All-in-one in the directory: [flow](https://github.com/c-scale-community/use-case-hisea/tree/flow/flow)
 	
 # To do's
 - [ ] put workflow components into a workflow orchestrator, e.g. [snakemake](https://snakemake.readthedocs.io/en/stable/)
