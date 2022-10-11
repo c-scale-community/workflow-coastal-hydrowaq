@@ -44,8 +44,8 @@ retrieve
 # do Cloud post-processing
 
 
-# delete data from GRNET-HPC (ARIS)
-# also the local (cloud) job file
+# delete data in GRNET-HPC (ARIS)
+# also the Cloud (local) job file
 clean
 
 # the commands: send, submit, check, retrieve
