@@ -18,7 +18,7 @@ send
 # submit the job to GRNET-HPC (ARIS)
 # and save the job id into the file ./job
 # it assumes that send command has been applied
-# so that the submit.sh script be in GRNET-HPC (ARIS) (in order to be submitted)
+# so that the submit.sh script will be in GRNET-HPC (ARIS) (in order to be submitted)
 submit
 
 # this loop will continue until the job is completed
