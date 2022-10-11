@@ -32,7 +32,7 @@ check (){
    jobid=$( cat ./job | awk '{print $4}' )
    echo "Checking Job ($jobid) Status in GRNET-HPC (ARIS)"
    # man sacct in ARIS for more info
-   state=$( ssh -i /path/to/rsa username@login.aris.grnet.gr "sacct -j $jobid -o state | head -n 3 | tail -n 1" )
+   state=$( ssh -i /path/to/rsa username@login.aris.grnet.gr "sacct -j $jobid -o state -t | tail -n 1" )
    # remove white spaces
    state=$( echo $state | sed -e 's# \+\(.\+\) \+#\1#' )
 
