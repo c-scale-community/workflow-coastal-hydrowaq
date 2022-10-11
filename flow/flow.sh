@@ -48,6 +48,6 @@ retrieve
 # also the Cloud (local) job file
 clean
 
-# the commands: send, submit, check, retrieve
+# the commands: send, submit, check, retrieve, clean
 # have been exported to this script via the sourcing of ./env file
 
