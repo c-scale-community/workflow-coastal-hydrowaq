@@ -34,7 +34,7 @@ until check | grep -q "COMPLETED"; do
     sleep 60
 done
 
-# running from this steps and beyond, it means
+# running from this step and beyond, it means
 # that the job has finished
 
 # retrieve data from GRNET-HPC (ARIS)
