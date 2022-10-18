@@ -17,3 +17,10 @@ The below script is called in docker container.
 # Example Docker run
 
     docker run -v /path/to/delf3dfm/output:/data/input -v /path/to/where/you/want/to/save/the/regular/gridded/data:/data/output postprocess tttz_waq_0000_map.nc 500 400
+
+# Known issues
+If pip fails run the below
+
+    sudo su
+    echo '{ "mtu": 1376 }' > /etc/docker/daemon.json
+    sudo systemctl restart docker
