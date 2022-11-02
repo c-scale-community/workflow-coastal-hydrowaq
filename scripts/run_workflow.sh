@@ -26,8 +26,8 @@
 ##
 
 CDSAPIRC_LOC=/home/centos/.cdsapirc
-CMEMS_UNAME=          
-CMEMS_PWD=        
+CMEMS_UNAME=bbackeberg
+CMEMS_PWD=iaTmwJ7D
 DATA_DOWNLOAD_LOC=/home/centos/data/download # note: only provide the base directory, don't add `cmems` or `era5` etc 
 PREPROC_OUTPUT_LOC=/home/centos/data/preprocout
 POSTPROC_OUTPUT_LOC=/home/centos/data/postprocout
@@ -46,7 +46,7 @@ DATE_MAX='2022-04-05'
 ##
 
 # download era5
-docker run \
+sudo docker run \
 	-v $CDSAPIRC_LOC:/root/.cdsapirc \
 	-v $DATA_DOWNLOAD_LOC:/data \
 	download-input python download_era5.py \
@@ -58,7 +58,7 @@ docker run \
 		--date_max $DATE_MAX
 
 # download cmems physics
-docker run \
+sudo docker run \
 	-v $DATA_DOWNLOAD_LOC:/data \
 	download-input python download_cmems_physics.py \
 		--username $CMEMS_UNAME \
@@ -71,7 +71,7 @@ docker run \
 		--date_max $DATE_MAX
 
 # download cmems biogeochemistry
-docker run \
+sudo docker run \
 	-v $DATA_DOWNLOAD_LOC:/data \
 	download-input python download_cmems_biogeochemistry.py \
 		--username $CMEMS_UNAME \
@@ -84,7 +84,7 @@ docker run \
 		--date_max $DATE_MAX
 
 # preprocess CMEMS phyics and biogeochemistry data
-docker run \
+sudo docker run \
 	-v $DATA_DOWNLOAD_LOC/cmems:/data/input \
 	-v $FM_MODEL_LOC:/data/model \
 	-v $PREPROC_OUTPUT_LOC:/data/output \
@@ -97,7 +97,7 @@ docker run \
 		--output /data/output
 
 # preprocess tide data
-docker run \
+sudo docker run \
 	-v $DATA_DOWNLOAD_LOC/fes2012:/data/input \
 	-v $FM_MODEL_LOC:/data/model \
 	-v $PREPROC_OUTPUT_LOC:/data/output \
@@ -110,7 +110,7 @@ docker run \
 		--model /data/model
 
 # preprocess ERA5 data
-docker run \
+sudo docker run \
 	-v $DATA_DOWNLOAD_LOC/era5:/data/input \
 	-v $PREPROC_OUTPUT_LOC:/data/output \
 	getera ERA5_convert2_FM_and_merge_allVars.py \
@@ -121,13 +121,13 @@ docker run \
 cp -v $PREPROC_OUTPUT_LOC/* $FM_MODEL_LOC/input/.
 
 # run the model
-docker run -v $FM_MODEL_LOC:/data --shm-size=4gb --ulimit stack=-1 -t deltares/delft3dfm:latest
+sudo docker run -v $FM_MODEL_LOC:/data --shm-size=4gb --ulimit stack=-1 -t deltares/delft3dfm:latest
 
 # postprocess model data
-docker run -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/data/input -v $POSTPROC_OUTPUT_LOC:/data/output postprocess tttz_waq_0000_map.nc 500 400
+sudo docker run -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/data/input -v $POSTPROC_OUTPUT_LOC:/data/output postprocess tttz_waq_0000_map.nc 500 400
 
 # Set up JupyterHub to analyse model output in a Jupyter Notebook
-docker run -p 8888:8888 -v ../notebooks:/home/jovyan/work -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data_unstruct -v $POSTPROC_OUTPUT_LOC:/home/jovyan/work/data_struct dfmipynb
+sudo docker run -p 8888:8888 -v ../notebooks:/home/jovyan/work -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data_unstruct -v $POSTPROC_OUTPUT_LOC:/home/jovyan/work/data_struct dfmipynb
 
 echo 'To access you notebook, copy and paste the URL starting with http://127.0.0.1:8888/lab?token=... to your browser but replace 127.0.0.1 with the public IP of the virtual machine you are working on'
 
