@@ -30,6 +30,7 @@ CMEMS_UNAME=
 CMEMS_PWD=        
 DATA_DOWNLOAD_LOC=/home/centos/data/download # note: only provide the base directory, don't add `cmems` or `era5` etc 
 PREPROC_OUTPUT_LOC=/home/centos/data/preprocout
+POSTPROC_OUTPUT_LOC=/home/centos/data/postprocout
 FM_MODEL_LOC=/home/centos/repos/use-case-hisea/fm_model
 PLIFILE1=south2.pli
 PLIFILE2=east2.pli
@@ -122,8 +123,11 @@ cp -v $PREPROC_OUTPUT_LOC/* $FM_MODEL_LOC/input/.
 # run the model
 docker run -v $FM_MODEL_LOC:/data --shm-size=4gb --ulimit stack=-1 -t deltares/delft3dfm:latest
 
+# postprocess model data
+docker run -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/data/input -v $POSTPROC_OUTPUT_LOC:/data/output postprocess tttz_waq_0000_map.nc 500 400
+
 # Set up JupyterHub to analyse model output in a Jupyter Notebook
-docker run -p 8888:8888 -v ../notebooks:/home/jovyan/work -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data dfmipynb
+docker run -p 8888:8888 -v ../notebooks:/home/jovyan/work -v $FM_MODEL_LOC/DFM_OUTPUT_tttz_waq:/home/jovyan/work/data_unstruct -v $POSTPROC_OUTPUT_LOC:/home/jovyan/work/data_struct dfmipynb
 
 echo 'To access you notebook, copy and paste the URL starting with http://127.0.0.1:8888/lab?token=... to your browser but replace 127.0.0.1 with the public IP of the virtual machine you are working on'
 
