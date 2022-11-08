@@ -61,11 +61,11 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
 	areastr = [str(latitude_min)+'/'+str(longitude_min)+'/'+str(latitude_max)+'/'+str(longitude_max)]
 	vars = list(vars) # convert tuple to list for cdsapi
 	#make the /data/era5 directory if it does not exist
-	Path('/data/era5').mkdir(parents=True, exist_ok=True)
+	Path('data/era5').mkdir(parents=True, exist_ok=True)
 	delta = datetime.strptime(date_max, '%Y-%m-%d') - datetime.strptime(date_min, '%Y-%m-%d')
 	for i in range(delta.days+1):
 		day = datetime.strptime(date_min, '%Y-%m-%d').date() + timedelta(days=i)
-		check_file = Path('/data/era5/era5_'+str(day)+'.nc')
+		check_file = Path('data/era5/era5_'+str(day)+'.nc')
 		while not check_file.is_file():
 			yearstr = [f'{day.year:0>4}']
 			monthstr = [f'{day.month:0>2}']
@@ -92,6 +92,9 @@ def download_era5(longitude_min, longitude_max, latitude_min, latitude_max, date
 				'format':'netcdf'
 				},
 				check_file)
+
+	Path('data/era5/download_era5.done').touch()
+
 
 if __name__ == '__main__':
 	download_era5()
