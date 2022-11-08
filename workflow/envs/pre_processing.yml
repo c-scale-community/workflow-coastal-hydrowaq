@@ -1,0 +1,10 @@
+name: pre_processing
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - click
+  - numpy
+  - netCDF4
+  - scipy
+  - pandas

@@ -1,0 +1,9 @@
+
+cmems_uname: yourusername
+cmems_pwd: yourpwd
+lon_min: 22.5
+lon_max: 24.5
+lat_min: 36.5
+lat_max: 38.5
+date_min: '2022-04-01'
+date_max: '2022-04-05'
