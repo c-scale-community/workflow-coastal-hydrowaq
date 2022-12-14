@@ -8,7 +8,7 @@ configfile: "workflow/config.yml"
 rule download_era5:
     input:
     output:
-        "data/era5/download_era5.done"
+        touch("download_era5.done")
     conda:
         "envs/download.yml"
     log:
@@ -34,7 +34,7 @@ rule download_era5:
 rule download_cmems_physics:
     input:
     output:
-        "data/cmems/download_cmems_physics.done"
+        touch("download_cmems_physics.done")
     conda:
         "envs/download.yml"
     log:
@@ -64,7 +64,7 @@ rule download_cmems_physics:
 rule download_cmems_biogeochemistry:
     input:
     output:
-        "data/cmems/download_cmems_biogeochemistry.done"
+        touch("download_cmems_biogeochemistry.done")
     conda:
         "envs/download.yml"
     log:
@@ -93,11 +93,11 @@ rule download_cmems_biogeochemistry:
 
 rule pre_processing_boundary:
     input:
-        "data/era5/download_era5.done",
-        "data/cmems/download_cmems_physics.done",
-        "data/cmems/download_cmems_biogeochemistry.done"
+        "download_era5.done",
+        "download_cmems_physics.done",
+        "download_cmems_biogeochemistry.done"
     output:
-        "data/input.zip"
+        touch("pre_processing_boundary.done")
     conda:
         "envs/pre_processing.yml"
     log:
@@ -108,9 +108,9 @@ rule pre_processing_boundary:
 		--interp true \
 		--simultaneous true \
 		--steric true \
-		--input data/cmems \
-		--model data/model \
-		--output data/output
+		--input data/cmems/ \
+		--model fm_model/ \
+		--output data/output/
         """
 
 rule cleanup:

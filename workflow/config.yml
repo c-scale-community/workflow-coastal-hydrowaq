@@ -1,6 +1,14 @@
 
-cmems_uname: yourusername
-cmems_pwd: yourpwd
+#CDSAPIRC_LOC=/home/centos/.cdsapirc
+#DATA_DOWNLOAD_LOC=/home/centos/data/download # note: only provide the base directory, don't add `cmems` or `era5` etc 
+#PREPROC_OUTPUT_LOC=/home/centos/data/preprocout
+#POSTPROC_OUTPUT_LOC=/home/centos/data/postprocout
+#FM_MODEL_LOC=/home/centos/repos/use-case-hisea/fm_model
+#PLIFILE1=south2.pli
+#PLIFILE2=east2.pli
+
+cmems_uname: bbackeberg
+cmems_pwd: iaTmwJ7D
 lon_min: 22.5
 lon_max: 24.5
 lat_min: 36.5

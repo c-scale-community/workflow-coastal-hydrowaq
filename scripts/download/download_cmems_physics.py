@@ -102,9 +102,6 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
 		ds = xr.open_mfdataset('data/cmems/tmp/cmems_'+var+'_*.nc', combine='by_coords', decode_times=False)
 		ds.to_netcdf('data/cmems/cmems_'+var+'.nc')
 
-	Path('data/cmems/download_cmems_physics.done').touch()
-
-
 
 if __name__ == '__main__':
 	runcommand()
