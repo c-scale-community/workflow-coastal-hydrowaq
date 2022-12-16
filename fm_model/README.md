@@ -2,6 +2,16 @@
 
 This folder contains all the necessary files to run the example Delft3D FM model schematisation. Below we list the important files to take note of when running the model.
 
+## pull and run the Delft3D FM docker contaienr
+
+This example model can be run using the [Delft3D FM docker container](https://hub.docker.com/repository/docker/deltares/delft3dfm). Please contact software.support@deltares.nl to arrange a support package to access the pre-compiled software container.
+
+    docker login --username ... --password ...
+	
+    docker image pull deltares/delft3dfm:latest
+        
+    docker run -v /home/$USER/use-case-hisea/fm_model:/data --shm-size=4gb --ulimit stack=-1 -t deltares/delft3dfm:latest
+
 ## important files and folders
 * `dimr_config.xml` \
     This is the `.xml`-file referenced when calling `docker run -v /path/to/fm_model:/data --ulimit stack=-1 -t deltares/delft3dfm:latest`. \

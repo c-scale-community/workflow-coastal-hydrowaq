@@ -3,7 +3,18 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python==3.8
+  - python=3.8
   - pip
+  - shapely
+  - cartopy
+  - pyepsg
+  - geopandas
+  - contextily
+  - xarray
+  - dask
+  - netcdf4
+  - bottleneck
+  - cdsapi
+  - motuclient
   - pip:
     - "git+https://github.com/openearth/dfm_tools.git"
