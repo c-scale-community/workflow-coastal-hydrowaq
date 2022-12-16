@@ -1,0 +1,13 @@
+name: download
+channels: 
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - click
+  - pathlib
+  - xarray=0.14.1
+  - dask
+  - netCDF4
+  - motuclient
+  - cdsapi
