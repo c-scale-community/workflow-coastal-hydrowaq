@@ -7,12 +7,11 @@ configfile: "workflow/config.yml"
 
 rule download_era5:
     input:
+	"/home/centos/.cdsapirc"
     output:
-        touch("download_era5.done")
-    conda:
-        "envs/download.yml"
+        touch("workflow/logs/2023-01-23_download_era5.done")
     log:
-        "logs/download_era5.log"
+        "workflow/logs/2023-01-23_download_era5.log"
     params:
         lon_min = config['lon_min'],
         lon_max = config['lon_max'],
@@ -22,23 +21,25 @@ rule download_era5:
         date_max = config['date_max']
     shell:
         """
-        python scripts/download/download_era5.py \
-              --longitude_min {params.lon_min} \
-              --longitude_max {params.lon_max} \
-              --latitude_min {params.lat_min} \
-              --latitude_max {params.lat_max} \
-              --date_min {params.date_min} \
-              --date_max {params.date_max}
+        sudo docker run \
+		-v /home/centos/.cdsapirc:/root/.cdsapirc \
+		-v /home/centos/data/download/2023-01-23:/data \
+		download-input python download_era5.py \
+              		--longitude_min {params.lon_min} \
+              		--longitude_max {params.lon_max} \
+              		--latitude_min {params.lat_min} \
+              		--latitude_max {params.lat_max} \
+              		--date_min {params.date_min} \
+              		--date_max {params.date_max}
         """
 
 rule download_cmems_physics:
     input:
+	"workflow/logs/2023-01-23_download_era5.done"
     output:
-        touch("download_cmems_physics.done")
-    conda:
-        "envs/download.yml"
+        touch("workflow/logs/2023-01-23_download_cmems_physics.done")
     log:
-        "logs/download_cmems_physics.log"
+        "workflow/logs/2023-01-23_download_cmems_physics.log"
     params:
         cmems_uname = config['cmems_uname'],
         cmems_pwd = config['cmems_pwd'],
@@ -50,25 +51,27 @@ rule download_cmems_physics:
         date_max = config['date_max']
     shell:
         """
-        python scripts/download/download_cmems_physics.py \
-              --username {params.cmems_uname} \
-              --password {params.cmems_pwd} \
-              --longitude_min {params.lon_min} \
-              --longitude_max {params.lon_max} \
-              --latitude_min {params.lat_min} \
-              --latitude_max {params.lat_max} \
-              --date_min {params.date_min} \
-              --date_max {params.date_max}
+	sudo docker run \
+		-v /home/centos/data/download/2023-01-23:/data \
+		download-input python download_cmems_physics.py \
+              		--username {params.cmems_uname} \
+              		--password {params.cmems_pwd} \
+              		--longitude_min {params.lon_min} \
+              		--longitude_max {params.lon_max} \
+              		--latitude_min {params.lat_min} \
+              		--latitude_max {params.lat_max} \
+              		--date_min {params.date_min} \
+              		--date_max {params.date_max}
         """
 
 rule download_cmems_biogeochemistry:
     input:
+	"workflow/logs/2023-01-23_download_era5.done"
+	"workflow/logs/2023-01-23_download_cmems_physics.done"
     output:
-        touch("download_cmems_biogeochemistry.done")
-    conda:
-        "envs/download.yml"
+        touch("workflow/logs/2023-01-23_download_cmems_biogeochemistry.done")
     log:
-        "logs/download_cmems_biogeochemistry.log"
+        "workflow/logs/2023-01-23_download_cmems_biogeochemistry.log"
     params:
         cmems_uname = config['cmems_uname'],
         cmems_pwd = config['cmems_pwd'],
@@ -80,39 +83,38 @@ rule download_cmems_biogeochemistry:
         date_max = config['date_max']
     shell:
         """
-        python scripts/download/download_cmems_biogeochemistry.py \
-              --username {params.cmems_uname} \
-              --password {params.cmems_pwd} \
-              --longitude_min {params.lon_min} \
-              --longitude_max {params.lon_max} \
-              --latitude_min {params.lat_min} \
-              --latitude_max {params.lat_max} \
-              --date_min {params.date_min} \
-              --date_max {params.date_max}
+	sudo docker run \
+		-v /home/centos/data/download/2023-01-23:/data \
+		download-input python download_cmems_biogeochemistry.py \
+              		--username {params.cmems_uname} \
+              		--password {params.cmems_pwd} \
+              		--longitude_min {params.lon_min} \
+              		--longitude_max {params.lon_max} \
+              		--latitude_min {params.lat_min} \
+              		--latitude_max {params.lat_max} \
+              		--date_min {params.date_min} \
+              		--date_max {params.date_max}
         """
 
-rule pre_processing_boundary:
+rule preprocess_era5:
     input:
-        "download_era5.done",
-        "download_cmems_physics.done",
-        "download_cmems_biogeochemistry.done"
+	"workflow/logs/2023-01-23_download_era5.done"
+	"workflow/logs/2023-01-23_download_cmems_physics.done"
+	"workflow/logs/2023-01-23_download_cmems_biogeochemistry.done"
     output:
-        touch("pre_processing_boundary.done")
-    conda:
-        "envs/pre_processing.yml"
+	"/home/centos/data/preprocout/2023-01-23/era5_FM.nc"
     log:
-        "logs/pre_processing_boundary.log"
+	"workflow/logs/2023-01-23_preprocess_era5.log"
     shell:
-        """
-	python scripts/preprocessing/tide_physical_chemical/boundary.py \
-		--interp true \
-		--simultaneous true \
-		--steric true \
-		--input data/cmems/ \
-		--model fm_model/ \
-		--output data/output/
-        """
-
+	"""
+	sudo docker run \
+		-v /home/centos/data/download/2023-01-23/era5:/data/input \
+		-v /home/centos/data/preprocout/2023-01-23:/data/output \
+		getera ERA5_convert2_FM_and_merge_allVars.py \
+			--input /data/input \
+			--output /data/output
+	"""
+	
 rule cleanup:
     shell:
         "rm -rf data/era5/ data/cmems/"
