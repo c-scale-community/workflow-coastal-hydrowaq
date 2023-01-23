@@ -102,19 +102,20 @@ rule preprocess_era5:
 	"workflow/logs/2023-01-23_download_cmems_physics.done"
 	"workflow/logs/2023-01-23_download_cmems_biogeochemistry.done"
     output:
-	"/home/centos/data/preprocout/2023-01-23/era5_FM.nc"
+        "/home/centos/data/preprocout/2023-01-23/era5_FM.nc"
     log:
-	"workflow/logs/2023-01-23_preprocess_era5.log"
+        "workflow/logs/2023-01-23_preprocess_era5.log"
     shell:
-	"""
+        """
 	sudo docker run \
 		-v /home/centos/data/download/2023-01-23/era5:/data/input \
 		-v /home/centos/data/preprocout/2023-01-23:/data/output \
 		getera ERA5_convert2_FM_and_merge_allVars.py \
-			--input /data/input \
-			--output /data/output
-	"""
-	
+              		--input /data/input \
+              		--output /data/output
+        """
+
 rule cleanup:
     shell:
         "rm -rf data/era5/ data/cmems/"
+
