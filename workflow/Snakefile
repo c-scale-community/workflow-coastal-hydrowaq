@@ -39,7 +39,7 @@ rule download_cmems_physics:
     output:
         touch("workflow/logs/2023-01-23_download_cmems_physics.done")
     log:
-        "workflow/logs/2023-01-23_download_cmems_physics.log"
+        "workflow/logs/2023-01-23_download_cmems_physics.log" #TODO figure out permissions error with this
     params:
         cmems_uname = config['cmems_uname'],
         cmems_pwd = config['cmems_pwd'],
