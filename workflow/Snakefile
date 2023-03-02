@@ -173,8 +173,20 @@ rule preprocess_fes2012:
                  --model /data/model
         """
 
-#TODO rule copy_preprocessed_data_to_model_input_folder:
-
+rule copy_preprocessed_data_to_model_input_folder:
+    input:
+        "workflow/logs/2023-01-23_preprocess_cmems.done",
+        "workflow/logs/2023-01-23_preprocess_era5.done",
+        "workflow/logs/preprocess_fes2012.done"
+    output:
+        touch("workflow/logs/2023-01-23_copy_preprocessed_data_to_model_input_folder.done")
+    shell:
+        """
+        cp -r /home/centos/data/preprocout/2023-01-23/* /home/centos/use-case-hisea/fm_model/input/.; \
+        cp --exclude='/home/centos/data/preprocout/2023-01-23' \
+            /home/centos/data/preprocout/* \
+            /home/centos/use-case-hisea/fm_model/input/.
+        """
 
 rule cleanup:
     shell:
