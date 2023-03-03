@@ -178,89 +178,53 @@ rule copy_preprocessed_data_to_model_input_folder:
         "workflow/logs/2023-01-23_preprocess_cmems.done",
         "workflow/logs/2023-01-23_preprocess_era5.done",
         "workflow/logs/preprocess_fes2012.done",
-        "/home/centos/data/preprocout/tide_east2.bc",
-        "/home/centos/data/preprocout/tide_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/DFMWAQ_east2_tmp.ext",
-        directory("/home/centos/data/preprocout/2023-01-23/DFMWAQ_input"),
-        "/home/centos/data/preprocout/2023-01-23/DFMWAQ_south2_tmp.ext",
-        "/home/centos/data/preprocout/2023-01-23/Diat_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/Diat_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/east2.pli",
-        "/home/centos/data/preprocout/2023-01-23/Green_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/Green_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/NO3_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/NO3_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/Opal_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/Opal_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/OXY_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/OXY_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/PO4_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/PO4_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/POC1_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/POC1_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/PON1_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/PON1_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/POP1_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/POP1_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/salinity_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/salinity_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/Si_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/Si_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/south2.pli",
-        "/home/centos/data/preprocout/2023-01-23/steric_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/steric_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/temperature_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/temperature_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/uxuy_east2.bc",
-        "/home/centos/data/preprocout/2023-01-23/uxuy_south2.bc",
-        "/home/centos/data/preprocout/2023-01-23/era5_FM.nc"
     output:
         touch("workflow/logs/2023-01-23_copy_preprocessed_data_to_model_input_folder.done")
     shell:
         "cp -r \
-             {input[3]} \
-             {input[4]} \
-             {input[5]} \
-             {input[6]} \
-             {input[7]} \
-             {input[8]} \
-             {input[9]} \
-             {input[10]} \
-             {input[11]} \
-             {input[12]} \
-             {input[13]} \
-             {input[14]} \
-             {input[15]} \
-             {input[16]} \
-             {input[17]} \
-             {input[18]} \
-             {input[19]} \
-             {input[20]} \
-             {input[21]} \
-             {input[22]} \
-             {input[23]} \
-             {input[24]} \
-             {input[25]} \
-             {input[26]} \
-             {input[27]} \
-             {input[28]} \
-             {input[29]} \
-             {input[30]} \
-             {input[31]} \
-             {input[32]} \
-             {input[33]} \
-             {input[34]} \
-             {input[35]} \
-             {input[36]} \
-             {input[37]} \
-             {input[38]} \
-             /home/centos/use-case-hisea/fm_model/input/."
+            /home/centos/data/preprocout/tide_east2.bc \
+            /home/centos/data/preprocout/tide_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/DFMWAQ_east2_tmp.ext \
+            /home/centos/data/preprocout/2023-01-23/DFMWAQ_input \
+            /home/centos/data/preprocout/2023-01-23/DFMWAQ_south2_tmp.ext \
+            /home/centos/data/preprocout/2023-01-23/Diat_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Diat_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/east2.pli \
+            /home/centos/data/preprocout/2023-01-23/Green_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Green_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/NO3_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/NO3_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/Opal_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Opal_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/OXY_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/OXY_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/PO4_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/PO4_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/POC1_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/POC1_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/PON1_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/PON1_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/POP1_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/POP1_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/salinity_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/salinity_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/Si_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Si_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/south2.pli \
+            /home/centos/data/preprocout/2023-01-23/steric_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/steric_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/temperature_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/temperature_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/uxuy_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/uxuy_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/era5_FM.nc \
+            /home/centos/use-case-hisea/fm_model/input/."
 
 rule run_delft3dfm:
     input: 
+        "workflow/logs/preprocess_fes2012.done",
         "workflow/logs/2023-01-23_preprocess_era5.done",
         "workflow/logs/2023-01-23_preprocess_cmems.done",
-        "workflow/logs/preprocess_fes2012.done",
         "workflow/logs/2023-01-23_copy_preprocessed_data_to_model_input_folder.done"
     output:
         touch("workflow/logs/2023-01-23_run_delft3dfm.done")
@@ -268,14 +232,62 @@ rule run_delft3dfm:
         "workflow/logs/2023-01-23_run_delft3dfm.log"
     shell:
         """
-        docker run \
+        sudo docker run \
             -v /home/$USER/use-case-hisea/fm_model:/data \
             --shm-size=4gb \
             --ulimit stack=-1 \
             -t deltares/delft3dfm:latest 
         """
 
-rule cleanup:
+rule cleanup_model_input_folder:
+    input:
+        "workflow/logs/2023-01-23_run_delft3dfm.done"
+    output:
+        touch("workflow/logs/2023-01-23_cleanup_model_input_folder.done")
     shell:
-        "rm -rf data/era5/ data/cmems/"
+        "rm -r \
+            /home/centos/data/preprocout/tide_east2.bc \
+            /home/centos/data/preprocout/tide_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/DFMWAQ_east2_tmp.ext \
+            /home/centos/data/preprocout/2023-01-23/DFMWAQ_input \
+            /home/centos/data/preprocout/2023-01-23/DFMWAQ_south2_tmp.ext \
+            /home/centos/data/preprocout/2023-01-23/Diat_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Diat_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/east2.pli \
+            /home/centos/data/preprocout/2023-01-23/Green_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Green_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/NO3_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/NO3_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/Opal_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Opal_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/OXY_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/OXY_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/PO4_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/PO4_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/POC1_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/POC1_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/PON1_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/PON1_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/POP1_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/POP1_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/salinity_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/salinity_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/Si_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/Si_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/south2.pli \
+            /home/centos/data/preprocout/2023-01-23/steric_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/steric_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/temperature_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/temperature_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/uxuy_east2.bc \
+            /home/centos/data/preprocout/2023-01-23/uxuy_south2.bc \
+            /home/centos/data/preprocout/2023-01-23/era5_FM.nc" 
 
+#TODO rule move_raw_data_to_runs_folder:
+
+#TODO rule postprocess_raw_data:
+
+#rule cleanup:
+    #shell:
+        #"rm -rf data/era5/ data/cmems/"
+#
