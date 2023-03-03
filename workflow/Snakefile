@@ -1,9 +1,4 @@
-
 configfile: "workflow/config.yml"
-
-# rule all:
-#     input:
-#         "plot/output.png"
 
 rule download_era5:
     input:
@@ -177,7 +172,7 @@ rule copy_preprocessed_data_to_model_input_folder:
     input:
         "workflow/logs/2023-01-23_preprocess_cmems.done",
         "workflow/logs/2023-01-23_preprocess_era5.done",
-        "workflow/logs/preprocess_fes2012.done",
+        "workflow/logs/preprocess_fes2012.done"
     output:
         touch("workflow/logs/2023-01-23_copy_preprocessed_data_to_model_input_folder.done")
     shell:
@@ -245,49 +240,79 @@ rule cleanup_model_input_folder:
     output:
         touch("workflow/logs/2023-01-23_cleanup_model_input_folder.done")
     shell:
-        "rm -r \
-            /home/centos/data/preprocout/tide_east2.bc \
-            /home/centos/data/preprocout/tide_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/DFMWAQ_east2_tmp.ext \
-            /home/centos/data/preprocout/2023-01-23/DFMWAQ_input \
-            /home/centos/data/preprocout/2023-01-23/DFMWAQ_south2_tmp.ext \
-            /home/centos/data/preprocout/2023-01-23/Diat_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/Diat_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/east2.pli \
-            /home/centos/data/preprocout/2023-01-23/Green_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/Green_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/NO3_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/NO3_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/Opal_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/Opal_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/OXY_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/OXY_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/PO4_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/PO4_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/POC1_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/POC1_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/PON1_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/PON1_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/POP1_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/POP1_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/salinity_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/salinity_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/Si_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/Si_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/south2.pli \
-            /home/centos/data/preprocout/2023-01-23/steric_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/steric_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/temperature_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/temperature_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/uxuy_east2.bc \
-            /home/centos/data/preprocout/2023-01-23/uxuy_south2.bc \
-            /home/centos/data/preprocout/2023-01-23/era5_FM.nc" 
+        "sudo rm -r \
+            /home/centos/use-case-hisea/fm_model/input/tide_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/tide_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/DFMWAQ_east2_tmp.ext \
+            /home/centos/use-case-hisea/fm_model/input/DFMWAQ_input \
+            /home/centos/use-case-hisea/fm_model/input/DFMWAQ_south2_tmp.ext \
+            /home/centos/use-case-hisea/fm_model/input/Diat_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/Diat_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/east2.pli \
+            /home/centos/use-case-hisea/fm_model/input/Green_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/Green_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/NO3_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/NO3_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/Opal_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/Opal_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/OXY_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/OXY_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/PO4_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/PO4_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/POC1_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/POC1_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/PON1_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/PON1_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/POP1_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/POP1_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/salinity_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/salinity_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/Si_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/Si_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/south2.pli \
+            /home/centos/use-case-hisea/fm_model/input/steric_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/steric_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/temperature_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/temperature_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/uxuy_east2.bc \
+            /home/centos/use-case-hisea/fm_model/input/uxuy_south2.bc \
+            /home/centos/use-case-hisea/fm_model/input/era5_FM.nc" 
 
-#TODO rule move_raw_data_to_runs_folder:
+rule move_raw_data_to_output_folder:
+    input:
+        "workflow/logs/2023-01-23_run_delft3dfm.done"
+    ouput:
+        touch("workflow/logs/2023-01-23_move_raw_data_to_output_folder.done")
+    shell:
+        "mv -r \
+             /home/centos/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq \
+             /home/centos/data/output/2023-01-23/raw" 
 
-#TODO rule postprocess_raw_data:
+rule cleanup_model_folder:
+    input:
+        "workflow/logs/2023-01-23_run_delft3dfm.done",
+        "workflow/logs/2023-01-23_move_raw_data_to_output_folder.done"
+    output:
+        touch("workflow/logs/2023-01-23_cleanup_model_folder.done")
+    shell:
+        "sudo rm \
+            DFM_interpreted_idomain_myortho3_net.nc \
+            log*.irlog \
+            myortho3_*_net.nc \
+            tttz_waq_*.cache \
+            tttz_waq_*.mdu \
+            unstruc.dia"
 
-#rule cleanup:
-    #shell:
-        #"rm -rf data/era5/ data/cmems/"
-#
+rule postprocess_raw_data:
+    input:
+        "workflow/logs/2023-01-23_run_delft3dfm.done",
+        "workflow/logs/2023-01-23_move_raw_data_to_output_folder.done"
+    output:
+        touch("2023-01-23_postprocess_raw_data.done")
+    shell:
+        """
+        sudo docker run \
+             -v /home/centos/data/output/2023-01-23/raw/DFM_OUTPUT_tttz_waq:/data/input \
+             -v /home/centos/data/output/2023-01-23/struct:/data/output \
+             postprocess tttz_waq_0000_map.nc 500 400
+        """
