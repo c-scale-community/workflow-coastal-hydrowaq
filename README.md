@@ -38,11 +38,4 @@ Instructions on how to build and run each workflow component can be found in the
 ## Additional instructions
 * [Set up your computing environment](https://github.com/c-scale-community/use-case-hisea/blob/main/README-setup_compute.md)
 * [Run the fm_model example included in this repo](https://github.com/c-scale-community/use-case-hisea/blob/main/README_run_fm_model_example.md)
-	
-# To do's
-- [ ] update post processing to read the reftime from the .mdu. This was already implemented the boundary.py
-- [ ] put workflow components into a workflow orchestrator, e.g. [snakemake](https://snakemake.readthedocs.io/en/stable/)
-- [ ] figure out for which input files we still need to create download and preprocessing scripts
-- [ ] figure out hybrid cloud-HPC workflow (need to switch to Singularity for running Delft3D FM)
-- [ ] switch from `coastserv` to `hydrolib` for pre and postprocessing
 
