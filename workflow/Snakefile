@@ -1,6 +1,7 @@
 configfile: "workflow/config.yml"
 
 rule download_era5:
+    input:
         "/home/centos/.cdsapirc"
     output:
         touch("workflow/logs/2023-01-23_download_era5.done")
@@ -312,11 +313,10 @@ rule move_raw_data_to_output_folder:
     output:
         touch("workflow/logs/2023-01-23_move_raw_data_to_output_folder.done")
     shell:
-        """
-        sudo mv \
-            /home/centos/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq/* \
-            /home/centos/data/output/2023-01-23/raw/.
-        """
+        "mkdir -p /home/centos/data/output/2023-01-23/raw && \
+         sudo mv \
+             /home/centos/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq/* \
+             /home/centos/data/output/2023-01-23/raw/."
 
 rule cleanup_model_folder:
     input:
@@ -326,23 +326,23 @@ rule cleanup_model_folder:
         touch("workflow/logs/2023-01-23_cleanup_model_folder.done")
     shell:
         "sudo rm \
-            DFM_interpreted_idomain_myortho3_net.nc \
-            log*.irlog \
-            myortho3_*_net.nc \
-            tttz_waq_*.cache \
-            tttz_waq_*.mdu \
-            unstruc.dia"
+            /home/centos/use-case-hisea/fm_model/DFM_interpreted_idomain_myortho3_net.nc \
+            /home/centos/use-case-hisea/fm_model/log*.irlog \
+            /home/centos/use-case-hisea/fm_model/myortho3_*_net.nc \
+            /home/centos/use-case-hisea/fm_model/tttz_waq_*.cache \
+            /home/centos/use-case-hisea/fm_model/tttz_waq_*.mdu \
+            /home/centos/use-case-hisea/fm_model/unstruc.dia"
 
-rule postprocess_raw_data:
-    input:
-        "workflow/logs/2023-01-23_run_delft3dfm.done",
-        "workflow/logs/2023-01-23_move_raw_data_to_output_folder.done"
-    output:
-        touch("2023-01-23_postprocess_raw_data.done")
-    shell:
-        """
-        sudo docker run \
-             -v /home/centos/data/output/2023-01-23/raw/DFM_OUTPUT_tttz_waq:/data/input \
-             -v /home/centos/data/output/2023-01-23/struct:/data/output \
-             postprocess tttz_waq_0000_map.nc 500 400
-        """
+#rule postprocess_raw_data:
+    #input:
+        #"workflow/logs/2023-01-23_run_delft3dfm.done",
+        #"workflow/logs/2023-01-23_move_raw_data_to_output_folder.done"
+    #output:
+        #touch("2023-01-23_postprocess_raw_data.done")
+    #shell:
+        #"""
+        #sudo docker run \
+             #-v /home/centos/data/output/2023-01-23/raw/DFM_OUTPUT_tttz_waq:/data/input \
+             #-v /home/centos/data/output/2023-01-23/struct:/data/output \
+             #postprocess tttz_waq_0000_map.nc 500 400
+        #"""
