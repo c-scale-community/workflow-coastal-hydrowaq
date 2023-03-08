@@ -1,14 +1,12 @@
 configfile: "workflow/config.yml"
 
 rule download_era5:
-    input:
         "/home/centos/.cdsapirc"
     output:
         touch("workflow/logs/2023-01-23_download_era5.done")
     log:
         "workflow/logs/2023-01-23_download_era5.log"
     params:
-        cdsapirc_loc = config['cdsapirc_loc'],
         lon_min = config['lon_min'],
         lon_max = config['lon_max'],
         lat_min = config['lat_min'],
@@ -18,7 +16,7 @@ rule download_era5:
     shell:
         """
         sudo docker run \
-            -v {params.cdsapirc_loc}:/root/.cdsapirc \
+            -v {input}:/root/.cdsapirc \
             -v /home/centos/data/download/2023-01-23:/data \
             download-input python download_era5.py \
                 --longitude_min {params.lon_min} \
@@ -111,15 +109,13 @@ rule preprocess_era5:
 
 rule create_random_DFMWAQ_folder:
     output:
-        directory("/home/centos/data/preprocout/2023-01-23/DFMWAQ_input")
-    run:
-        import os
-        if not os.path.exists("/home/centos/data/preprocout/2023-01-23/DFMWAQ_input"):
-            os.makedirs("/home/centos/data/preprocout/2023-01-23/DFMWAQ_input")
+        touch("workflow/logs/2023-01-23_create_random_DFMWAQ_folder.done")
+    shell:
+        "sudo mkdir -p /home/centos/data/preprocout/2023-01-23/DFMWAQ_input"
 
 rule preprocess_cmems:
     input:
-        directory("/home/centos/data/preprocout/2023-01-23/DFMWAQ_input"),
+        "workflow/logs/2023-01-23_create_random_DFMWAQ_folder.done",
         "workflow/logs/2023-01-23_download_cmems_physics.done",
         "workflow/logs/2023-01-23_download_cmems_biogeochemistry.done"
     output:
@@ -143,7 +139,39 @@ rule preprocess_cmems:
 
 rule preprocess_fes2012:
     input:
-        directory("/home/centos/data/download/fes2012")
+        "/home/centos/data/download/fes2012/2N2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/E2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/J1_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/K1_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/K2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/L2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/LA2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/M2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/M3_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/M4_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/M6_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/M8_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MF_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MKS2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MM_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MN4_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MS4_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MSF_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MTM_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/MU2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/N2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/N4_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/NU2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/O1_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/P1_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/Q1_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/R2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/S1_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/S2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/S4_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/SSA_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/T2_FES2012_SLEV.nc",
+        "/home/centos/data/download/fes2012/Z0_FES2012_SLEV.nc"
     output:
         touch("workflow/logs/preprocess_fes2012.done")
     log:
@@ -281,12 +309,14 @@ rule cleanup_model_input_folder:
 rule move_raw_data_to_output_folder:
     input:
         "workflow/logs/2023-01-23_run_delft3dfm.done"
-    ouput:
+    output:
         touch("workflow/logs/2023-01-23_move_raw_data_to_output_folder.done")
     shell:
-        "mv -r \
-             /home/centos/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq \
-             /home/centos/data/output/2023-01-23/raw" 
+        """
+        sudo mv \
+            /home/centos/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq/* \
+            /home/centos/data/output/2023-01-23/raw/.
+        """
 
 rule cleanup_model_folder:
     input:
