@@ -58,7 +58,7 @@ import xarray as xr # note dependencies: dask, netCDF4
 		show_default=True)
 
 def runcommand(username, password, longitude_min, longitude_max, latitude_min, latitude_max, date_min, date_max, vars):
-	#make the /data/tmp directory if it does not exist
+	#make the data/tmp directory if it does not exist
 	Path('/data/cmems/tmp').mkdir(parents=True, exist_ok=True)
 	delta = datetime.strptime(date_max, '%Y-%m-%d') - datetime.strptime(date_min, '%Y-%m-%d')
 	for var in vars:
@@ -100,6 +100,7 @@ def runcommand(username, password, longitude_min, longitude_max, latitude_min, l
 						run += 1
 		ds = xr.open_mfdataset('/data/cmems/tmp/cmems_'+var+'_*.nc', combine='by_coords', decode_times=False)
 		ds.to_netcdf('/data/cmems/cmems_'+var+'.nc')
+
 
 if __name__ == '__main__':
 	runcommand()
