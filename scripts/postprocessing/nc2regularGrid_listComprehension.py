@@ -1,5 +1,6 @@
 from dfm_tools.get_nc import get_netdata, get_ncmodeldata
-from dfm_tools.get_nc_helpers import get_ncvardimlist
+#from dfm_tools.get_nc_helpers import get_ncvardimlist
+from dfm_tools.get_nc_helpers import get_ncvarproperties
 from dfm_tools.regulargrid import scatter_to_regulargrid
 
 import argparse
@@ -26,14 +27,16 @@ def regularGrid_to_netcdf(fp_in, nx, ny, treg, lreg):
     if treg != 'all':
         time_old = np.take(time_old, treg)
 
-    vars_pd, dims_pd = get_ncvardimlist(file_nc=file_nc)
+    #vars_pd, dims_pd = get_ncvardimlist(file_nc=file_nc)
+    vars_pd = get_ncvarproperties(file_nc=file_nc)
 
 
     df = vars_pd
 
     key_values = ['mesh2d_tem1','time', 'mesh2d_s1', 'mesh2d_ucx', 'mesh2d_ucy', 'mesh2d_tem1', 'mesh2d_sa1', 'mesh2d_water_quality_output_17', 'mesh2d_OXY', 'mesh2d_face_x', 'mesh2d_face_y', 'mesh2d_layer_z']
 
-    df = df.loc[df['nc_varkeys'].isin(key_values)]
+    #df = df.loc[df['nc_varkeys'].isin(key_values)]
+    df = df.loc[df.index.isin(key_values)]
 
     """
     ####################################################################################################################
@@ -41,7 +44,8 @@ def regularGrid_to_netcdf(fp_in, nx, ny, treg, lreg):
     #   This will be equal to four dimensions in the regular grid format since nFaces is the x- and y- dimension.
     ####################################################################################################################
     """
-    df2 = df.loc[df['ndims'] == 3]
+    #df2 = df.loc[df['ndims'] == 3]
+    df2 = df.loc[df['shape'].apply(len) == 3]
 
     data_frommap_x = get_ncmodeldata(file_nc=file_nc, varname='mesh2d_face_x')
     data_frommap_y = get_ncmodeldata(file_nc=file_nc, varname='mesh2d_face_y')
@@ -54,10 +58,12 @@ def regularGrid_to_netcdf(fp_in, nx, ny, treg, lreg):
     first_read = True
     i = 0
     for index, row in df2.iterrows():
-        print(row['nc_varkeys'])
+        #print(row['nc_varkeys'])
+        print(row.name)
         if row['dimensions'][1] == 'mesh2d_nEdges':
             continue
-        data_frommap_var = get_ncmodeldata(file_nc=file_nc, varname=row['nc_varkeys'], timestep=treg, layer=lreg)
+        #data_frommap_var = get_ncmodeldata(file_nc=file_nc, varname=row['nc_varkeys'], timestep=treg, layer=lreg)
+        data_frommap_var = get_ncmodeldata(file_nc=file_nc, varname=row.name, timestep=treg, layer=lreg)
         data_frommap_var = data_frommap_var.filled(np.nan)
         field_array = np.empty((data_frommap_var.shape[0], ny, nx, data_frommap_var.shape[-1]))
         tms = data_frommap_var.shape[0]
@@ -85,7 +91,8 @@ def regularGrid_to_netcdf(fp_in, nx, ny, treg, lreg):
         field_array = np.ma.masked_invalid(field_array)
         field_array = field_array.filled(-999.)
 
-        print('done with variable %s' % row['nc_varkeys'])
+        #print('done with variable %s' % row['nc_varkeys'])
+        print('done with variable %s' % row.name)
 
         if first_read:
             unout = 'seconds since 2015-01-01 00:00:00'
@@ -135,7 +142,8 @@ def regularGrid_to_netcdf(fp_in, nx, ny, treg, lreg):
 
             timevar[:] = time_old
 
-        fieldName = row['nc_varkeys']
+        #fieldName = row['nc_varkeys']
+        fieldName = row.name
         fieldvar = root_grp.createVariable(fieldName, 'float64', ('time', 'lat', 'lon', 'layer'), fill_value=-999.)
         key = fieldName
         for ncattr in input_nc.variables[key].ncattrs():
@@ -155,16 +163,19 @@ def regularGrid_to_netcdf(fp_in, nx, ny, treg, lreg):
     ####################################################################################################################
     """
     print('STARTING 2D')
-    df2 = df.loc[df['ndims'] == 2]
+    #df2 = df.loc[df['ndims'] == 2]
+    df2 = df.loc[df['shape'].apply(len) == 2]
 
     excludeList = ['edge', 'face', 'x', 'y']
     for index, row in df2.iterrows():
-        test = any(n in str(row['nc_varkeys']) for n in excludeList)
+        #test = any(n in str(row['nc_varkeys']) for n in excludeList)
+        test = any(n in str(row.name) for n in excludeList)
         if not test:
             if row['dimensions'][1] == 'mesh2d_nEdges':
                 continue
             ntimes = row['shape'][0]
-            data_frommap_var = get_ncmodeldata(file_nc=file_nc, varname=row['nc_varkeys'], timestep=treg)
+            #data_frommap_var = get_ncmodeldata(file_nc=file_nc, varname=row['nc_varkeys'], timestep=treg)
+            data_frommap_var = get_ncmodeldata(file_nc=file_nc, varname=row.name, timestep=treg)
             data_frommap_var = data_frommap_var.filled(np.nan)
             field_array = np.empty((data_frommap_var.shape[0], ny, nx))
             trange = range(0, data_frommap_var.shape[0])
@@ -178,7 +189,8 @@ def regularGrid_to_netcdf(fp_in, nx, ny, treg, lreg):
             field_array = np.ma.masked_invalid(field_array)
             field_array = field_array.filled(-999.)
             """write data to new netcdf"""
-            fieldName = row['nc_varkeys']
+            #fieldName = row['nc_varkeys']
+            fieldName = row.name
             fieldvar = root_grp.createVariable(fieldName, 'float32', ('time', 'lat', 'lon'), fill_value=-999)
             key = fieldName
             for ncattr in input_nc.variables[key].ncattrs():

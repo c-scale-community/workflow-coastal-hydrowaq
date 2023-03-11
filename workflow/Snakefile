@@ -1,0 +1,118 @@
+
+configfile: "workflow/config.yml"
+
+# rule all:
+#     input:
+#         "plot/output.png"
+
+rule download_era5:
+    input:
+    output:
+        touch("download_era5.done")
+    conda:
+        "envs/download.yml"
+    log:
+        "logs/download_era5.log"
+    params:
+        lon_min = config['lon_min'],
+        lon_max = config['lon_max'],
+        lat_min = config['lat_min'],
+        lat_max = config['lat_max'],
+        date_min = config['date_min'],
+        date_max = config['date_max']
+    shell:
+        """
+        python scripts/download/download_era5.py \
+              --longitude_min {params.lon_min} \
+              --longitude_max {params.lon_max} \
+              --latitude_min {params.lat_min} \
+              --latitude_max {params.lat_max} \
+              --date_min {params.date_min} \
+              --date_max {params.date_max}
+        """
+
+rule download_cmems_physics:
+    input:
+    output:
+        touch("download_cmems_physics.done")
+    conda:
+        "envs/download.yml"
+    log:
+        "logs/download_cmems_physics.log"
+    params:
+        cmems_uname = config['cmems_uname'],
+        cmems_pwd = config['cmems_pwd'],
+        lon_min = config['lon_min'],
+        lon_max = config['lon_max'],
+        lat_min = config['lat_min'],
+        lat_max = config['lat_max'],
+        date_min = config['date_min'],
+        date_max = config['date_max']
+    shell:
+        """
+        python scripts/download/download_cmems_physics.py \
+              --username {params.cmems_uname} \
+              --password {params.cmems_pwd} \
+              --longitude_min {params.lon_min} \
+              --longitude_max {params.lon_max} \
+              --latitude_min {params.lat_min} \
+              --latitude_max {params.lat_max} \
+              --date_min {params.date_min} \
+              --date_max {params.date_max}
+        """
+
+rule download_cmems_biogeochemistry:
+    input:
+    output:
+        touch("download_cmems_biogeochemistry.done")
+    conda:
+        "envs/download.yml"
+    log:
+        "logs/download_cmems_biogeochemistry.log"
+    params:
+        cmems_uname = config['cmems_uname'],
+        cmems_pwd = config['cmems_pwd'],
+        lon_min = config['lon_min'],
+        lon_max = config['lon_max'],
+        lat_min = config['lat_min'],
+        lat_max = config['lat_max'],
+        date_min = config['date_min'],
+        date_max = config['date_max']
+    shell:
+        """
+        python scripts/download/download_cmems_biogeochemistry.py \
+              --username {params.cmems_uname} \
+              --password {params.cmems_pwd} \
+              --longitude_min {params.lon_min} \
+              --longitude_max {params.lon_max} \
+              --latitude_min {params.lat_min} \
+              --latitude_max {params.lat_max} \
+              --date_min {params.date_min} \
+              --date_max {params.date_max}
+        """
+
+rule pre_processing_boundary:
+    input:
+        "download_era5.done",
+        "download_cmems_physics.done",
+        "download_cmems_biogeochemistry.done"
+    output:
+        touch("pre_processing_boundary.done")
+    conda:
+        "envs/pre_processing.yml"
+    log:
+        "logs/pre_processing_boundary.log"
+    shell:
+        """
+	python scripts/preprocessing/tide_physical_chemical/boundary.py \
+		--interp true \
+		--simultaneous true \
+		--steric true \
+		--input data/cmems/ \
+		--model fm_model/ \
+		--output data/output/
+        """
+
+rule cleanup:
+    shell:
+        "rm -rf data/era5/ data/cmems/"
