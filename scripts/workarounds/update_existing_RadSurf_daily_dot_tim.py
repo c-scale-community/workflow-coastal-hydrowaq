@@ -20,7 +20,7 @@
 # 7. Compute the average of values in column 1 for rows with the same day and month as the last row.
 # 8. Write the transformed data to a new file specified in --filename_out option with columns [0,1], separated by tabs and with floating point numbers in column 1 rounded to 8 decimal places.
 # The user can also add the --help option to see the help message and the list of available options.
-# , 
+# 
 # Below is an example of the scripts usage:
 #   `python update_existing_RadSurf_daily_dot_tim.py --tref '2015-01-01' --filename_in ../../fm_model/input/RadSurf_daily.tim --filename_out output.txt --date_max '2023-03-11'`
 
