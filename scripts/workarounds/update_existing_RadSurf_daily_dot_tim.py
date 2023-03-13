@@ -1,4 +1,9 @@
 # Author: [backeb](https://github.com/backeb)
+# This script was written with the assistance of 
+# OpenAI. (2021). ChatGPT: a large language model 
+# trained by OpenAI. [Computer software]. 
+# Retrieved from https://openai.com/
+#
 # This code reads in a RadSurf_daily.tim file and extends the timeseries to a date specified by the user. 
 # The new data is then written to an output file specified by the user.
 #
