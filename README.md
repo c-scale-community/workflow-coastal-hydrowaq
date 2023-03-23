@@ -38,6 +38,27 @@ Instructions on how to build and run each workflow component can be found in the
 ## Additional instructions
 * [Set up your computing environment](https://github.com/c-scale-community/use-case-hisea/blob/main/README-setup_compute.md)
 * [Run the fm_model example included in this repo](https://github.com/c-scale-community/use-case-hisea/blob/main/README_run_fm_model_example.md)
+
+## Working with snakemake and udocker
+
+Here are the steps to create
+
+```bash
+# install snakemake
+mkdir working-dir
+cd working-dir
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -p conda-install
+source conda-install/etc/profile.d/conda.sh
+conda install mamba -c conda-forge --yes
+mamba create -c bioconda -c conda-forge -n snakemake snakemake-minimal udocker --yes
+conda activate snakemake
+
+# run workflow
+git clone https://github.com/c-scale-community/use-case-hisea.git
+cd use-case-hisea/
+snakemake --cores 1 download_era5 --use-conda --conda-frontend mamba
+```
 	
 # To do's
 - [ ] update post processing to read the reftime from the .mdu. This was already implemented the boundary.py
