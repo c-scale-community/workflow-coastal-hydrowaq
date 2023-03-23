@@ -1,28 +1,16 @@
 configfile: "workflow/config.yml"
-
-rule set_pythonpath:
-    params:
-        home = lambda wc: "${HOME}"
-    shell:
-        """
-        if ! echo "${{PYTHONPATH:-}}" | tr : '\n' | grep -q -e '{params.home}/use-case-hisea/scripts/workflow_helpers' -e '{params.home}/use-case-hisea/scripts/delft3dfm_helpers'
-        then
-            echo "export PYTHONPATH=\"{params.home}/use-case-hisea/scripts/workflow_helpers:{params.home}/use-case-hisea/scripts/delft3dfm_helpers\":${{PYTHONPATH:-}}" >> ~/.bashrc && \
-            if [[ $- == *i* ]]; then source ~/.bashrc; fi
-        else
-            echo "PYTHONPATH is already set."
-        fi
-        """
-
-from pytools.persistent_dict import PersistentDict
 from datetime import date
+import sys
+sys.path.append('scripts/workflow_helpers')
+sys.path.append('scripts/delft3dfm_helpers')
 from workflow_helpers import set_date_range
+from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
 
 rule set_date_range:
     input:
         "workflow/config.yml"
     output:
-        expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d'))
+        touch(expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')))
     params:
         run_mode = config['run_mode'],
         forecast_window_mid_pt = config['forecast_window_mid_pt'],
@@ -40,7 +28,6 @@ rule set_date_range:
                                                 tstart=params.tstart,
                                                 tstop=params.tstop,
                                                 outfile='workflow/config.yml')
-        touch(expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')))
 
 rule download_era5:
     input:
@@ -51,6 +38,7 @@ rule download_era5:
         expand("workflow/logs/{current_date}_download_era5.log", current_date=date.today().strftime('%Y-%m-%d'))
     params:
         cdsapirc_loc = lambda wc: config['cdsapirc_loc'],
+        data_dir_path = lambda wc: config['data_dir_path'],
         lon_min = config['lon_min'],
         lon_max = config['lon_max'],
         lat_min = config['lat_min'],
@@ -61,7 +49,7 @@ rule download_era5:
         """
         sudo docker run \
             -v {params.cdsapirc_loc}:/root/.cdsapirc \
-            -v {data_dir_path}/download/{date.today().strftime('%Y-%m-%d')}:/data \
+            -v {params.data_dir_path}/download/$(date +%Y-%m-%d):/data \
             download-input python download_era5.py \
                 --longitude_min {params.lon_min} \
                 --longitude_max {params.lon_max} \
@@ -69,7 +57,7 @@ rule download_era5:
                 --latitude_max {params.lat_max} \
                 --date_min {params.date_min} \
                 --date_max {params.date_max} && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_download_era5.done
+        touch workflow/logs/$(date +%Y-%m-%d)_download_era5.done
         """
 
 rule download_cmems_physics:
@@ -315,7 +303,6 @@ rule update_mdu_file: #TODO Bjorn, continue here
     output:
         touch(expand("workflow/logs/{current_date}_update_mdu_file.done", current_date=date.today().strftime('%Y-%m-%d')))
     run:
-        from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
         update_mdu_tstart_tstop(mdufile = config['cdsapirc_loc'], date_min=config['date_min'], date_max=config['date_max'])
 
 rule run_delft3dfm:
