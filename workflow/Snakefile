@@ -1,6 +1,6 @@
 configfile: "workflow/config.yml"
 
-rule prepare_folders:
+rule prepare_folders_and_files:
     input:
     output:
         touch("prepare_folders.done")
@@ -8,6 +8,7 @@ rule prepare_folders:
         data_folder = config['data_folder']
     shell:
         """
+        stat ~/.cdsapirc
         mkdir -p {params.data_folder}
         """
 
