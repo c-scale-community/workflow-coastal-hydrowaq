@@ -1,13 +1,41 @@
 configfile: "workflow/config.yml"
 
+rule prepare_folders:
+    input:
+    output:
+        touch("prepare_folders.done")
+    params:
+        data_folder = config['data_folder']
+    shell:
+        """
+        mkdir -p {params.data_folder}
+        """
+
+rule prepare_containers:
+    input:
+        "prepare_folders.done"
+    output:
+        touch("prepare_containers.done")
+    params:
+        container_download_remote = config['container_download_remote'],
+        container_download_local = config['container_download_local']
+    shell:
+        """
+        udocker pull {params.container_download_remote}
+        udocker create --name={params.container_download_local} {params.container_download_remote}
+        """
+
 rule download_era5:
     input:
-        "/home/centos/.cdsapirc"
+        "prepare_containers.done"
     output:
         touch("workflow/logs/2023-01-23_download_era5.done")
     log:
         "workflow/logs/2023-01-23_download_era5.log"
     params:
+        cdsapirc = lambda wc: config['cdsapirc'],
+        data_folder = config['data_folder'],
+        container_download_local = config['container_download_local'],
         lon_min = config['lon_min'],
         lon_max = config['lon_max'],
         lat_min = config['lat_min'],
@@ -16,10 +44,10 @@ rule download_era5:
         date_max = config['date_max']
     shell:
         """
-        sudo docker run \
-            -v {input}:/root/.cdsapirc \
-            -v /home/centos/data/download/2023-01-23:/data \
-            download-input python download_era5.py \
+        udocker run --nobanner \
+            -v {params.cdsapirc}:/root/.cdsapirc \
+            -v {params.data_folder}:/data \
+            {params.container_download_local} python download_era5.py \
                 --longitude_min {params.lon_min} \
                 --longitude_max {params.lon_max} \
                 --latitude_min {params.lat_min} \

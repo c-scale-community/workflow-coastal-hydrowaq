@@ -1,12 +1,11 @@
-FROM continuumio/miniconda3
+FROM condaforge/mambaforge
 WORKDIR /scripts
 
 # put the envinroment.yaml file in the container
 COPY environment.yml /tmp/environment.yml
 
 # create the environment
-RUN conda update -n base -c defaults conda
-RUN conda env create -f /tmp/environment.yml
+RUN mamba env create -f /tmp/environment.yml
 
 # pull the environment name out of the environment.yml
 RUN echo "conda activate download_env" > /root/.bashrc

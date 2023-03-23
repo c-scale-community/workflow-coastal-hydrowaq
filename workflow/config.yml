@@ -1,3 +1,7 @@
+cdsapirc: '${HOME}/.cdsapirc'
+data_folder: '/home/sebastian/devel/c-scale-community/use-case-hisea-issue-43/data/'
+container_download_remote: 'ghcr.io/c-scale-community/hisea_download_era5:1.0.0'
+container_download_local: 'download-input'
 cmems_uname: bbackeberg
 cmems_pwd: iaTmwJ7D
 lon_min: 22.5
