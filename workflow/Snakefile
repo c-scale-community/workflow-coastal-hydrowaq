@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+>>>>>>> 15937c9... update snakemake and added helpers
 configfile: "workflow/config.yml"
 from datetime import date
 import sys
@@ -6,6 +11,21 @@ sys.path.append('scripts/delft3dfm_helpers')
 from workflow_helpers import set_date_range
 from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
 
+<<<<<<< HEAD
+=======
+# rule all:
+#     input:
+#         "plot/output.png"
+=======
+configfile: "workflow/config.yml"
+from datetime import date
+import sys
+sys.path.append('scripts/workflow_helpers')
+sys.path.append('scripts/delft3dfm_helpers')
+from workflow_helpers import set_date_range
+from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
+
+>>>>>>> 15937c9... update snakemake and added helpers
 rule set_date_range:
     input:
         "workflow/config.yml"
@@ -28,6 +48,10 @@ rule set_date_range:
                                                 tstart=params.tstart,
                                                 tstop=params.tstop,
                                                 outfile='workflow/config.yml')
+<<<<<<< HEAD
+=======
+>>>>>>> 2bf981b... update snakemake
+>>>>>>> 15937c9... update snakemake and added helpers
 
 rule download_era5:
     input:
@@ -37,8 +61,16 @@ rule download_era5:
     log:
         expand("workflow/logs/{current_date}_download_era5.log", current_date=date.today().strftime('%Y-%m-%d'))
     params:
+<<<<<<< HEAD
         cdsapirc_loc = lambda wc: config['cdsapirc_loc'],
         data_dir_path = lambda wc: config['data_dir_path'],
+=======
+<<<<<<< HEAD
+=======
+        cdsapirc_loc = lambda wc: config['cdsapirc_loc'],
+        data_dir_path = lambda wc: config['data_dir_path'],
+>>>>>>> 2bf981b... update snakemake
+>>>>>>> 15937c9... update snakemake and added helpers
         lon_min = config['lon_min'],
         lon_max = config['lon_max'],
         lat_min = config['lat_min'],
@@ -47,6 +79,18 @@ rule download_era5:
         date_max = config['date_max'],
     shell:
         """
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        python scripts/download/download_era5.py \
+              --longitude_min {params.lon_min} \
+              --longitude_max {params.lon_max} \
+              --latitude_min {params.lat_min} \
+              --latitude_max {params.lat_max} \
+              --date_min {params.date_min} \
+              --date_max {params.date_max}
+=======
+>>>>>>> 15937c9... update snakemake and added helpers
         sudo docker run \
             -v {params.cdsapirc_loc}:/root/.cdsapirc \
             -v {params.data_dir_path}/download/$(date +%Y-%m-%d):/data \
@@ -58,6 +102,10 @@ rule download_era5:
                 --date_min {params.date_min} \
                 --date_max {params.date_max} && \
         touch workflow/logs/$(date +%Y-%m-%d)_download_era5.done
+<<<<<<< HEAD
+=======
+>>>>>>> 2bf981b... update snakemake
+>>>>>>> 15937c9... update snakemake and added helpers
         """
 
 rule download_cmems_physics:
@@ -160,6 +208,25 @@ rule preprocess_cmems:
     log:
         expand("workflow/logs/{current_date}_preprocess_cmems.log", current_date=date.today().strftime('%Y-%m-%d'))
     shell:
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        "rm -rf data/era5/ data/cmems/"
+=======
+        "sudo mkdir -p /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/DFMWAQ_input && \
+        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_create_random_DFMWAQ_folder.done"
+
+rule preprocess_cmems:
+    input:
+        expand("workflow/logs/{current_date}_create_random_DFMWAQ_folder.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_download_cmems_physics.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_download_cmems_biogeochemistry.done", current_date=date.today().strftime('%Y-%m-%d'))
+    output:
+        expand("workflow/logs/{current_date}_preprocess_cmems.done", current_date=date.today().strftime('%Y-%m-%d'))
+    log:
+        expand("workflow/logs/{current_date}_preprocess_cmems.log", current_date=date.today().strftime('%Y-%m-%d'))
+    shell:
+>>>>>>> 15937c9... update snakemake and added helpers
         """
         sudo docker run \
             -v {data_dir_path}/download/{date.today().strftime('%Y-%m-%d')}/cmems:/data/input \
@@ -330,3 +397,7 @@ rule run_delft3dfm:
             -t deltares/delft3dfm:latest && \
         touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_run_delft3dfm.done
         """
+<<<<<<< HEAD
+=======
+>>>>>>> 2bf981b... update snakemake
+>>>>>>> 15937c9... update snakemake and added helpers

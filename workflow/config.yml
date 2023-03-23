@@ -18,6 +18,13 @@ lon_min: 22.5
 lon_max: 24.5
 lat_min: 36.5
 lat_max: 38.5
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+date_min: '2022-04-01'
+date_max: '2022-04-05'
+=======
+>>>>>>> 15937c9... update snakemake and added helpers
 
 # run mode
 run_mode: forecast # forecast | hindcast
@@ -39,3 +46,7 @@ tstop: 2021-03-12
 # update date_min, date_max for each execution of the workflow
 date_min: 2023-03-08
 date_max: 2023-03-10
+<<<<<<< HEAD
+=======
+>>>>>>> 2bf981b... update snakemake
+>>>>>>> 15937c9... update snakemake and added helpers
