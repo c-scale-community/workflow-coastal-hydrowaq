@@ -1,8 +1,41 @@
+# dependencies
+cdsapirc_loc: "${HOME}/.cdsapirc"
 cmems_uname: bbackeberg
 cmems_pwd: iaTmwJ7D
+
+# data folder locations
+data_dir_path: "${HOME}/data"
+fes2012_data_dir_path: "${HOME}/data/download/fes2012"
+
+# delft3dfm
+model_dir_path: "${HOME}/use-case-hisea/fm_model"
+mdufile: "${HOME}/use-case-hisea/fm_model/tttz_waq.mdu"
+plifile1: south2.pli
+plifile2: east2.pli
+
+# area of interest
 lon_min: 22.5
 lon_max: 24.5
 lat_min: 36.5
 lat_max: 38.5
-date_min: '2022-04-01'
-date_max: '2022-04-05'
+
+# run mode
+run_mode: forecast # forecast | hindcast
+# if run_mode == 'forecast' specify forecast_window_mid_pt, forecast_window, forecast_freq
+forecast_window_mid_pt: today - 15 days # ERA5 latency
+forecast_window: 2 days
+forecast_freq: 1 days
+# if run_mode == 'hindcast' specify tstart and tstop
+tstart: 2021-01-01
+tstop: 2021-03-12
+
+# # data input options TODO
+# #physics: # cmems | hycom
+# #bgc: # cmems | other 
+# #atm: # era5 | ecmwf | gfs 
+
+######################### DO NOT EDIT ANYTHING BELOW THIS LINE ###############################
+
+# update date_min, date_max for each execution of the workflow
+date_min: 
+date_max:
