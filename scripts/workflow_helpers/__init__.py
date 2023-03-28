@@ -1,1 +1,1 @@
-from .workflow_helpers import set_date_range
+from .workflow_helpers import set_date_range, check_fes2012_files_exist

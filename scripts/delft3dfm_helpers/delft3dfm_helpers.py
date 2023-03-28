@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime, date
+import os
 
 def get_tref(mdufile):
     # This script reads an MDU file and searches for the line that starts with "RefDate". 
@@ -15,12 +16,15 @@ def get_tref(mdufile):
     # This script was written with the assistance of OpenAI. (2021). ChatGPT: a large language model trained 
     # by OpenAI. [Computer software]. Retrieved from https://openai.com/
 
+    # Substitute wildcards in the input path
+    mdufile = os.path.expandvars(mdufile)
+
     with open(mdufile, 'r+') as file:
         lines = file.readlines()
         for i in range(len(lines)):
             if lines[i].startswith('RefDate'):
                 tref_str=lines[i].split()[2]
-                tref=datetime.datetime.strptime(tref_str, '%Y%m%d')
+                tref=datetime.strptime(tref_str, '%Y%m%d')
                 print(lines[i])
     return tref
 
@@ -42,14 +46,20 @@ def update_mdu_tstart_tstop(mdufile, date_min, date_max):
     # This script was written with the assistance of OpenAI. (2021). ChatGPT: a large language model trained 
     # by OpenAI. [Computer software]. Retrieved from https://openai.com/
     
+    # expand the input mdufile to resolve environment variables
+    mdufile = os.path.expandvars(mdufile)
+
     # get tref from mdufile
     tref = get_tref(mdufile=mdufile)
 
     # Calculate the number of minutes of date_min and date_max since tref
-    delta = datetime.datetime.strptime(date_min, '%Y-%m-%d').date() - tref.date()
+    date_min_str = date_min.strftime('%Y-%m-%d')
+    delta = datetime.strptime(date_min_str, '%Y-%m-%d').date() - tref.date()
     date_min_minutes_since_tref = delta.days * 1440 + delta.seconds // 60
     date_min_minutes_since_tref += 720 # add half a day so that delft3dfm starts
-    delta = datetime.datetime.strptime(date_max, '%Y-%m-%d').date() - tref.date()
+
+    date_max_str = date_max.strftime('%Y-%m-%d')
+    delta = datetime.strptime(date_max_str, '%Y-%m-%d').date() - tref.date()
     date_max_minutes_since_tref = delta.days * 1440 + delta.seconds // 60
     date_max_minutes_since_tref += 720 # add half a day so that delft3dfm starts
 

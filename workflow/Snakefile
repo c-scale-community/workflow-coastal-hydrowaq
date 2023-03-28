@@ -1,31 +1,12 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
->>>>>>> 15937c9... update snakemake and added helpers
 configfile: "workflow/config.yml"
 from datetime import date
 import sys
 sys.path.append('scripts/workflow_helpers')
 sys.path.append('scripts/delft3dfm_helpers')
-from workflow_helpers import set_date_range
+from workflow_helpers import set_date_range, check_fes2012_files_exist
 from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
+import os
 
-<<<<<<< HEAD
-=======
-# rule all:
-#     input:
-#         "plot/output.png"
-=======
-configfile: "workflow/config.yml"
-from datetime import date
-import sys
-sys.path.append('scripts/workflow_helpers')
-sys.path.append('scripts/delft3dfm_helpers')
-from workflow_helpers import set_date_range
-from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
-
->>>>>>> 15937c9... update snakemake and added helpers
 rule set_date_range:
     input:
         "workflow/config.yml"
@@ -48,10 +29,18 @@ rule set_date_range:
                                                 tstart=params.tstart,
                                                 tstop=params.tstop,
                                                 outfile='workflow/config.yml')
-<<<<<<< HEAD
-=======
->>>>>>> 2bf981b... update snakemake
->>>>>>> 15937c9... update snakemake and added helpers
+
+rule update_mdu_file:
+    input:
+        expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d'))
+    output:
+        touch(expand("workflow/logs/{current_date}_update_mdu_file.done", current_date=date.today().strftime('%Y-%m-%d')))
+    params:
+        mdufile = lambda wc: config['mdufile'],
+        date_min = config['date_min'],
+        date_max = config['date_max'],
+    run:
+        update_mdu_tstart_tstop(mdufile = params.mdufile, date_min=params.date_min, date_max=params.date_max)
 
 rule download_era5:
     input:
@@ -61,16 +50,8 @@ rule download_era5:
     log:
         expand("workflow/logs/{current_date}_download_era5.log", current_date=date.today().strftime('%Y-%m-%d'))
     params:
-<<<<<<< HEAD
         cdsapirc_loc = lambda wc: config['cdsapirc_loc'],
         data_dir_path = lambda wc: config['data_dir_path'],
-=======
-<<<<<<< HEAD
-=======
-        cdsapirc_loc = lambda wc: config['cdsapirc_loc'],
-        data_dir_path = lambda wc: config['data_dir_path'],
->>>>>>> 2bf981b... update snakemake
->>>>>>> 15937c9... update snakemake and added helpers
         lon_min = config['lon_min'],
         lon_max = config['lon_max'],
         lat_min = config['lat_min'],
@@ -79,18 +60,6 @@ rule download_era5:
         date_max = config['date_max'],
     shell:
         """
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        python scripts/download/download_era5.py \
-              --longitude_min {params.lon_min} \
-              --longitude_max {params.lon_max} \
-              --latitude_min {params.lat_min} \
-              --latitude_max {params.lat_max} \
-              --date_min {params.date_min} \
-              --date_max {params.date_max}
-=======
->>>>>>> 15937c9... update snakemake and added helpers
         sudo docker run \
             -v {params.cdsapirc_loc}:/root/.cdsapirc \
             -v {params.data_dir_path}/download/$(date +%Y-%m-%d):/data \
@@ -102,20 +71,17 @@ rule download_era5:
                 --date_min {params.date_min} \
                 --date_max {params.date_max} && \
         touch workflow/logs/$(date +%Y-%m-%d)_download_era5.done
-<<<<<<< HEAD
-=======
->>>>>>> 2bf981b... update snakemake
->>>>>>> 15937c9... update snakemake and added helpers
         """
 
 rule download_cmems_physics:
     input:
-        expand("workflow/logs/{current_date}_download_era5.done", current_date=date.today().strftime('%Y-%m-%d'))
+        expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')),
     output:
         expand("workflow/logs/{current_date}_download_cmems_physics.done", current_date=date.today().strftime('%Y-%m-%d'))
     log:
         expand("workflow/logs/{current_date}_download_cmems_physics.log", current_date=date.today().strftime('%Y-%m-%d'))
     params:
+        data_dir_path = lambda wc: config['data_dir_path'],
         cmems_uname = config['cmems_uname'],
         cmems_pwd = config['cmems_pwd'],
         lon_min = config['lon_min'],
@@ -127,7 +93,7 @@ rule download_cmems_physics:
     shell:
         """
         sudo docker run \
-            -v {data_dir_path}/download/{date.today().strftime('%Y-%m-%d')}:/data \
+            -v {params.data_dir_path}/download/$(date +%Y-%m-%d):/data \
             download-input python download_cmems_physics.py \
                 --username {params.cmems_uname} \
                 --password {params.cmems_pwd} \
@@ -137,18 +103,18 @@ rule download_cmems_physics:
                 --latitude_max {params.lat_max} \
                 --date_min {params.date_min} \
                 --date_max {params.date_max} && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_download_cmems_physics.done
+        touch workflow/logs/$(date +%Y-%m-%d)_download_cmems_physics.done
         """
 
 rule download_cmems_biogeochemistry:
     input:
-        expand("workflow/logs/{current_date}_download_era5.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_download_cmems_physics.done", current_date=date.today().strftime('%Y-%m-%d'))
+        expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')),
     output:
         expand("workflow/logs/{current_date}_download_cmems_biogeochemistry.done", current_date=date.today().strftime('%Y-%m-%d'))
     log:
         expand("workflow/logs/{current_date}_download_cmems_biogeochemistry.log", current_date=date.today().strftime('%Y-%m-%d'))
     params:
+        data_dir_path = lambda wc: config['data_dir_path'],
         cmems_uname = config['cmems_uname'],
         cmems_pwd = config['cmems_pwd'],
         lon_min = config['lon_min'],
@@ -160,7 +126,7 @@ rule download_cmems_biogeochemistry:
     shell:
         """
         sudo docker run \
-            -v {data_dir_path}/download/{date.today().strftime('%Y-%m-%d')}:/data \
+            -v {params.data_dir_path}/download/$(date +%Y-%m-%d):/data \
             download-input python download_cmems_biogeochemistry.py \
                 --username {params.cmems_uname} \
                 --password {params.cmems_pwd} \
@@ -170,7 +136,7 @@ rule download_cmems_biogeochemistry:
                 --latitude_max {params.lat_max} \
                 --date_min {params.date_min} \
                 --date_max {params.date_max} && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_download_cmems_biogeochemistry.done
+        touch workflow/logs/$(date +%Y-%m-%d)_download_cmems_biogeochemistry.done
         """
 
 rule preprocess_era5:
@@ -180,23 +146,29 @@ rule preprocess_era5:
         expand("workflow/logs/{current_date}_preprocess_era5.done", current_date=date.today().strftime('%Y-%m-%d'))
     log:
         expand("workflow/logs/{current_date}_preprocess_era5.log", current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        data_dir_path = lambda wc: config['data_dir_path']
     shell:
         """
         sudo docker run \
-            -v {data_dir_path}/download/{date.today().strftime('%Y-%m-%d')}/era5:/data/input \
-            -v {data_dir_path}/preprocout/{date.today().strftime('%Y-%m-%d')}:/data/output \
+            -v {params.data_dir_path}/download/$(date +%Y-%m-%d)/era5:/data/input \
+            -v {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d):/data/output \
             getera ERA5_convert2_FM_and_merge_allVars.py \
                 --input /data/input \
                 --output /data/output && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_preprocess_era5.done
+        touch workflow/logs/$(date +%Y-%m-%d)_preprocess_era5.done
         """
 
 rule create_random_DFMWAQ_folder:
     output:
         expand("workflow/logs/{current_date}_create_random_DFMWAQ_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        data_dir_path = lambda wc: config['data_dir_path']
     shell:
-        "sudo mkdir -p /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/DFMWAQ_input && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_create_random_DFMWAQ_folder.done"
+        """
+        sudo mkdir -p {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/DFMWAQ_input && \
+        touch workflow/logs/$(date +%Y-%m-%d)_create_random_DFMWAQ_folder.done
+        """
 
 rule preprocess_cmems:
     input:
@@ -207,31 +179,15 @@ rule preprocess_cmems:
         expand("workflow/logs/{current_date}_preprocess_cmems.done", current_date=date.today().strftime('%Y-%m-%d'))
     log:
         expand("workflow/logs/{current_date}_preprocess_cmems.log", current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        data_dir_path = lambda wc: config['data_dir_path'],
+        model_dir_path = lambda wc: config['model_dir_path'],
     shell:
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        "rm -rf data/era5/ data/cmems/"
-=======
-        "sudo mkdir -p /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/DFMWAQ_input && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_create_random_DFMWAQ_folder.done"
-
-rule preprocess_cmems:
-    input:
-        expand("workflow/logs/{current_date}_create_random_DFMWAQ_folder.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_download_cmems_physics.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_download_cmems_biogeochemistry.done", current_date=date.today().strftime('%Y-%m-%d'))
-    output:
-        expand("workflow/logs/{current_date}_preprocess_cmems.done", current_date=date.today().strftime('%Y-%m-%d'))
-    log:
-        expand("workflow/logs/{current_date}_preprocess_cmems.log", current_date=date.today().strftime('%Y-%m-%d'))
-    shell:
->>>>>>> 15937c9... update snakemake and added helpers
         """
         sudo docker run \
-            -v {data_dir_path}/download/{date.today().strftime('%Y-%m-%d')}/cmems:/data/input \
-            -v {model_dir_path}:/data/model \
-            -v {data_dir_path}/preprocout/{date.today().strftime('%Y-%m-%d')}:/data/output \
+            -v {params.data_dir_path}/download/$(date +%Y-%m-%d)/cmems:/data/input \
+            -v {params.model_dir_path}:/data/model \
+            -v {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d):/data/output \
             preprocessing boundary.py \
                 --interp true \
                 --simultaneous true \
@@ -239,52 +195,30 @@ rule preprocess_cmems:
                 --input /data/input \
                 --model /data/model \
                 --output /data/output && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_preprocess_cmems.done
+        touch workflow/logs/$(date +%Y-%m-%d)_preprocess_cmems.done
         """
+
+rule check4fes2012_files:
+    output:
+        "workflow/logs/check4fes2012_files.done"
+    params:
+        fes2012_data_dir_path = lambda wc: config['fes2012_data_dir_path']
+    run:
+        fes2012_files_exist = check_fes2012_files_exist(params.fes2012_data_dir_path)
+        if fes2012_files_exist:
+            os.system('touch workflow/logs/check4fes2012_files.done')
 
 rule preprocess_fes2012:
     input:
-        expand("{fes2012_data_dir_path}/2N2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/E2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/J1_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/K1_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/K2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/L2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/LA2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/M2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/M3_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/M4_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/M6_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/M8_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MF_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MKS2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MM_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MN4_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MS4_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MSF_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MTM_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/MU2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/N2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/N4_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/NU2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/O1_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/P1_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/Q1_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/R2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/S1_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/S2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/S4_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/SSA_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/T2_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path']),
-        expand("{fes2012_data_dir_path}/Z0_FES2012_SLEV.nc", fes2012_data_dir_path=config['fes2012_data_dir_path'])
+        "workflow/logs/check4fes2012_files.done"
     output:
         "workflow/logs/preprocess_fes2012.done"
     log:
         "workflow/logs/preprocess_fes2012.log"
     params:
-        fes2012_data_dir_path = config['fes2012_data_dir_path'],
-        model_dir_path = config['model_dir_path'],
-        data_dir_path = config['data_dir_path'],
+        data_dir_path = lambda wc: config['data_dir_path'],
+        model_dir_path = lambda wc: config['model_dir_path'],
+        fes2012_data_dir_path = lambda wc: config['fes2012_data_dir_path'],
         lon_min = config['lon_min'],
         lon_max = config['lon_max'],
         lat_min = config['lat_min'],
@@ -293,17 +227,17 @@ rule preprocess_fes2012:
         plifile2 = config['plifile2']
     shell:
         """
-         sudo docker run \
-             -v {params.fes2012_data_dir_path}:/data/input \
-             -v {params.model_dir_path}:/data/model \
-             -v {params.data_dir_path}/preprocout:/data/output \
-             preprocessing tide.py \
-                 --fespath /data/input \
-                 --coords "{params.lon_min}, {params.lon_max}, {params.lat_min}, {params.lat_max}" \
-                 --pli {params.plifile1} \
-                 --pli {params.plifile2} \
-                 --output /data/output \
-                 --model /data/model && \
+        sudo docker run \
+            -v {params.fes2012_data_dir_path}:/data/input \
+            -v {params.model_dir_path}:/data/model \
+            -v {params.data_dir_path}/output/preprocessing:/data/output \
+            preprocessing tide.py \
+                --fespath /data/input \
+                --coords "{params.lon_min}, {params.lon_max}, {params.lat_min}, {params.lat_max}" \
+                --pli {params.plifile1} \
+                --pli {params.plifile2} \
+                --output /data/output \
+                --model /data/model && \
         touch workflow/logs/preprocess_fes2012.done
         """
 
@@ -315,89 +249,166 @@ rule copy_preprocessed_data_to_model_input_folder:
     output:
         expand("workflow/logs/{current_date}_copy_preprocessed_data_to_model_input_folder.done", \
                current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        data_dir_path = lambda wc: config['data_dir_path'],
+        model_dir_path = lambda wc: config['model_dir_path'],
     shell:
         "cp -r \
-            /home/centos/data/preprocout/tide_east2.bc \
-            /home/centos/data/preprocout/tide_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/DFMWAQ_east2_tmp.ext \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/DFMWAQ_input \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/DFMWAQ_south2_tmp.ext \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Diat_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Diat_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/east2.pli \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Green_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Green_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/NO3_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/NO3_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Opal_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Opal_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/OXY_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/OXY_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/PO4_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/PO4_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/POC1_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/POC1_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/PON1_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/PON1_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/POP1_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/POP1_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/salinity_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/salinity_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Si_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/Si_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/south2.pli \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/steric_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/steric_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/temperature_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/temperature_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/uxuy_east2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/uxuy_south2.bc \
-            /home/centos/data/preprocout/{date.today().strftime('%Y-%m-%d')}/era5_FM.nc \
-            /home/centos/use-case-hisea/fm_model/input/. && \
-            touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_copy_preprocessed_data_to_model_input_folder.done"
+            {params.data_dir_path}/output/preprocessing/tide_east2.bc \
+            {params.data_dir_path}/output/preprocessing/tide_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/DFMWAQ_east2_tmp.ext \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/DFMWAQ_input \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/DFMWAQ_south2_tmp.ext \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Diat_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Diat_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/east2.pli \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Green_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Green_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/NO3_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/NO3_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Opal_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Opal_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/OXY_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/OXY_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/PO4_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/PO4_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/POC1_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/POC1_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/PON1_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/PON1_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/POP1_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/POP1_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/salinity_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/salinity_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Si_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/Si_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/south2.pli \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/steric_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/steric_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/temperature_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/temperature_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/uxuy_east2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/uxuy_south2.bc \
+            {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/era5_FM.nc \
+            {params.model_dir_path}/input/. && \
+            touch workflow/logs/$(date +%Y-%m-%d)_copy_preprocessed_data_to_model_input_folder.done"
 
-rule update_mdu_file: #TODO Bjorn, continue here
+rule workaround_update_RadSurf_daily:
     input:
-        expand("workflow/logs/{current_date}_download_era5.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_create_random_DFMWAQ_folder.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_download_cmems_physics.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_download_cmems_biogeochemistry.done", current_date=date.today().strftime('%Y-%m-%d')),
-        "workflow/logs/preprocess_fes2012.done",
-        expand("workflow/logs/{current_date}_preprocess_era5.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_preprocess_cmems.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_copy_preprocessed_data_to_model_input_folder.done", \
-                current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_update_mdu_file.done", current_date=date.today().strftime('%Y-%m-%d')),
     output:
-        touch(expand("workflow/logs/{current_date}_update_mdu_file.done", current_date=date.today().strftime('%Y-%m-%d')))
-    run:
-        update_mdu_tstart_tstop(mdufile = config['cdsapirc_loc'], date_min=config['date_min'], date_max=config['date_max'])
+        expand("workflow/logs/{current_date}_workaround_update_RadSurf_daily.done", current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        mdufile = lambda wc: config['mdufile'],
+        model_dir_path = lambda wc: config['model_dir_path'],
+        date_max = config['date_max']
+    shell:
+        """
+        python scripts/workarounds/update_existing_RadSurf_daily_dot_tim.py \
+                                   --mdufile {params.mdufile} \
+                                   --filename_in {params.model_dir_path}/input/RadSurf_daily.tim \
+                                   --filename_out {params.model_dir_path}/input/RadSurf_daily.tim \
+                                   --date_max {params.date_max} && \
+        touch workflow/logs/$(date +%Y-%m-%d)_workaround_update_RadSurf_daily.done
+        """
 
 rule run_delft3dfm:
     input:
+        expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_update_mdu_file.done", current_date=date.today().strftime('%Y-%m-%d')),
         expand("workflow/logs/{current_date}_download_era5.done", current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_create_random_DFMWAQ_folder.done", current_date=date.today().strftime('%Y-%m-%d')),
         expand("workflow/logs/{current_date}_download_cmems_physics.done", current_date=date.today().strftime('%Y-%m-%d')),
         expand("workflow/logs/{current_date}_download_cmems_biogeochemistry.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_create_random_DFMWAQ_folder.done", current_date=date.today().strftime('%Y-%m-%d')),
         "workflow/logs/preprocess_fes2012.done",
         expand("workflow/logs/{current_date}_preprocess_era5.done", current_date=date.today().strftime('%Y-%m-%d')),
         expand("workflow/logs/{current_date}_preprocess_cmems.done", current_date=date.today().strftime('%Y-%m-%d')),
         expand("workflow/logs/{current_date}_copy_preprocessed_data_to_model_input_folder.done", \
                 current_date=date.today().strftime('%Y-%m-%d')),
-        expand("workflow/logs/{current_date}_update_mdu_file.done", current_date=date.today().strftime('%Y-%m-%d'))
+        expand("workflow/logs/{current_date}_workaround_update_RadSurf_daily.done", current_date=date.today().strftime('%Y-%m-%d'))
     output:
         expand("workflow/logs/{current_date}_run_delft3dfm.done", current_date=date.today().strftime('%Y-%m-%d'))
     log:
         expand("workflow/logs/{current_date}_run_delft3dfm.log", current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        model_dir_path = lambda wc: config['model_dir_path']
     shell:
         """
         sudo docker run \
-            -v {model_dir_path}:/data \
+            -v {params.model_dir_path}:/data \
             --shm-size=4gb \
             --ulimit stack=-1 \
             -t deltares/delft3dfm:latest && \
-        touch workflow/logs/{date.today().strftime('%Y-%m-%d')}_run_delft3dfm.done
+        touch workflow/logs/$(date +%Y-%m-%d)_run_delft3dfm.done
         """
-<<<<<<< HEAD
-=======
->>>>>>> 2bf981b... update snakemake
->>>>>>> 15937c9... update snakemake and added helpers
+
+#rule cleanup_model_input_folder:
+    #input:
+        #"workflow/logs/2023-01-23_run_delft3dfm.done"
+    #output:
+        #touch("workflow/logs/2023-01-23_cleanup_model_input_folder.done")
+    #shell:
+        #"sudo rm -r \
+            #/home/centos/use-case-hisea/fm_model/input/tide_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/tide_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/DFMWAQ_east2_tmp.ext \
+            #/home/centos/use-case-hisea/fm_model/input/DFMWAQ_input \
+            #/home/centos/use-case-hisea/fm_model/input/DFMWAQ_south2_tmp.ext \
+            #/home/centos/use-case-hisea/fm_model/input/Diat_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/Diat_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/east2.pli \
+            #/home/centos/use-case-hisea/fm_model/input/Green_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/Green_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/NO3_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/NO3_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/Opal_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/Opal_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/OXY_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/OXY_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/PO4_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/PO4_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/POC1_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/POC1_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/PON1_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/PON1_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/POP1_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/POP1_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/salinity_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/salinity_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/Si_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/Si_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/south2.pli \
+            #/home/centos/use-case-hisea/fm_model/input/steric_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/steric_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/temperature_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/temperature_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/uxuy_east2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/uxuy_south2.bc \
+            #/home/centos/use-case-hisea/fm_model/input/era5_FM.nc"
+#
+#rule move_raw_data_to_output_folder:
+    #input:
+        #"workflow/logs/2023-01-23_run_delft3dfm.done"
+    #output:
+        #touch("workflow/logs/2023-01-23_move_raw_data_to_output_folder.done")
+    #shell:
+        #"mkdir -p /home/centos/data/output/2023-01-23/raw && \
+         #sudo mv \
+             #/home/centos/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq/* \
+             #/home/centos/data/output/2023-01-23/raw/."
+#
+#rule cleanup_model_folder:
+    #input:
+        #"workflow/logs/2023-01-23_run_delft3dfm.done",
+        #"workflow/logs/2023-01-23_move_raw_data_to_output_folder.done"
+    #output:
+        #touch("workflow/logs/2023-01-23_cleanup_model_folder.done")
+    #shell:
+        #"sudo rm \
+            #/home/centos/use-case-hisea/fm_model/DFM_interpreted_idomain_myortho3_net.nc \
+            #/home/centos/use-case-hisea/fm_model/log*.irlog \
+            #/home/centos/use-case-hisea/fm_model/myortho3_*_net.nc \
+            #/home/centos/use-case-hisea/fm_model/tttz_waq_*.cache \
+            #/home/centos/use-case-hisea/fm_model/tttz_waq_*.mdu \
+            #/home/centos/use-case-hisea/fm_model/unstruc.dia"

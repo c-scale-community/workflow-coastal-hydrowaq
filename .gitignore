@@ -22,3 +22,6 @@ fm_model/tttz_waq_0003.mdu
 fm_model/unstruc.dia
 notebooks/config.yml
 notebooks/test.done
+
+fm_model/input/RadSurf_daily.tim
+fm_model/tttz_waq.mdu
