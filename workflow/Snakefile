@@ -350,7 +350,7 @@ rule move_raw_data_to_output_folder:
         expand("workflow/logs/{current_date}_move_raw_data_to_output_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
     params:
         data_dir_path = lambda wc: config['data_dir_path'],
-        model_dir_path = lambda wc: config['model_dir_path'],
+        model_dir_path = lambda wc: config['model_dir_path']
     shell:
         """
         mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/rst && \
@@ -368,7 +368,7 @@ rule move_raw_data_to_output_folder:
 
 rule cleanup_model_folder:
     input:
-        expand("workflow/logs/{current_date}_run_delft3dfm.done", current_date=date.today().strftime('%Y-%m-%d'))
+        expand("workflow/logs/{current_date}_run_delft3dfm.done", current_date=date.today().strftime('%Y-%m-%d')),
         expand("workflow/logs/{current_date}_move_raw_data_to_output_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
     output:
         expand("workflow/logs/{current_date}_cleanup_model_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
