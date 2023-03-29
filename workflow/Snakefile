@@ -230,7 +230,7 @@ rule preprocess_fes2012:
         sudo docker run \
             -v {params.fes2012_data_dir_path}:/data/input \
             -v {params.model_dir_path}:/data/model \
-            -v {params.data_dir_path}/output/preprocessing:/data/output \
+            -v {params.data_dir_path}/output/preprocessing/fes2012:/data/output \
             preprocessing tide.py \
                 --fespath /data/input \
                 --coords "{params.lon_min}, {params.lon_max}, {params.lat_min}, {params.lat_max}" \
@@ -254,8 +254,8 @@ rule copy_preprocessed_data_to_model_input_folder:
         model_dir_path = lambda wc: config['model_dir_path'],
     shell:
         "cp -r \
-            {params.data_dir_path}/output/preprocessing/tide_east2.bc \
-            {params.data_dir_path}/output/preprocessing/tide_south2.bc \
+            {params.data_dir_path}/output/preprocessing/fes2012/tide_east2.bc \
+            {params.data_dir_path}/output/preprocessing/fes2012/tide_south2.bc \
             {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/DFMWAQ_east2_tmp.ext \
             {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/DFMWAQ_input \
             {params.data_dir_path}/output/preprocessing/$(date +%Y-%m-%d)/DFMWAQ_south2_tmp.ext \
@@ -343,72 +343,81 @@ rule run_delft3dfm:
         touch workflow/logs/$(date +%Y-%m-%d)_run_delft3dfm.done
         """
 
-#rule cleanup_model_input_folder:
-    #input:
-        #"workflow/logs/2023-01-23_run_delft3dfm.done"
-    #output:
-        #touch("workflow/logs/2023-01-23_cleanup_model_input_folder.done")
-    #shell:
-        #"sudo rm -r \
-            #/home/centos/use-case-hisea/fm_model/input/tide_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/tide_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/DFMWAQ_east2_tmp.ext \
-            #/home/centos/use-case-hisea/fm_model/input/DFMWAQ_input \
-            #/home/centos/use-case-hisea/fm_model/input/DFMWAQ_south2_tmp.ext \
-            #/home/centos/use-case-hisea/fm_model/input/Diat_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/Diat_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/east2.pli \
-            #/home/centos/use-case-hisea/fm_model/input/Green_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/Green_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/NO3_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/NO3_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/Opal_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/Opal_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/OXY_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/OXY_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/PO4_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/PO4_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/POC1_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/POC1_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/PON1_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/PON1_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/POP1_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/POP1_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/salinity_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/salinity_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/Si_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/Si_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/south2.pli \
-            #/home/centos/use-case-hisea/fm_model/input/steric_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/steric_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/temperature_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/temperature_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/uxuy_east2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/uxuy_south2.bc \
-            #/home/centos/use-case-hisea/fm_model/input/era5_FM.nc"
-#
-#rule move_raw_data_to_output_folder:
-    #input:
-        #"workflow/logs/2023-01-23_run_delft3dfm.done"
-    #output:
-        #touch("workflow/logs/2023-01-23_move_raw_data_to_output_folder.done")
-    #shell:
-        #"mkdir -p /home/centos/data/output/2023-01-23/raw && \
-         #sudo mv \
-             #/home/centos/use-case-hisea/fm_model/DFM_OUTPUT_tttz_waq/* \
-             #/home/centos/data/output/2023-01-23/raw/."
-#
-#rule cleanup_model_folder:
-    #input:
-        #"workflow/logs/2023-01-23_run_delft3dfm.done",
-        #"workflow/logs/2023-01-23_move_raw_data_to_output_folder.done"
-    #output:
-        #touch("workflow/logs/2023-01-23_cleanup_model_folder.done")
-    #shell:
-        #"sudo rm \
-            #/home/centos/use-case-hisea/fm_model/DFM_interpreted_idomain_myortho3_net.nc \
-            #/home/centos/use-case-hisea/fm_model/log*.irlog \
-            #/home/centos/use-case-hisea/fm_model/myortho3_*_net.nc \
-            #/home/centos/use-case-hisea/fm_model/tttz_waq_*.cache \
-            #/home/centos/use-case-hisea/fm_model/tttz_waq_*.mdu \
-            #/home/centos/use-case-hisea/fm_model/unstruc.dia"
+rule move_raw_data_to_output_folder:
+    input:
+        expand("workflow/logs/{current_date}_run_delft3dfm.done", current_date=date.today().strftime('%Y-%m-%d'))
+    output:
+        expand("workflow/logs/{current_date}_move_raw_data_to_output_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        data_dir_path = lambda wc: config['data_dir_path'],
+        model_dir_path = lambda wc: config['model_dir_path'],
+    shell:
+        """
+        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/rst && \
+        sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*rst* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/rst/. && \
+        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/map && \
+        sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*map* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/map/. && \
+        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/his && \
+        sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*his* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/his/. && \
+        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/dia && \
+        sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*dia* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/dia/. && \
+        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/other && \
+        sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/other/. && \
+        touch workflow/logs/$(date +%Y-%m-%d)_move_raw_data_to_output_folder.done
+        """
+
+rule cleanup_model_folder:
+    input:
+        expand("workflow/logs/{current_date}_run_delft3dfm.done", current_date=date.today().strftime('%Y-%m-%d'))
+        expand("workflow/logs/{current_date}_move_raw_data_to_output_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
+    output:
+        expand("workflow/logs/{current_date}_cleanup_model_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
+    params:
+        model_dir_path = lambda wc: config['model_dir_path'],
+    shell:
+        """
+        sudo rm -r \
+            {params.model_dir_path}/input/tide_east2.bc \
+            {params.model_dir_path}/input/tide_south2.bc \
+            {params.model_dir_path}/input/DFMWAQ_east2_tmp.ext \
+            {params.model_dir_path}/input/DFMWAQ_input \
+            {params.model_dir_path}/input/DFMWAQ_south2_tmp.ext \
+            {params.model_dir_path}/input/Diat_east2.bc \
+            {params.model_dir_path}/input/Diat_south2.bc \
+            {params.model_dir_path}/input/east2.pli \
+            {params.model_dir_path}/input/Green_east2.bc \
+            {params.model_dir_path}/input/Green_south2.bc \
+            {params.model_dir_path}/input/NO3_east2.bc \
+            {params.model_dir_path}/input/NO3_south2.bc \
+            {params.model_dir_path}/input/Opal_east2.bc \
+            {params.model_dir_path}/input/Opal_south2.bc \
+            {params.model_dir_path}/input/OXY_east2.bc \
+            {params.model_dir_path}/input/OXY_south2.bc \
+            {params.model_dir_path}/input/PO4_east2.bc \
+            {params.model_dir_path}/input/PO4_south2.bc \
+            {params.model_dir_path}/input/POC1_east2.bc \
+            {params.model_dir_path}/input/POC1_south2.bc \
+            {params.model_dir_path}/input/PON1_east2.bc \
+            {params.model_dir_path}/input/PON1_south2.bc \
+            {params.model_dir_path}/input/POP1_east2.bc \
+            {params.model_dir_path}/input/POP1_south2.bc \
+            {params.model_dir_path}/input/salinity_east2.bc \
+            {params.model_dir_path}/input/salinity_south2.bc \
+            {params.model_dir_path}/input/Si_east2.bc \
+            {params.model_dir_path}/input/Si_south2.bc \
+            {params.model_dir_path}/input/south2.pli \
+            {params.model_dir_path}/input/steric_east2.bc \
+            {params.model_dir_path}/input/steric_south2.bc \
+            {params.model_dir_path}/input/temperature_east2.bc \
+            {params.model_dir_path}/input/temperature_south2.bc \
+            {params.model_dir_path}/input/uxuy_east2.bc \
+            {params.model_dir_path}/input/uxuy_south2.bc \
+            {params.model_dir_path}/input/era5_FM.nc
+            {params.model_dir_path}/DFM_interpreted_idomain_myortho3_net.nc \
+            {params.model_dir_path}/log*.irlog \
+            {params.model_dir_path}/myortho3_*_net.nc \
+            {params.model_dir_path}/tttz_waq_*.cache \
+            {params.model_dir_path}/tttz_waq_*.mdu \
+            {params.model_dir_path}/unstruc.dia && \
+        touch workflow/logs/$(date +%Y-%m-%d)_cleanup_model_folder.done
+        """
