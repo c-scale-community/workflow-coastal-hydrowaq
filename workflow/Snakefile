@@ -421,3 +421,21 @@ rule cleanup_model_folder:
             {params.model_dir_path}/unstruc.dia && \
         touch workflow/logs/$(date +%Y-%m-%d)_cleanup_model_folder.done
         """
+
+rule all:
+    input:
+        expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_update_mdu_file.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_download_era5.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_download_cmems_physics.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_download_cmems_biogeochemistry.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_preprocess_era5.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_create_random_DFMWAQ_folder.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_preprocess_cmems.done", current_date=date.today().strftime('%Y-%m-%d')),
+        "workflow/logs/check4fes2012_files.done",
+        "workflow/logs/preprocess_fes2012.done",
+        expand("workflow/logs/{current_date}_copy_preprocessed_data_to_model_input_folder.done",current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_workaround_update_RadSurf_daily.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_run_delft3dfm.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_move_raw_data_to_output_folder.done", current_date=date.today().strftime('%Y-%m-%d')),
+        expand("workflow/logs/{current_date}_cleanup_model_folder.done", current_date=date.today().strftime('%Y-%m-%d'))
