@@ -28,15 +28,6 @@ This example model can be run using the [Delft3D FM docker container](https://hu
 * `input/` \
     [The input folder](https://github.com/c-scale-community/use-case-hisea/tree/main/fm_model/input) contains all the boundary condition, initial condition and forcing files needed for the simulation. Most of these files are created in the [preprocessing](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/preprocessing) step.
 
-# TODOs
-
-- [ ] `make_continuity_bc.py` (`input/Continuity.bc`)
-- [ ] `make_im1_bc.py` (`input/IM1.bc`)
-- [ ] `make_nh4_bc` (`input/NH4.bc`)
-- [ ] `make_radsurf_daily_tim.py` (`input/RadSurf_daily.tim`)
-- [ ] `make_depthavg_xyz_ini.py` (`input/❓❓❓❓❓_❓❓❓❓❓_fromCMEMS_depthavg.xyz`)
-- [ ] `make_domain_pol.py` (`input/domain.pol`)
-
 ## other file details
 
 * `Marine_Algae_20200603.sub` = Substance File called in `tttz_waq.mdu`, needed by Water Quality Module

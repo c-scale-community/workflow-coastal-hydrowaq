@@ -138,4 +138,3 @@ def check_fes2012_files_exist(directory):
             pass
 
     return all_files_exist
-

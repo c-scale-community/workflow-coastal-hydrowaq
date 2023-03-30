@@ -27,7 +27,6 @@
 # Below is an example of the scripts usage:
 #   `python update_existing_RadSurf_daily_dot_tim.py --mdufile ../../fm_model/tttz_waq.mdu --filename_in ../../fm_model/input/RadSurf_daily.tim --filename_out output.txt --date_max '2023-03-11'`
 
-
 import pandas as pd
 import click
 import warnings
@@ -47,6 +46,7 @@ def main(mdufile, filename_in, filename_out, date_max):
 
     # Define the reference time
     tref = get_tref(mdufile=mdufile)
+
     #print(tref, '\n')
 
     # Read the data from file

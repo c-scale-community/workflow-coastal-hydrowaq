@@ -18,7 +18,7 @@ def get_tref(mdufile):
 
     # Substitute wildcards in the input path
     mdufile = os.path.expandvars(mdufile)
-
+    
     with open(mdufile, 'r+') as file:
         lines = file.readlines()
         for i in range(len(lines)):
