@@ -7,6 +7,8 @@
 fm_model/input/*
 fm_model/DFM_OUTPUT_*
 fm_model/*.cache
+fm_model/tttz_waq.mdu
+fm_model/input/RadSurf_daily.tim
 !fm_model/input/Continuity.bc
 !fm_model/input/*.xyz
 !fm_model/input/domain.pol
@@ -20,3 +22,4 @@ fm_model/tttz_waq_0001.mdu
 fm_model/tttz_waq_0002.mdu
 fm_model/tttz_waq_0003.mdu
 fm_model/unstruc.dia
+
