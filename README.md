@@ -47,7 +47,7 @@ To install Snakemake do:
     b. data folder locations \
     c. delft3dfm folders and files \
     d. area of interest (this should cover the area of your delft3dfm model schematisation) \
-    e. run mode \
+    e. run mode 
 3. Execute the workflow from the `use-case-hisea/` directory by doing:
     snakemake --cores 4 all
 
