@@ -38,7 +38,7 @@ Instructions on how to build and run the Docker conterainers for each workflow c
 To install Snakemake do:
 
 1. `conda install -n base -c conda-forge mamba` 
-2. `mamba install -c conda-forge -c bioconda snakemake`
+2. `mamba install -c conda-forge -c bioconda snakemake click`
 
 ## Run the workflow for the example fm_model included in this repo
 1. In your CLI, `cd` to `use-case-hisea/.`
