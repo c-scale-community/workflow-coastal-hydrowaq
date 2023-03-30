@@ -1,13 +1,13 @@
 # dependencies
 cdsapirc_loc: "${HOME}/.cdsapirc"
-cmems_uname: 
-cmems_pwd: 
+cmems_uname: bbackeberg
+cmems_pwd: iaTmwJ7D
 
 # data folder locations
 data_dir_path: "${HOME}/data"
 fes2012_data_dir_path: "${HOME}/data/download/fes2012"
 
-# delft3dfm
+# delft3dfm folders and files
 model_dir_path: "${HOME}/use-case-hisea/fm_model"
 mdufile: "${HOME}/use-case-hisea/fm_model/tttz_waq.mdu"
 plifile1: south2.pli
@@ -37,5 +37,5 @@ tstop: 2021-03-12
 ################## DO NOT EDIT ANYTHING BELOW THIS LINE ###############################
 
 # update date_min, date_max for each execution of the workflow
-date_min: 2023-03-13
-date_max: 2023-03-15
+date_min: 2023-03-15
+date_max: 2023-03-17
