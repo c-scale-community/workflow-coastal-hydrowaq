@@ -1,6 +1,6 @@
 # postprocessing-deprecated
 
-## this container is no longer used
+## this container and post-processing approach is no longer used, see [issue #42](https://github.com/c-scale-community/use-case-hisea/issues/42) 
 
 This folder contains the files needed to build and run the docker container to postprocess the output from the Delft3D FM model run to a regular grid for further analysis.
 
