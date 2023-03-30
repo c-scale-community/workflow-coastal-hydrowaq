@@ -1,14 +1,23 @@
+# dependencies
+cdsapirc_loc: "${HOME}/.cdsapirc"
+cmems_uname: bbackeberg
+cmems_pwd: iaTmwJ7D
 
-cmems_uname: yourusername
-cmems_pwd: yourpwd
+# data folder locations
+data_dir_path: "${HOME}/data"
+fes2012_data_dir_path: "${HOME}/data/download/fes2012"
+
+# delft3dfm folders and files
+model_dir_path: "${HOME}/use-case-hisea/fm_model"
+mdufile: "${HOME}/use-case-hisea/fm_model/tttz_waq.mdu"
+plifile1: south2.pli
+plifile2: east2.pli
+
+# area of interest
 lon_min: 22.5
 lon_max: 24.5
 lat_min: 36.5
 lat_max: 38.5
-<<<<<<< HEAD
-date_min: '2022-04-01'
-date_max: '2022-04-05'
-=======
 
 # run mode
 run_mode: forecast # forecast | hindcast
@@ -25,9 +34,8 @@ tstop: 2021-03-12
 # #bgc: # cmems | other 
 # #atm: # era5 | ecmwf | gfs 
 
-######################### DO NOT EDIT ANYTHING BELOW THIS LINE ###############################
+################## DO NOT EDIT ANYTHING BELOW THIS LINE ###############################
 
 # update date_min, date_max for each execution of the workflow
-date_min: 2023-03-08
-date_max: 2023-03-10
->>>>>>> 2bf981b... update snakemake
+date_min: 2023-03-15
+date_max: 2023-03-17

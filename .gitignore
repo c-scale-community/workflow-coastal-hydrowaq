@@ -20,3 +20,15 @@ fm_model/tttz_waq_0001.mdu
 fm_model/tttz_waq_0002.mdu
 fm_model/tttz_waq_0003.mdu
 fm_model/unstruc.dia
+notebooks/config.yml
+notebooks/test.done
+
+fm_model/input/RadSurf_daily.tim
+fm_model/tttz_waq.mdu
+.snakemake/
+fm_model/tttz_waq_0004.mdu
+fm_model/tttz_waq_0005.mdu
+fm_model/tttz_waq_0006.mdu
+fm_model/tttz_waq_0007.mdu
+workflow/.snakemake/
+workflow/logs/

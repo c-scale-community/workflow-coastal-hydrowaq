@@ -1,15 +1,13 @@
 # Author: [backeb](https://github.com/backeb)
-# This script was written with the assistance of 
-# OpenAI. (2021). ChatGPT: a large language model 
-# trained by OpenAI. [Computer software]. 
-# Retrieved from https://openai.com/
+# This script was written with the assistance of OpenAI. (2021). ChatGPT: a large language model trained 
+# by OpenAI. [Computer software]. Retrieved from https://openai.com/
 #
 # This code reads in a RadSurf_daily.tim file and extends the timeseries to a date specified by the user. 
 # The new data is then written to an output file specified by the user.
 #
 # To use the script, the user needs to provide the following options as command-line arguments:
 #
-# --tref: Reference time as YYYY-MM-DD
+# --mdufile: path/to/mdufile.mdu
 # --filename_in: Path/filename of input file
 # --filename_out: Path/filename of output file
 # --date_max: Date_max as YYYY-MM-DD
@@ -17,7 +15,7 @@
 # Once the user provides the required options, they can run the script and it will
 #
 # 1. Read the data from the input file specified in --filename_in option.
-# 2. Add a datetime column based on the first column and reference time specified in --tref option.
+# 2. Add a datetime column based on the first column and reference time tref fetched from an mdufile.
 # 3. Determine the number of days between the last datetime in the last row and date_max specified in --date_max option.
 # 4. Append empty rows to the data to cover the missing days.
 # 5. Fill in the missing values in column 0 using previous value and unique differences.
@@ -27,25 +25,28 @@
 # The user can also add the --help option to see the help message and the list of available options.
 # 
 # Below is an example of the scripts usage:
-#   `python update_existing_RadSurf_daily_dot_tim.py --tref '2015-01-01' --filename_in ../../fm_model/input/RadSurf_daily.tim --filename_out output.txt --date_max '2023-03-11'`
-
+#   `python update_existing_RadSurf_daily_dot_tim.py --mdufile ../../fm_model/tttz_waq.mdu --filename_in ../../fm_model/input/RadSurf_daily.tim --filename_out output.txt --date_max '2023-03-11'`
 
 import pandas as pd
 import click
 import warnings
+import sys
+sys.path.append('../delft3dfm_helpers')
+from delft3dfm_helpers import get_tref
 
 # Ignore FutureWarning
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 @click.command()
-@click.option('--tref', type=str, help='Reference time as YYYY-MM-DD')
+@click.option('--mdufile', type=str, help='path/to/mdufile.mdu')
 @click.option('--filename_in', help='path/filename of input file')
 @click.option('--filename_out', help='path/filename of output file')
 @click.option('--date_max', help='date_max as YYYY-MM-DD')
-def main(tref, filename_in, filename_out, date_max):
+def main(mdufile, filename_in, filename_out, date_max):
 
     # Define the reference time
-    tref = pd.to_datetime(tref)
+    tref = get_tref(mdufile=mdufile)
+
     #print(tref, '\n')
 
     # Read the data from file
