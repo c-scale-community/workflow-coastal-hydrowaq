@@ -385,7 +385,6 @@ rule cleanup_model_folder:
             {params.model_dir_path}/input/Diat_east2.bc \
             {params.model_dir_path}/input/Diat_south2.bc \
             {params.model_dir_path}/input/east2.pli \
-            {params.model_dir_path}/input/east2.ext \
             {params.model_dir_path}/input/Green_east2.bc \
             {params.model_dir_path}/input/Green_south2.bc \
             {params.model_dir_path}/input/NO3_east2.bc \
@@ -407,7 +406,6 @@ rule cleanup_model_folder:
             {params.model_dir_path}/input/Si_east2.bc \
             {params.model_dir_path}/input/Si_south2.bc \
             {params.model_dir_path}/input/south2.pli \
-            {params.model_dir_path}/input/south2.ext \
             {params.model_dir_path}/input/steric_east2.bc \
             {params.model_dir_path}/input/steric_south2.bc \
             {params.model_dir_path}/input/temperature_east2.bc \
