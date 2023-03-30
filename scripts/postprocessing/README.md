@@ -1,4 +1,6 @@
-# postprocessing
+# postprocessing-deprecated
+
+## this container is no longer used
 
 This folder contains the files needed to build and run the docker container to postprocess the output from the Delft3D FM model run to a regular grid for further analysis.
 
