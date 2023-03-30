@@ -14,7 +14,7 @@ The workflow solution has the following functionality
 The workflow is executed using [Snakemake](https://snakemake.readthedocs.io/en/stable/index.html), a workflow management system for creating and executing reproducible and scalable data analyses. The workflow solution can be deployed on any provider part of the [C-SCALE data and compute federation](https://c-scale.eu/) offering cloud container compute.
 
 The workflow components and flow is summarised in the below schematic:
-![workflow](./img/cloud_hpc_workflow.png)
+![workflow](./img/workflow.png)
 
 ## Prerequisites
 1. Github account. Sign up [here](https://github.com/signup).
