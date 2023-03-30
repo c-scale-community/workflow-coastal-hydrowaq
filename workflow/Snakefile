@@ -353,15 +353,15 @@ rule move_raw_data_to_output_folder:
         model_dir_path = lambda wc: config['model_dir_path']
     shell:
         """
-        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/rst && \
+        sudo mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/rst && \
         sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*rst* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/rst/. && \
-        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/map && \
+        sudo mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/map && \
         sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*map* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/map/. && \
-        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/his && \
+        sudo mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/his && \
         sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*his* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/his/. && \
-        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/dia && \
+        sudo mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/dia && \
         sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/*dia* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/dia/. && \
-        mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/other && \
+        sudo mkdir -p {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/other && \
         sudo mv {params.model_dir_path}/DFM_OUTPUT_tttz_waq/* {params.data_dir_path}/output/fm_model_runs/$(date +%Y-%m-%d)/other/. && \
         touch workflow/logs/$(date +%Y-%m-%d)_move_raw_data_to_output_folder.done
         """
@@ -385,6 +385,7 @@ rule cleanup_model_folder:
             {params.model_dir_path}/input/Diat_east2.bc \
             {params.model_dir_path}/input/Diat_south2.bc \
             {params.model_dir_path}/input/east2.pli \
+            {params.model_dir_path}/input/east2.ext \
             {params.model_dir_path}/input/Green_east2.bc \
             {params.model_dir_path}/input/Green_south2.bc \
             {params.model_dir_path}/input/NO3_east2.bc \
@@ -406,13 +407,14 @@ rule cleanup_model_folder:
             {params.model_dir_path}/input/Si_east2.bc \
             {params.model_dir_path}/input/Si_south2.bc \
             {params.model_dir_path}/input/south2.pli \
+            {params.model_dir_path}/input/south2.ext \
             {params.model_dir_path}/input/steric_east2.bc \
             {params.model_dir_path}/input/steric_south2.bc \
             {params.model_dir_path}/input/temperature_east2.bc \
             {params.model_dir_path}/input/temperature_south2.bc \
             {params.model_dir_path}/input/uxuy_east2.bc \
             {params.model_dir_path}/input/uxuy_south2.bc \
-            {params.model_dir_path}/input/era5_FM.nc
+            {params.model_dir_path}/input/era5_FM.nc \
             {params.model_dir_path}/DFM_interpreted_idomain_myortho3_net.nc \
             {params.model_dir_path}/log*.irlog \
             {params.model_dir_path}/myortho3_*_net.nc \
