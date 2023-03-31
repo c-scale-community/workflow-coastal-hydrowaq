@@ -8,8 +8,22 @@ from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
 import os
 
 
+rule prepare_folders_and_files:
+    input:
+    output:
+        touch("prepare_folders.done")
+    params:
+        data_dir_path = lambda wc: config['data_dir_path']
+    shell:
+        """
+        stat ~/.cdsapirc
+        mkdir -p {params.data_dir_path}/download/$(date +%Y-%m-%d)
+        """
+
+
 rule prepare_containers:
     input:
+        "prepare_folders.done"
     output:
         touch("prepare_containers.done")
     shell:
