@@ -1,7 +1,7 @@
 # dependencies
 cdsapirc_loc: "${HOME}/.cdsapirc"
-cmems_uname: bbackeberg
-cmems_pwd: iaTmwJ7D
+cmems_uname:
+cmems_pwd:
 
 # data folder locations
 data_dir_path: "${HOME}/data"

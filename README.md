@@ -6,7 +6,7 @@ With the **coastal hydrodynamic and water quality modelling workflow solution** 
 
 The workflow solution has the following functionality
 
-1. Download the necessary input data for the user's [Delft3D Flexible Mesh](https://www.deltares.nl/en/software/delft3d-flexible-mesh-suite/) model setup. Input data include Copernicus' [Global Ocean Physics Reanalysis](https://resources.marine.copernicus.eu/product-download/GLOBAL_REANALYSIS_PHY_001_030) and [Global ocean biogeochemistry hindcast](https://resources.marine.copernicus.eu/product-download/GLOBAL_REANALYSIS_BIO_001_029), [ERA5](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form) and [FES2012](https://www.aviso.altimetry.fr/es/data/products/auxiliary-products/global-tide-fes/description-fes2012.html). Note, functionality to download FES2012 still needs to be developed ([issue #39](https://github.com/c-scale-community/use-case-hisea/issues/39)).
+1. Download the necessary input data for the user's [Delft3D Flexible Mesh](https://www.deltares.nl/en/software/delft3d-flexible-mesh-suite/) model setup. Input data include Copernicus' [Global Ocean Physics Reanalysis](https://resources.marine.copernicus.eu/product-download/GLOBAL_REANALYSIS_PHY_001_030) and [Global ocean biogeochemistry hindcast](https://resources.marine.copernicus.eu/product-download/GLOBAL_REANALYSIS_BIO_001_029), [ERA5](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=form) and [FES2012](https://www.aviso.altimetry.fr/es/data/products/auxiliary-products/global-tide-fes/description-fes2012.html).
 2. Prepare the data for ingestion into the user's Delft 3D Flexible Mesh [hydrodynamic](https://www.deltares.nl/en/software/module/d-flow-flexible-mesh/) and [water quality model](https://www.deltares.nl/en/software/module/d-water-quality/). This entails the preparation of forcings, initial conditions, and boundary condiditons.
 3. Produce hydrodynamic and water quality hindcasts or forcasts based on the user's Delft3D Flexible Mesh hydrodynamic and water quality model setups.
 4. Analyse the simulation outputs in an interactive Jupyter Notebook.
@@ -26,7 +26,7 @@ The workflow components and flow is summarised in the below schematic:
 
 # Instructions
 
-## Building the Docker containers
+## 1. Build the Docker containers
 Instructions on how to build and run the Docker conterainers for each workflow component can be found in the README.md files of corresponding folders of this repo:
 
 1. [download](https://github.com/c-scale-community/use-case-hisea/tree/main/scripts/download)
@@ -34,13 +34,13 @@ Instructions on how to build and run the Docker conterainers for each workflow c
 3. [fm_model](https://github.com/c-scale-community/use-case-hisea/tree/main/fm_model)
 4. [notebooks](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks)
 
-## Install Snakemake
+## 2. Install Snakemake
 To install Snakemake do:
 
 1. `conda install -n base -c conda-forge mamba` 
 2. `mamba install -c conda-forge -c bioconda snakemake click`
 
-## Run the workflow for the example fm_model included in this repo
+## 3. Run the workflow for the example fm_model included in this repo
 1. In your CLI, `cd` to `use-case-hisea/.`
 2. Open `use-case-hisea/workflow/config.yml` in your preferred text editor and specify \
     a. `dependencies` \
