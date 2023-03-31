@@ -7,6 +7,32 @@ from workflow_helpers import set_date_range, check_fes2012_files_exist
 from delft3dfm_helpers import get_tref, update_mdu_tstart_tstop
 import os
 
+
+rule prepare_folders_and_files:
+    input:
+    output:
+        touch("prepare_folders.done")
+    params:
+        data_dir_path = lambda wc: config['data_dir_path']
+    shell:
+        """
+        stat ~/.cdsapirc
+        mkdir -p {params.data_dir_path}/download/$(date +%Y-%m-%d)
+        """
+
+
+rule prepare_containers:
+    input:
+        "prepare_folders.done"
+    output:
+        touch("prepare_containers.done")
+    shell:
+        """
+        udocker pull ghcr.io/c-scale-community/hisea_download_era5:1.0.0
+        udocker create --force --name=download-input ghcr.io/c-scale-community/hisea_download_era5:1.0.0
+        """
+
+
 rule set_date_range:
     input:
         "workflow/config.yml"
@@ -44,6 +70,7 @@ rule update_mdu_file:
 
 rule download_era5:
     input:
+        "prepare_containers.done",
         expand("workflow/logs/{current_date}_set_date_range.done", current_date=date.today().strftime('%Y-%m-%d')),
     output:
         expand("workflow/logs/{current_date}_download_era5.done", current_date=date.today().strftime('%Y-%m-%d'))
@@ -60,7 +87,7 @@ rule download_era5:
         date_max = config['date_max'],
     shell:
         """
-        sudo docker run \
+        udocker run --nobanner \
             -v {params.cdsapirc_loc}:/root/.cdsapirc \
             -v {params.data_dir_path}/download/$(date +%Y-%m-%d):/data \
             download-input python download_era5.py \
