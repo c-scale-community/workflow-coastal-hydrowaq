@@ -46,8 +46,8 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -p conda-install
 source conda-install/etc/profile.d/conda.sh
 conda install mamba -c conda-forge --yes
-mamba create -c bioconda -c conda-forge -n snakemake snakemake-minimal udocker click --yes
-conda activate snakemake
+mamba create -c bioconda -c conda-forge -n hisea snakemake-minimal udocker click --yes
+conda activate hisea
 
 # run workflow
 git clone https://github.com/c-scale-community/use-case-hisea.git
