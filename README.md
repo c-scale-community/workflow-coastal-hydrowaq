@@ -34,11 +34,26 @@ Instructions on how to build and run the Docker conterainers for each workflow c
 3. [fm_model](https://github.com/c-scale-community/use-case-hisea/tree/main/fm_model)
 4. [notebooks](https://github.com/c-scale-community/use-case-hisea/tree/main/notebooks)
 
-## Install Snakemake
-To install Snakemake do:
+## Working with snakemake and udocker
 
-1. `conda install -n base -c conda-forge mamba` 
-2. `mamba install -c conda-forge -c bioconda snakemake click`
+Here are the steps to create the conda environment:
+
+```bash
+# install snakemake
+mkdir working-dir
+cd working-dir
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -p conda-install
+source conda-install/etc/profile.d/conda.sh
+conda install mamba -c conda-forge --yes
+mamba create -c bioconda -c conda-forge -n snakemake snakemake-minimal udocker click --yes
+conda activate snakemake
+
+# run workflow
+git clone https://github.com/c-scale-community/use-case-hisea.git
+cd use-case-hisea/
+snakemake --cores 1 download_era5 --use-conda --conda-frontend mamba
+```
 
 ## Run the workflow for the example fm_model included in this repo
 1. In your CLI, `cd` to `use-case-hisea/.`
