@@ -29,7 +29,7 @@ rule prepare_containers:
     shell:
         """
         udocker pull ghcr.io/c-scale-community/hisea_download_era5:1.0.0
-        udocker create --name=download-input ghcr.io/c-scale-community/hisea_download_era5:1.0.0
+        udocker create --force --name=download-input ghcr.io/c-scale-community/hisea_download_era5:1.0.0
         """
 
 
