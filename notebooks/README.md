@@ -1,7 +1,7 @@
 # notebooks
 In this folder you will find Jupyter Notebooks and the files to build the docker container (`Dockerfile`and `environment.yaml`) to run the notebooks.
 
-* `visualise_delft3dfm.ipynb` \
+* `example_visuals.ipynb` \
     notebook with examples on how to visualise Delft3D FM output
 * `dev.ipynb` \
     development notebook for troubleshooting and bug fixes
