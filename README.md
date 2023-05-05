@@ -49,6 +49,7 @@ To install Snakemake do:
     d. `area of interest` (this should cover the area of your delft3dfm model schematisation) \
     e. `run mode` 
 3. Execute the workflow from the `use-case-hisea/` directory by doing: `snakemake --cores 4 all`
+4. To run each rule individually, from the `use-case-hisea/` directory do: `snakemake -R <insert rule name> --cores 1`
 
 ## Additional instructions
 * [Set up your computing environment](https://github.com/c-scale-community/use-case-hisea/blob/main/README-setup_compute.md)
